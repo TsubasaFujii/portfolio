@@ -1,16 +1,24 @@
-import { Routes, Route } from "react-router-dom";
-import GlobalStyle from "./components/styles/GlobalStyles.styled";
+import { GlobalStyles } from "./components/styles/GlobalStyles.styled";
 import Theme from "./components/styles/Theme.styled";
+import { ScreenSizeContext, ThemeContext } from './components/styles/ContextProviders';
+import { useSwitchTheme } from "./hooks/theme";
+import { useScreenSize } from "./hooks/viewport";
+
+import Home from "./pages/Home";
+
 
 function App() {
+    const { currentTheme, toggleTheme } = useSwitchTheme();
+    const { screenSize } = useScreenSize();
+
     return (
-        <Theme>
-            <GlobalStyle />
-            <Routes>
-                <Route path='/' element={<Home />} />
-                <Route path='/contact' element={<Contact />} />
-                <Route path='/projects' element={<Projects />} />
-            </Routes>
+        <Theme theme={currentTheme}>
+            <ThemeContext.Provider value={currentTheme}>
+                <ScreenSizeContext.Provider value={screenSize}>
+                    <GlobalStyles />
+                    <Home toggleTheme={toggleTheme} />
+                </ScreenSizeContext.Provider>
+            </ThemeContext.Provider>
         </Theme>
     );
 }
