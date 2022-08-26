@@ -10,7 +10,10 @@ const Wrapper = styled(motion.button)`
     // 0.6 : 1
     padding: ${({ theme }) => `1.25rem ${theme.spacing.md}`};
 
-    box-shadow: 4px 4px 8px rgba(26, 13, 6, 0.2), -4px -4px 8px #FFFFFF;
+    box-shadow: ${({ mode }) =>
+        `4px 4px 8px rgba(${mode === 'dark' ? '102, 96, 85, 0.5' : '26, 13, 6, 0.2'}), ` +
+        `-4px -4px 8px ${mode === 'dark' ? 'rgba(102, 96, 85, 0.8)' : '#FFFFFF'}`
+    };
     border: none;
     // (vertical paddings * 2 + font-size) /2
     border-radius: calc((1.25rem + 1.25rem + 1.3em) / 2);
@@ -79,9 +82,7 @@ function Label(props) {
     const { text } = props;
     return (
         <motion.div
-            transition={{ ease: "linear" }}
-            variants={labelMotion}
-            layout>
+            variants={labelMotion}>
             {text}
         </motion.div>
     );
@@ -106,7 +107,9 @@ export default function Button(props) {
             mode={mode}
             disabled={disabled}
             initial={'init'}
-            whileHover={'hover'}>
+            whileHover={'hover'}
+            whileTap={{ scale: 0.9 }}
+            transition={{ type: "spring", stiffness: 400, damping: 17 }}>
             <Content>
                 <Label text={label} />
                 {screenSize === 'sm' ? cloneElement(icon) : <Icon icon={icon} />}
