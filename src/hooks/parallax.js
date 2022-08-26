@@ -50,7 +50,7 @@ export function useParallaxElement(arg) {
                 } else {
                     translateY = (scrolled - startAt + viewportHeight) * speed
                 }
-                target.current.style.transform = `translateY(${translateY}px)`;
+                target.current.style.transform = `translateX(${translateY}px)`;
             } else {
                 return;
             }
