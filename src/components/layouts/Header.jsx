@@ -9,10 +9,12 @@ import { motion } from 'framer-motion';
 
 const Wrapper = styled.header`
     padding: ${({ theme }) => `${theme.spacing.xs} ${theme.spacing.sm}`};
+
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
+
     display: flex;
     flex-direction: row;
     flex-wrap: wrap-reverse;
