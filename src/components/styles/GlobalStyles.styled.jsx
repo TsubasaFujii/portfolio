@@ -11,18 +11,13 @@ export const GlobalStyles = createGlobalStyle`
 
     body {
         overflow-x: hidden;
-        background-color: ${({ theme, mode }) =>
-        mode === 'dark' ?
-            theme.colors.black :
-            theme.colors.white
-    };
     }
 
     section {
     }
 
     header {
-
+        z-index: 500;
     }
 
     footer {
