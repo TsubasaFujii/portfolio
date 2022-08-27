@@ -14,14 +14,15 @@ const Wrapper = styled.header`
     top: 0;
     left: 0;
     right: 0;
+    z-index: 300;
 
     display: flex;
     flex-direction: row;
     flex-wrap: wrap-reverse;
 
      // CC in HEX is 80% opacity
-    background: ${({ theme, mode }) =>
-        mode === 'dark' ?
+    background: ${({ theme, $currentTheme }) =>
+        $currentTheme === 'dark' ?
             `${theme.colors.black}CC` :
             `${theme.colors.white}CC`};
     backdrop-filter: blur(1rem);
@@ -40,8 +41,8 @@ const MenuItem = styled.div`
     flex: 1;
     padding-top: 1rem;
     padding-bottom: 1rem;
-    ${({ theme, current }) =>
-        current && `border-bottom: 0.3rem solid ${theme.colors.primary}};`
+    ${({ theme, $current }) =>
+        $current && `border-bottom: 0.3rem solid ${theme.colors.primary}};`
     }
 
     // H5 settings
@@ -73,13 +74,13 @@ const Switch = styled(motion.div)`
     border-radius: calc(1.5rem + 0.25rem + 0.25rem / 2);
 
     display: flex;
-    justify-content: ${({ mode }) => mode === 'dark' ? 'flex-end' : 'flex-start'};
+    justify-content: ${({ $currentTheme }) => $currentTheme === 'dark' ? 'flex-end' : 'flex-start'};
     align-items: center;
     
     //image size has to be smaller than Marker
-    background: ${({ theme, mode }) => `
-        no-repeat ${mode === 'dark' ? '30%' : '70%'}/1.3rem ` +
-        `url(${mode === 'dark' ? moon : sun}) ${theme.colors.primary70}`};
+    background: ${({ theme, $currentTheme }) => `
+        no-repeat ${$currentTheme === 'dark' ? '30%' : '70%'}/1.3rem ` +
+        `url(${$currentTheme === 'dark' ? moon : sun}) ${theme.colors.primary70}`};
 
     &:hover {
         cursor: pointer;
@@ -107,21 +108,19 @@ const Label = styled(motion.div)`
     font-size: 1rem;
 `;
 
-function ThemeSwitch(props) {
-    const { toggleTheme } = props;
-    const mode = useContext(ThemeContext);
+function ThemeSwitch() {
+    const { currentTheme, toggleTheme } = useContext(ThemeContext);
     const theme = useTheme();
 
     return (
-        <ThemeSwitchWrapper mode={mode} onClick={toggleTheme}>
+        <ThemeSwitchWrapper onClick={toggleTheme}>
             <Label
-                mode={mode}
                 animate={{
-                    color: mode === 'light' ? theme.colors.black : `${theme.colors.white}66`
+                    color: currentTheme === 'light' ? theme.colors.black : `${theme.colors.white}66`
                 }}>
                 light
             </Label>
-            <Switch mode={mode}>
+            <Switch $currentTheme={currentTheme}>
                 <Marker
                     transition={{
                         stiffness: 200,
@@ -130,9 +129,8 @@ function ThemeSwitch(props) {
                     layout />
             </Switch>
             <Label
-                mode={mode}
                 animate={{
-                    color: mode === 'dark' ? theme.colors.white : theme.colors.grey
+                    color: currentTheme === 'dark' ? theme.colors.white : theme.colors.grey
                 }}>
                 dark
             </Label>
@@ -142,14 +140,14 @@ function ThemeSwitch(props) {
 
 export const Header = forwardRef((props, ref) => {
     const { toggleTheme } = props;
-    const mode = useContext(ThemeContext);
+    const { currentTheme } = useContext(ThemeContext);
 
     return (
-        <Wrapper mode={mode} ref={ref}>
+        <Wrapper $currentTheme={currentTheme} ref={ref}>
             <Navigation>
-                <MenuItem mode={mode} current>Home</MenuItem>
-                <MenuItem mode={mode}>Projects</MenuItem>
-                <MenuItem mode={mode}>Contact</MenuItem>
+                <MenuItem $current>Home</MenuItem>
+                <MenuItem>Projects</MenuItem>
+                <MenuItem>Contact</MenuItem>
             </Navigation>
             <ThemeSwitch toggleTheme={toggleTheme} />
         </Wrapper>

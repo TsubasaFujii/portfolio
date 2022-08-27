@@ -13,10 +13,10 @@ function App() {
 
     return (
         <Theme theme={currentTheme}>
-            <ThemeContext.Provider value={currentTheme}>
+            <ThemeContext.Provider value={{ currentTheme, toggleTheme }}>
                 <ScreenSizeContext.Provider value={screenSize}>
                     <GlobalStyles />
-                    <Home toggleTheme={toggleTheme} />
+                    <Home />
                 </ScreenSizeContext.Provider>
             </ThemeContext.Provider>
         </Theme>

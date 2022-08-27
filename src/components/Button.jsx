@@ -10,9 +10,9 @@ const Wrapper = styled(motion.button)`
     // 0.6 : 1
     padding: ${({ theme }) => `1.25rem ${theme.spacing.md}`};
 
-    box-shadow: ${({ mode }) =>
-        `4px 4px 8px rgba(${mode === 'dark' ? '102, 96, 85, 0.5' : '26, 13, 6, 0.2'}), ` +
-        `-4px -4px 8px ${mode === 'dark' ? 'rgba(102, 96, 85, 0.8)' : '#FFFFFF'}`
+    box-shadow: ${({ $currentTheme }) =>
+        `4px 4px 8px rgba(${$currentTheme === 'dark' ? '102, 96, 85, 0.5' : '26, 13, 6, 0.2'}), ` +
+        `-4px -4px 8px ${$currentTheme === 'dark' ? 'rgba(102, 96, 85, 0.8)' : '#FFFFFF'}`
     };
     border: none;
     // (vertical paddings * 2 + font-size) /2
@@ -27,8 +27,8 @@ const Wrapper = styled(motion.button)`
 
     &:disabled {
         // 99 = HEX opacity 60%
-        background: ${({ theme, mode }) =>
-        mode === 'dark' ?
+        background: ${({ theme, $currentTheme }) =>
+        $currentTheme === 'dark' ?
             `${theme.colors.grey}99` :
             theme.colors.black20
     };
@@ -97,19 +97,20 @@ function Content({ children }) {
 }
 
 export default function Button(props) {
-    const { label, disabled, icon, align } = props;
-    const mode = useContext(ThemeContext);
+    const { label, disabled, icon, align, onClick } = props;
+    const { currentTheme } = useContext(ThemeContext);
     const screenSize = useContext(ScreenSizeContext);
 
     return (
         <Wrapper
             align={align}
-            mode={mode}
+            $currentTheme={currentTheme}
             disabled={disabled}
             initial={'init'}
             whileHover={'hover'}
             whileTap={{ scale: 0.9 }}
-            transition={{ type: "spring", stiffness: 400, damping: 17 }}>
+            transition={{ type: "spring", stiffness: 400, damping: 17 }}
+            onClick={onClick}>
             <Content>
                 <Label text={label} />
                 {screenSize === 'sm' ? cloneElement(icon) : <Icon icon={icon} />}
