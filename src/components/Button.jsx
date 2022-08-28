@@ -12,7 +12,7 @@ const Wrapper = styled(motion.button)`
 
     box-shadow: ${({ $currentTheme }) =>
         `4px 4px 8px rgba(${$currentTheme === 'dark' ? '102, 96, 85, 0.5' : '26, 13, 6, 0.2'}), ` +
-        `-4px -4px 8px ${$currentTheme === 'dark' ? 'rgba(102, 96, 85, 0.8)' : '#FFFFFF'}`
+        `-4px -4px 8px ${$currentTheme === 'dark' ? 'rgba(102, 96, 85, 0.8)' : '#ffffff7d'}`
     };
     border: none;
     // (vertical paddings * 2 + font-size) /2
