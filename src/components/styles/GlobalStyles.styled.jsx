@@ -8,9 +8,9 @@ export const GlobalStyles = createGlobalStyle`
         margin: 0;
         padding: 0;
     }
-
-    body {
-        overflow-x: hidden;
+    #root {
+        width: 100vw;
+        overflow: hidden;
     }
 
     section {
@@ -35,16 +35,11 @@ export const GlobalStyles = createGlobalStyle`
         font-family: 'Josefin Sans', sans-serif;
         font-weight: 700;
 
-        text-transform: capitalize;
         font-family: 'Josefin Sans', sans-serif;
     }
 
-    h1 {
+    h1, h2 {
         font-size: 3rem;
-    }
-
-    h2 {
-        font-size: 2.4rem;
     }
 
     h3 {
