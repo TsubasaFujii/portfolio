@@ -1,4 +1,6 @@
+import { motion } from 'framer-motion';
 import React from 'react';
+import { forwardRef } from 'react';
 import styled from 'styled-components';
 
 const Wrapper = styled.h1.attrs(({ size }) => (
@@ -7,14 +9,32 @@ const Wrapper = styled.h1.attrs(({ size }) => (
         null
 ))`
     color: ${({ theme }) => theme.fontColor};
+    text-transform: capitalize;
 `;
 
-export default function Heading(props) {
-    const { size, children } = props;
+export function Heading(props) {
+    // className for styled component
+    const { size, children, transform, className } = props;
 
     return (
-        <Wrapper size={size}>
+        <Wrapper
+            size={size}
+            className={className}
+            $transform={transform}>
             {children}
         </Wrapper>
     )
 }
+
+export const MotionHeading = forwardRef((props, ref) => {
+    const { size, children, transform, className } = props;
+    return (
+        <Wrapper
+            size={size}
+            className={className}
+            $transform={transform}
+            ref={ref}>
+            {children}
+        </Wrapper>
+    )
+});
