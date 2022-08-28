@@ -8,6 +8,7 @@ import moon from '../../assets/icons/moon.svg';
 import { motion } from 'framer-motion';
 
 const Wrapper = styled.header`
+    width: 100vw;
     padding: ${({ theme }) => `${theme.spacing.xs} ${theme.spacing.sm}`};
 
     position: fixed;
