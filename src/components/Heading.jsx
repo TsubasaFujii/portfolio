@@ -26,15 +26,16 @@ export function Heading(props) {
     )
 }
 
-export const MotionHeading = forwardRef((props, ref) => {
+
+export function MotionHeading(props) {
     const { size, children, transform, className } = props;
+    const MotionWrapper = motion(Wrapper);
     return (
-        <Wrapper
+        <MotionWrapper
             size={size}
             className={className}
-            $transform={transform}
-            ref={ref}>
+            $transform={transform}>
             {children}
-        </Wrapper>
+        </MotionWrapper>
     )
-});
+}
