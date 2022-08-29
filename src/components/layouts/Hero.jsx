@@ -24,11 +24,11 @@ const NewLine = styled(motion.span)`
     display: block;
 `;
 
-export const Hero = forwardRef((props, ref) => {
+export default function Hero(props) {
     const { headerHeight } = props;
 
     return (
-        <Wrapper headerHeight={headerHeight} ref={ref}>
+        <Wrapper headerHeight={headerHeight}>
             <Heading>
                 <NewLine
                     initial={{
@@ -83,4 +83,4 @@ export const Hero = forwardRef((props, ref) => {
                 icon={<Icon name='chevronDown' />} />
         </Wrapper >
     )
-});
+}

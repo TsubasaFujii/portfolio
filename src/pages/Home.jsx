@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
-import styled, { keyframes } from 'styled-components';
+import { motion } from 'framer-motion';
+import styled, { keyframes, useTheme } from 'styled-components';
+import { useInView } from 'react-intersection-observer';
 
 import { useParallaxElement } from '../hooks/parallax';
 
@@ -11,32 +12,23 @@ import bgForDark from '../assets/bg-dark.svg';
 import { Header } from '../components/layouts/Header';
 import { useState } from 'react';
 import { ThemeContext } from '../components/styles/ContextProviders';
+import AboutMe from '../components/layouts/AboutMe';
+import { forwardRef } from 'react';
+import Projects from '../components/layouts/Projects';
 
-const Container = styled.div`
-    width: 100%;
+const Container = styled.main`
+    width: 100vw;
     padding: ${({ theme }) => `0 ${theme.spacing.sm} 0`};
 
+    z-index: 200;
     position: relative;
     overflow-x: hidden;
-    // TODO FLEX & GAP
-
-    &::after {
-        content:'';
-        width: 200%;
-        z-index: -1;
-
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        right: 0;
-        left: 0;
-
-        background: ${({ mode, headerHeight }) =>
-        `no-repeat center ${headerHeight}px / 50vmax ` +
-        `url(${mode === 'dark' ? bgForDark : bgForLight})`};
-    }
+    
+    display: flex;
+    flex-direction: column;
+    gap: ${({ theme }) => theme.spacing.xl};
 `;
-
+/* 
 const BackgroundWrapper = styled.div`
     width: 100%;
     position: absolute;
@@ -93,13 +85,76 @@ overflow: hidden;
     &.shown:before {
     animation: ${expand} 1.2s ease -in forwards;
 }
+`; */
+
+const BackgroundWrapper = styled(motion.div)`
+    width: 100%;
+
+    z-index: -1;
+    position: absolute;
+
+    top: ${({ $headerHeight }) => `${$headerHeight}px`};
+    right: -50%;
 `;
 
-export default function Home(props) {
-    const { toggleTheme } = props;
-    const [headerHeight, setHeaderHeight] = useState(null);
+
+const HeaderLayer = forwardRef((props, ref) => (
+    <Header ref={ref} {...props} />
+));
+
+function ContentLayer(props) {
+    const { headerHeight } = props;
+
+    return (
+        <Container headerHeight={headerHeight}>
+            <Hero headerHeight={headerHeight} />
+            <AboutMe />
+            <Projects />
+        </Container>
+    );
+}
+
+function BackgroundLayer(props) {
+    const { headerHeight } = props;
+    const theme = useTheme();
+
+    const { targetRef } = useParallaxElement({ speed: 0.5 });
+    const ref = useRef(null);
+    const isInView = useInView(ref);
+
+
+    return (
+        <BackgroundWrapper $headerHeight={headerHeight} ref={targetRef}>
+            <svg
+                viewBox='0 0 100 100'
+                xmlns='http://www.w3.org/2000/svg'
+                fill={theme.colors.primary}
+                className='bg1'>
+                <circle cx='50' cy='50' r='50' />
+            </svg>
+        </BackgroundWrapper>
+
+        /*     &::after {
+                content:'';
+                width: 200%;
+                z-index: -1;
+        
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                right: 0;
+                left: 0;
+        
+                background: ${({ currentTheme, headerHeight }) =>
+                `no-repeat center ${headerHeight}px / 50vmax ` +
+                `url(${currentTheme === 'dark' ? bgForDark : bgForLight})`};
+            } */
+    );
+}
+
+export default function Home() {
     const headerRef = useRef(null);
-    const mode = useContext(ThemeContext);
+    const [headerHeight, setHeaderHeight] = useState(null);
 
     useEffect(() => {
         if (!headerRef.current) return;
@@ -113,43 +168,11 @@ export default function Home(props) {
         return () => window.removeEventListener('resize', handleResize);
     }, [headerRef]);
 
-    const { target } = useParallaxElement({ speed: 0.5 });
-    const ref = useRef(null);
-    const isInView = useInView(ref);
-
     return (
         <>
-            <Header ref={headerRef} toggleTheme={toggleTheme} />
-            <Container mode={mode} headerHeight={headerHeight}>
-                <Hero headerHeight={headerHeight} />
-                {/* <Wrapper ref={ref}>
-                <motion.h1 initial={{ y: -100 }}
-                    whileInView={{ y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{
-                        duration: 0.35,
-                    }}>
-                    Hello,
-                </motion.h1>
-                <motion.h1 initial={{ y: 100 }}
-                    whileInView={{ y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{
-                        duration: 0.35,
-                    }}>
-                    I'm
-                    <AnimatedUnderline className={isInView ? 'shown' : null}>
-                        Tsubasa
-                    </AnimatedUnderline>
-                </motion.h1>
-                <h1 align='right' size={4} lowercase initial={{ y: 100 }} animate={{ y: 0 }}>
-                    [ts-u-ba-sa]
-                </h1>
-            </Wrapper>
-            <Wrapper z={3}>
-                assdslndlm
-            </Wrapper> */}
-            </Container>
+            <HeaderLayer ref={headerRef} />
+            <ContentLayer headerHeight={headerHeight} />
+            <BackgroundLayer headerHeight={headerHeight} />
         </>
     )
 }

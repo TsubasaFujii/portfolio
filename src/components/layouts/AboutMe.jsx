@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 
 import profile from '../../assets/profile.png';
+import { useEffect } from 'react';
 
 
 const Wrapper = styled.section`
@@ -26,20 +28,25 @@ const NewLine = styled(motion.span)`
     display: block;
 `;
 
-const ImageWrapper = styled.div`
+const ImageWrapper = styled(motion.div)`
     height: 70vmin;
     width: 70vmin;
     position: relative;
 
-    ::after {
+    &::after {
         content: ' ';
         width: 100%;
         height: 100%;
         position: absolute;
         top: 0;
         
-        clip-path: circle(45% at center 55%);
+        clip-path: circle(5% at center 55%);
         background-color: ${({ theme }) => theme.colors.primary};
+        transition: clip-path 0.3s;
+    }
+
+    &.isVisible::after {
+        clip-path: circle(45% at center 55%);
     }
 `;
 
@@ -84,7 +91,7 @@ function ProfileImage(props) {
     const { isVisible } = props;
 
     return (
-        <ImageWrapper>
+        <ImageWrapper className={isVisible ? 'isVisible' : null}>
             <Image
                 src={profile}
                 alt='my profile'
@@ -122,11 +129,20 @@ function Introduction() {
     );
 }
 
-export default function AboutMe(props) {
-    const { isVisible } = props;
+export default function AboutMe() {
+    const [isVisible, setIsVisible] = useState(false);
+    const { ref, entry } = useInView({
+        initialInView: false,
+        threshold: 0.5,
+    });
+
+    useEffect(() => {
+        if (!entry) return;
+        setIsVisible(entry.isIntersecting);
+    }, [entry]);
 
     return (
-        <Wrapper>
+        <Wrapper ref={ref}>
             <AboutMeHeading isVisible={isVisible} />
             <ProfileImage isVisible={isVisible} />
             <Introduction />
