@@ -20,11 +20,13 @@ const headingMotion = {
 }
 
 const H2Wrapper = styled(motion.h2)`
+    width: 100%;
     color: ${({ theme }) => theme.fontColor};
     text-transform: capitalize;
-    position: absolute;
+    position: relative;
     top: 0;
     text-transform: uppercase;
+    text-align: left;
     color: ${({ theme, $currentTheme }) =>
         $currentTheme === 'dark' ? theme.colors.white : theme.colors.black};
 `;
