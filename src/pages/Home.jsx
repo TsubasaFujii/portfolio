@@ -170,7 +170,7 @@ export default function Home() {
 
     return (
         <>
-            <HeaderLayer ref={headerRef} />
+            <Header ref={headerRef} />
             <ContentLayer headerHeight={headerHeight} />
             <BackgroundLayer headerHeight={headerHeight} />
         </>
