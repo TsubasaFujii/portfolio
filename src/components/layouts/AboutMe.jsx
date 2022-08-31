@@ -5,6 +5,7 @@ import { useInView } from 'react-intersection-observer';
 
 import profile from '../../assets/profile.png';
 import { useEffect } from 'react';
+import { H2, Heading } from '../Heading';
 
 
 const Wrapper = styled.section`
@@ -15,13 +16,7 @@ const Wrapper = styled.section`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: ${({ theme }) => theme.spacing.sm};
-`;
-
-const AnimatedHeading = styled(motion.h2)`
-    position: absolute;
-    top: 0;
-    text-transform: uppercase;
+    gap: ${({ theme }) => theme.spacing.md};
 `;
 
 const NewLine = styled(motion.span)`
@@ -57,47 +52,53 @@ const Image = styled(motion.img)`
     position: absolute;
     clip-path: url(#clipPathLower);
 `;
+/* 
+const introWrapperMotion = {
+    visible: {
+        opacity: 1,
+        transition: {
+            ease: 'linear',
+            duration: 0.2
+        }
+    },
+    hidden: { opacity: 0 },
+}
+ */
+const IntroductionWrapper = styled(motion.div).attrs(() => ({
+    initial: "hidden",
+}))`
+    
+`;
 
 const Paragraph = styled(motion.p)`
     margin-top: 1rem;
-    line-height: 1.3em;
-
-    &:first-of-type {
-        margin-top: 0;
-    }
 `;
 
 function AboutMeHeading(props) {
     const { isVisible } = props;
 
     return (
-        <AnimatedHeading
-            animate={{
-                left: isVisible ? '-1.5rem' : 0,
-                opacity: isVisible ? 1 : 0,
-            }}
-            transition={{
-                ease: 'linear',
-                duration: 0.2
-            }}
-        >
+        <H2 isVisible={isVisible}>
             <NewLine>about</NewLine>
             <NewLine>me</NewLine>
-        </AnimatedHeading >
+        </H2>
     )
 }
 
-function ProfileImage(props) {
-    const { isVisible } = props;
+function ProfileImage() {
+    const { ref, inView } = useInView({
+        initialInView: false,
+        threshold: 0.2,
+    });
 
     return (
-        <ImageWrapper className={isVisible ? 'isVisible' : null}>
+        <ImageWrapper ref={ref} className={inView ? 'isVisible' : null}>
             <Image
                 src={profile}
                 alt='my profile'
                 animate={{
-                    top: isVisible ? 0 : '-2rem',
-                    opacity: isVisible ? 1 : 0,
+                    top: inView ? 0 : '-2rem',
+                    opacity: inView ? 1 : 0,
                 }} />
             <svg width="0" height="0" xmlns="http://www.w3.org/2000/svg">
                 <defs>
@@ -113,9 +114,13 @@ function ProfileImage(props) {
     )
 }
 
+/*         <IntroductionWrapper
+            animate={inView ? "visible" : "hidden"}
+            variants={introWrapperMotion}> */
 function Introduction() {
     return (
-        <div>
+        <IntroductionWrapper>
+            <Heading size={4}>Lorem ipsum dolor sit amet, consectetur adipiscing elit</Heading>
             <Paragraph>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus.
             </Paragraph>
@@ -125,7 +130,7 @@ function Introduction() {
             <Paragraph>
                 Curabitur vel bibendum lorem. Morbi convallis convallis diam sit amet lacinia. Aliquam in elementum tellus.
             </Paragraph>
-        </div>
+        </IntroductionWrapper>
     );
 }
 
@@ -133,7 +138,7 @@ export default function AboutMe() {
     const [isVisible, setIsVisible] = useState(false);
     const { ref, entry } = useInView({
         initialInView: false,
-        threshold: 0.5,
+        threshold: 0.2,
     });
 
     useEffect(() => {
