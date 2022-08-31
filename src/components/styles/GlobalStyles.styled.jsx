@@ -11,6 +11,7 @@ export const GlobalStyles = createGlobalStyle`
     #root {
         width: 100vw;
         overflow: hidden;
+        position: relative;
     }
 
     section {
@@ -34,8 +35,6 @@ export const GlobalStyles = createGlobalStyle`
     button {
         font-family: 'Josefin Sans', sans-serif;
         font-weight: 700;
-
-        font-family: 'Josefin Sans', sans-serif;
     }
 
     h1, h2 {
@@ -60,6 +59,8 @@ export const GlobalStyles = createGlobalStyle`
     p {
         font-family: 'Lato', sans-serif;
         font-weight: 400;
+        line-height: 1.5em;
+        font-size: 1.2rem;
     }
 
     `;
