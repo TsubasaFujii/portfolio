@@ -27,6 +27,12 @@ const NewLine = styled(motion.span)`
 export default function Hero(props) {
     const { headerHeight } = props;
 
+    function handleOnClick() {
+        const projectEl = document.querySelector('#projects');
+        console.log(projectEl);
+        projectEl.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
     return (
         <Wrapper headerHeight={headerHeight}>
             <Heading>
@@ -80,7 +86,8 @@ export default function Hero(props) {
             <Heading size={4}>Frontend developer</Heading>
             <Button
                 label='Check my projects'
-                icon={<Icon name='chevronDown' />} />
+                icon={<Icon name='chevronDown' />}
+                onClick={handleOnClick} />
         </Wrapper >
     )
 }
