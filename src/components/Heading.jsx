@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 import React from 'react';
 import { useContext } from 'react';
-import { forwardRef } from 'react';
 import styled from 'styled-components';
 import { ThemeContext } from './styles/ContextProviders';
 
@@ -15,7 +14,7 @@ const Wrapper = styled.h1.attrs(({ size }) => (
 `;
 
 const headingMotion = {
-    visible: { left: '-1.5rem', opacity: 1 },
+    visible: { left: '-1rem', opacity: 1 },
     hidden: { left: 0, opacity: 0 }
 }
 
