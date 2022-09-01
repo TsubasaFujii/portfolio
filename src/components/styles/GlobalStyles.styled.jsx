@@ -46,7 +46,7 @@ export const GlobalStyles = createGlobalStyle`
     }
 
     h4 {
-        font-weight: 400;
+        font-weight: 600;
         font-size: 1.6rem;
     }
 
@@ -56,10 +56,21 @@ export const GlobalStyles = createGlobalStyle`
         font-size: 1.3rem;
     }
 
-    p {
+    p,
+    label,
+    input,
+    textarea {
         font-family: 'Lato', sans-serif;
         font-weight: 400;
-        line-height: 1.5em;
+    }
+
+    label,
+    input,
+    textarea {
+        font-size: 1rem;
+    }
+
+    p {
         font-size: 1.2rem;
     }
 
