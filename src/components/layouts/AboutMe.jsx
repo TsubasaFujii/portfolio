@@ -6,6 +6,7 @@ import { useInView } from 'react-intersection-observer';
 import profile from '../../assets/profile.png';
 import { useEffect } from 'react';
 import { H2, Heading } from '../Heading';
+import Text from '../Text';
 
 
 const Wrapper = styled.section`
@@ -28,7 +29,7 @@ const ImageWrapper = styled(motion.div)`
     width: 70vmin;
     position: relative;
 
-    &::after {
+    &:after {
         content: ' ';
         width: 100%;
         height: 100%;
@@ -40,7 +41,7 @@ const ImageWrapper = styled(motion.div)`
         transition: clip-path 0.3s;
     }
 
-    &.isVisible::after {
+    &.isVisible:after {
         clip-path: circle(45% at center 55%);
     }
 `;
@@ -52,26 +53,11 @@ const Image = styled(motion.img)`
     position: absolute;
     clip-path: url(#clipPathLower);
 `;
-/* 
-const introWrapperMotion = {
-    visible: {
-        opacity: 1,
-        transition: {
-            ease: 'linear',
-            duration: 0.2
-        }
-    },
-    hidden: { opacity: 0 },
-}
- */
+
 const IntroductionWrapper = styled(motion.div).attrs(() => ({
     initial: "hidden",
 }))`
     
-`;
-
-const Paragraph = styled(motion.p)`
-    margin-top: 1rem;
 `;
 
 function AboutMeHeading(props) {
@@ -114,22 +100,19 @@ function ProfileImage() {
     )
 }
 
-/*         <IntroductionWrapper
-            animate={inView ? "visible" : "hidden"}
-            variants={introWrapperMotion}> */
 function Introduction() {
     return (
         <IntroductionWrapper>
             <Heading size={4}>Lorem ipsum dolor sit amet, consectetur adipiscing elit</Heading>
-            <Paragraph>
+            <Text>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus.
-            </Paragraph>
-            <Paragraph>
+            </Text>
+            <Text>
                 Maecenas eget condimentum velit, sit amet feugiat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent auctor purus luctus enim egestas, ac scelerisque ante pulvinar. Donec ut rhoncus ex. Suspendisse ac rhoncus nisl, eu tempor urna.
-            </Paragraph>
-            <Paragraph>
+            </Text>
+            <Text>
                 Curabitur vel bibendum lorem. Morbi convallis convallis diam sit amet lacinia. Aliquam in elementum tellus.
-            </Paragraph>
+            </Text>
         </IntroductionWrapper>
     );
 }
