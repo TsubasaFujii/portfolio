@@ -33,6 +33,7 @@ const FormWrapper = styled.form`
 const InputFieldWrapper = styled.div`
     display: flex;
     flex-direction: column;
+    gap: ${({ theme }) => theme.spacing.xs};
 
     & > label {
         text-transform: capitalize;
@@ -81,8 +82,10 @@ function Form() {
         email: false,
         message: false,
     });
+    const [isReady, setIsReady] = useState(false);
 
     function handleInput(event) {
+        validateInput(event);
         setInputValues(prev => ({
             ...prev,
             [event.target.id]: event.target.value
@@ -91,6 +94,7 @@ function Form() {
 
     function handleOnClick() {
         console.log(inputValues);
+        setIsReady(false);
     }
 
     function validateInput(event) {
@@ -123,21 +127,26 @@ function Form() {
     }
 
     useEffect(() => {
-        console.log(isError);
-    }, [isError]);
+        const hasError = Object.values(isError).some(value => value);
+        const hasData = Object.values(inputValues).every(value => value);
+
+        if (!hasError && hasData) {
+            setIsReady(true);
+        } else {
+            setIsReady(false);
+        }
+    }, [isError, inputValues]);
 
     return (
         <FormWrapper>
             <InputField
                 item='name'
                 value={inputValues.name}
-                handleInput={handleInput}
-                validateInput={validateInput} />
+                handleInput={handleInput} />
             <InputField
                 item='email'
                 value={inputValues.email}
-                handleInput={handleInput}
-                validateInput={validateInput} />
+                handleInput={handleInput} />
             <InputFieldWrapper>
                 <label htmlFor='message'>Name</label>
                 <textarea
@@ -149,13 +158,13 @@ function Form() {
                     onChange={handleInput} />
             </InputFieldWrapper>
             <div>
-                {Object.keys(isError).some(i => i) ? 'Error' : 'Not error'}
+                {Object.values(isError).some(i => i) ? 'Error' : 'Not error'}
             </div>
             <Button
                 icon={<Icon name='react' />}
                 label='Send Message'
                 onClick={handleOnClick}
-                disabled={Object.keys(isError).some(i => i)} />
+                disabled={!isReady} />
         </FormWrapper>
     )
 }
