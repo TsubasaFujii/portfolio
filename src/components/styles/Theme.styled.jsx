@@ -25,6 +25,7 @@ const lightThemeColors = {
     white: '#FAF7F5',
     grey: '#EBE6E4',
     black: '#1A0D06',
+    disabled: '#998b82',
     black70: 'rgba(26, 13, 6, 70%)',
     black40: 'rgba(26, 13, 6, 40%)',
     black20: 'rgba(26, 13, 6, 20%)',
