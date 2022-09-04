@@ -256,7 +256,8 @@ function ContactForm() {
                 icon={<Icon name='paperPlane' />}
                 label='Send Message'
                 onClick={handleOnClick}
-                disabled={!isReady} />
+                disabled={!isReady}
+                flat />
         </Form>
     )
 }
