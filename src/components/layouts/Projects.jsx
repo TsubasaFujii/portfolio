@@ -31,7 +31,7 @@ const Wrapper = styled.section.attrs(() => ({
 
     display: flex;
     flex-direction: column;
-    gap: ${({ theme }) => theme.spacing.xl};
+    gap: ${({ theme }) => theme.spacing.md};
     justify-content: center;
 
     scroll-margin: 10vh;
@@ -47,6 +47,12 @@ const ProjectWrapper = styled.div`
     gap: ${({ theme }) => theme.spacing.md};
     justify-content: flex-start;
     
+`;
+
+const List = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: ${({ theme }) => theme.spacing.xl};
 `;
 
 const ProjectThumbnail = styled.div`
@@ -214,7 +220,7 @@ function Project(props) {
     );
 }
 
-function ProjectHeading(props) {
+function Heading(props) {
     const { isVisible } = props;
     return (
         <>
@@ -225,6 +231,13 @@ function ProjectHeading(props) {
     )
 }
 
+function ProjectList() {
+    return (
+        <List>
+            {projects.map(project => <Project {...project} key={project.title} />)}
+        </List>
+    )
+}
 export default function Projects() {
     const { ref, inView } = useInView({
         initialInView: false,
@@ -232,8 +245,8 @@ export default function Projects() {
 
     return (
         <Wrapper ref={ref}>
-            <ProjectHeading isVisible={inView} />
-            {projects.map(project => <Project {...project} key={project.title} />)}
+            <Heading isVisible={inView} />
+            <ProjectList />
         </Wrapper>
     )
 }
