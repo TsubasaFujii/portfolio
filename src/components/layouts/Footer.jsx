@@ -274,7 +274,7 @@ function Sns() {
 }
 function CopyRight() {
     return (
-        <div>
+        <div className='copyright'>
             &copy; 2022 Tsubasa Fujii
         </div>
     )

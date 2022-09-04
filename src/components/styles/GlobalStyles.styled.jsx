@@ -64,7 +64,8 @@ export const GlobalStyles = createGlobalStyle`
     p,
     label,
     input,
-    textarea {
+    textarea,
+    div.copyright {
         font-family: 'Lato', sans-serif;
         font-weight: 400;
     }
