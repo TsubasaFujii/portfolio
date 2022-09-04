@@ -10,9 +10,10 @@ const Wrapper = styled(motion.button)`
     // 0.6 : 1
     padding: ${({ theme }) => `1.25rem ${theme.spacing.md}`};
 
-    box-shadow: ${({ $currentTheme }) =>
-        `4px 4px 8px rgba(${$currentTheme === 'dark' ? '102, 96, 85, 0.5' : '26, 13, 6, 0.2'}), ` +
-        `-4px -4px 8px ${$currentTheme === 'dark' ? 'rgba(102, 96, 85, 0.8)' : '#ffffff7d'}`
+    box-shadow: ${({ $flat, $currentTheme }) =>
+        $flat ? 'none' :
+            `4px 4px 8px rgba(${$currentTheme === 'dark' ? '102, 96, 85, 0.5' : '26, 13, 6, 0.2'}), ` +
+            `-4px -4px 8px ${$currentTheme === 'dark' ? 'rgba(102, 96, 85, 0.8)' : '#ffffff7d'}`
     };
     border: none;
     // (vertical paddings * 2 + font-size) /2
@@ -20,6 +21,7 @@ const Wrapper = styled(motion.button)`
     background: ${({ theme }) => theme.colors.primary50};
 
     text-transform: capitalize;
+    cursor: pointer;
 
     &:hover {
         background: ${({ theme }) => theme.colors.primary70};
@@ -30,8 +32,9 @@ const Wrapper = styled(motion.button)`
         background: ${({ theme, $currentTheme }) =>
         $currentTheme === 'dark' ?
             `${theme.colors.grey}99` :
-            theme.colors.black20
+            theme.colors.disabled
     };
+        box-shadow: none;
     }
 `;
 
@@ -97,7 +100,7 @@ function Content({ children }) {
 }
 
 export default function Button(props) {
-    const { label, disabled, icon, align, onClick } = props;
+    const { label, disabled, icon, align, onClick, flat } = props;
     const { currentTheme } = useContext(ThemeContext);
     const screenSize = useContext(ScreenSizeContext);
 
@@ -107,10 +110,11 @@ export default function Button(props) {
             $currentTheme={currentTheme}
             disabled={disabled}
             initial={'init'}
-            whileHover={'hover'}
-            whileTap={{ scale: 0.9 }}
+            whileHover={!disabled && 'hover'}
+            whileTap={!disabled && { scale: 0.9 }}
             transition={{ type: "spring", stiffness: 400, damping: 17 }}
-            onClick={onClick}>
+            onClick={onClick}
+            $flat={flat}>
             <Content>
                 <Label text={label} />
                 {screenSize === 'sm' ? cloneElement(icon) : <Icon icon={icon} />}
