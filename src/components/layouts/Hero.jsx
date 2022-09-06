@@ -1,11 +1,10 @@
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import React from 'react';
-import { forwardRef } from 'react';
+import { useEffect } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
-import { useParallaxElement } from '../../hooks/parallax';
 
 import Button from '../Button';
-import { Heading } from '../Heading';
 import Icon from '../Icon';
 
 const Wrapper = styled.section`
@@ -18,72 +17,176 @@ const Wrapper = styled.section`
     align-items: flex-start;
     justify-content: center;
     gap: ${({ theme }) => theme.spacing.md};
+
+    color: ${({ theme }) => theme.fontColor};
 `;
 
 const NewLine = styled(motion.span)`
-    display: block;
+    display: inline-block;
 `;
+
+const Letter = styled(motion.span)`
+    display: inline-block;
+`;
+
+const H1 = styled(motion.h1)`
+    display: flex;
+    flex-direction: column;
+`;
+
+const Sub = styled(motion.span)`
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
+`;
+
+const headingMotion = {
+    visible: {
+        transition: {
+            staggerChildren: 0.2
+        }
+    }
+}
+
+const lineMotion = {
+    visible: {
+        transition: {
+            staggerChildren: 0.02,
+        }
+    }
+}
+
+const letterMotion = {
+    initial: {
+        opacity: 0,
+        y: '50%',
+    },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: {
+            type: "spring",
+            stiffness: 50
+        }
+    }
+}
+
+const headingText = ['Hello,', 'I\'m', 'Tsubasa.'];
+
+function HeroHeading() {
+    return (
+        <H1
+            variants={headingMotion}
+            initial='initial'
+            animate='visible'>
+            {headingText.map((word) => (
+                <NewLine
+                    key={word}
+                    variants={lineMotion}>
+                    {
+                        [...word].map((letter, index) => (
+                            <Letter
+                                key={index}
+                                variants={letterMotion}>
+                                {letter}
+                            </Letter>
+                        ))
+                    }
+                </NewLine>
+            ))
+            }
+        </H1>
+    )
+}
+
+const subText = [
+    'foodie',
+    'cat lover',
+    'traveler'
+];
+
+const infoMotion = {
+    show: {
+        opacity: 1,
+        transition: {
+            duration: 1
+        }
+    },
+    hidden: {
+        opacity: 0,
+        transition: {
+            duration: 0.02
+        },
+    }
+};
+
+
+function WordLoop() {
+    const [current, setCurrent] = useState(0);
+
+    useEffect(() => {
+        function switchText() {
+            setCurrent(prev =>
+                prev === subText.length - 1 ? 0 : prev + 1
+            );
+        }
+        const intervalId = setInterval(switchText, 2500);
+        return () => clearInterval(intervalId);
+    }, []);
+
+    return (
+        <AnimatePresence mode='wait'>
+            <motion.span
+                key={current}
+                initial='hidden'
+                animate='show'
+                exit='hidden'
+                variants={infoMotion}
+            >
+                {subText[current]}
+            </motion.span>
+        </AnimatePresence>
+    )
+}
+
+const subMotion = {
+    initial: {
+        y: '100%'
+    },
+    visible: {
+        y: 0,
+        transition: {
+            duration: 0.5
+        }
+    }
+};
+
+function SubHeading() {
+    return (
+        <motion.div initial='initial' animate='visible' variants={subMotion}>
+            <motion.h5 variants={subMotion}>Frontend developer</motion.h5>
+            <Sub className='intro'>
+                and <WordLoop />
+            </Sub>
+        </motion.div>
+    )
+}
 
 export default function Hero(props) {
     const { headerHeight } = props;
 
     function handleOnClick() {
         const projectEl = document.querySelector('#projects');
-        console.log(projectEl);
-        projectEl.scrollIntoView({ behavior: "smooth", block: "start" });
+        projectEl.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
     }
 
     return (
         <Wrapper headerHeight={headerHeight}>
-            <Heading>
-                <NewLine
-                    initial={{
-                        y: '10vh',
-                        opacity: 0,
-                    }}
-                    whileInView={{
-                        y: 0,
-                        opacity: 1
-                    }}
-                    viewport={{ once: true }}
-                    transition={{
-                        duration: 0.4,
-                    }}>
-                    Hello,
-                </NewLine>
-                <NewLine
-                    initial={{
-                        y: '10vh',
-                        opacity: 0,
-                    }}
-                    whileInView={{
-                        y: 0,
-                        opacity: 1
-                    }}
-                    viewport={{ once: true }}
-                    transition={{
-                        duration: 0.4,
-                        delay: 0.2,
-                    }}>
-                    I'm
-                </NewLine>
-                <NewLine
-                    initial={{
-                        y: '10vh',
-                        opacity: 0,
-                    }}
-                    whileInView={{
-                        y: 0,
-                        opacity: 1
-                    }}
-                    transition={{
-                        duration: 0.4,
-                        delay: 0.3,
-                    }}>
-                    Tsubasa
-                </NewLine>
-            </Heading>
-            <Heading size={4}>Frontend developer</Heading>
+            <HeroHeading />
+            <SubHeading />
             <Button
                 label='Check my projects'
                 icon={<Icon name='chevronDown' />}
