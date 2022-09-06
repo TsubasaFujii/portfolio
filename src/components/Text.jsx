@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 import styled from 'styled-components';
 
-const TextWrapper = styled.p`
+const TextWrapper = styled(motion.p)`
     color: ${({ theme }) => theme.fontColor};
     line-height: 1.5em;
     &:not(:only-of-type) {
@@ -11,8 +12,19 @@ const TextWrapper = styled.p`
 
 export default function Text(props) {
     const { children } = props;
+    const ref = useRef(null);
+    const isInView = useInView(ref, { once: true });
+
     return (
-        <TextWrapper>
+        <TextWrapper
+            ref={ref}
+            animate={{
+                opacity: isInView ? 1 : 0,
+                y: isInView ? 0 : '-1rem',
+                transition: {
+                    duration: 0.5
+                }
+            }}>
             {children}
         </TextWrapper>
     )
