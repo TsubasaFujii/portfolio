@@ -1,10 +1,11 @@
-import { GlobalStyles } from "./components/styles/GlobalStyles.styled";
-import Theme from "./components/styles/Theme.styled";
+import React from 'react';
+import { GlobalStyles } from './components/styles/GlobalStyles.styled';
+import Theme from './components/styles/Theme.styled';
 import { ScreenSizeContext, ThemeContext } from './components/styles/ContextProviders';
-import { useSwitchTheme } from "./hooks/theme";
-import { useScreenSize } from "./hooks/viewport";
+import { useSwitchTheme } from './hooks/theme';
+import { useScreenSize } from './hooks/viewport';
 
-import Home from "./pages/Home";
+import Home from './pages/Home';
 
 
 function App() {

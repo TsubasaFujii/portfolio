@@ -2,24 +2,27 @@ import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import PropTypes from 'prop-types';
 
 import Button from '../Button';
 import { H2 } from '../Heading';
 import Icon from '../Icon';
+import Text from '../Text';
 
 import project1 from '../../assets/projects/webShop.JPG';
 import externalIcon from '../../assets/icons/external.svg';
-import Text from '../Text';
 
 const projects = [
     {
         title: 'e-commance website',
         img: project1,
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Donec ut rhoncus ex. Suspendisse ac rhoncus nisl, eu tempor urna.',
         tools: ['react', 'vue', 'node']
     },
     {
         title: 'To do list',
         img: project1,
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Donec ut rhoncus ex. Suspendisse ac rhoncus nisl, eu tempor urna.',
         tools: ['vue', 'node']
     }
 ]
@@ -138,7 +141,7 @@ const AnimatedUnderline = styled(motion.span)`
         left: 0;
         bottom: 0;
         // HEX 45% = 73
-        background: ${({ theme }) => `${theme.colors.primary20}73`};
+        background: ${({ theme }) => `${theme.colors.primary50}73`};
         transform: skew(-12deg);
         z-index: -1;
     }
@@ -163,23 +166,8 @@ const GroupedTools = styled.div`
     font-size: 1.5rem;
 `;
 
-function Title(props) {
-    const { title, isVisible } = props;
-
-    return (
-        <ProjectTitle
-            initial={{ left: 0, }}
-            animate={{
-                opacity: isVisible ? 1 : 0,
-            }}>
-            <AnimatedUnderline className={isVisible ? 'isVisible' : null}>{title}</AnimatedUnderline>
-        </ProjectTitle>
-    );
-}
-
 function Thumbnail(props) {
     const { img, isVisible } = props;
-
 
     function handleOnClick() {
         console.log('open product version');
@@ -198,8 +186,45 @@ function Thumbnail(props) {
     );
 }
 
+Thumbnail.propTypes = {
+    img: PropTypes.string,
+    isVisible: PropTypes.bool,
+};
+
+function Title(props) {
+    const { title, isVisible } = props;
+
+    return (
+        <ProjectTitle
+            initial={{ left: 0, }}
+            animate={{
+                opacity: isVisible ? 1 : 0,
+            }}>
+            <AnimatedUnderline className={isVisible ? 'isVisible' : null}>{title}</AnimatedUnderline>
+        </ProjectTitle>
+    );
+}
+
+Title.propTypes = {
+    title: PropTypes.string,
+    isVisible: PropTypes.bool,
+};
+
+function Description(props) {
+    const { description } = props;
+    return (
+        <Text>
+            {description}
+        </Text>
+    )
+}
+
+Description.propTypes = {
+    description: PropTypes.string,
+};
+
 function Project(props) {
-    const { title, img, tools } = props;
+    const { title, img, tools, description } = props;
     const { ref, inView } = useInView({
         initialInView: false,
         threshold: 0.3,
@@ -210,15 +235,20 @@ function Project(props) {
             <Thumbnail img={img} isVisible={inView} />
             <Title title={title} isVisible={inView} />
             <Details>
-                <Text>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Donec ut rhoncus ex. Suspendisse ac rhoncus nisl, eu tempor urna.
-                </Text>
+                <Description description={description} />
                 <GroupedTools>{tools.map((tool, index) => <Icon key={index} name={tool} />)}</GroupedTools>
                 <Button label='GitHub' icon={<Icon name='code' />} />
             </Details>
         </ProjectWrapper>
     );
 }
+
+Project.propTypes = {
+    title: PropTypes.string,
+    img: PropTypes.string,
+    tools: PropTypes.array,
+    description: PropTypes.string
+};
 
 function Heading(props) {
     const { isVisible } = props;
@@ -230,6 +260,9 @@ function Heading(props) {
         </>
     )
 }
+Heading.propTypes = {
+    isVisible: PropTypes.bool,
+};
 
 function ProjectList() {
     return (
@@ -238,6 +271,7 @@ function ProjectList() {
         </List>
     )
 }
+
 export default function Projects() {
     const { ref, inView } = useInView({
         initialInView: false,

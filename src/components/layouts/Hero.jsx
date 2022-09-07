@@ -1,16 +1,16 @@
+import React, { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import React from 'react';
-import { useEffect } from 'react';
-import { useState } from 'react';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
+import PropTypes from 'prop-types';
 
 import Button from '../Button';
 import Icon from '../Icon';
 
 const Wrapper = styled.section`
-    min-height: ${({ headerHeight }) => `calc(100vh - ${headerHeight}px)`};
+    min-height: ${({ $headerHeight }) => `calc(100vh - ${$headerHeight}px)`};
     padding-left: ${({ theme }) => theme.spacing.md};
-    margin-top: ${({ headerHeight }) => `${headerHeight}px`};
+    margin-top: ${({ $headerHeight }) => `${$headerHeight}px`};
+    position: relative;
 
     display: flex;
     flex-direction: column;
@@ -40,6 +40,16 @@ const Sub = styled(motion.span)`
     font-size: 1rem;
 `;
 
+const BackgroundWrapper = styled(motion.div)`
+    width: 100vw;
+
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    left: ${({ theme }) => `-${theme.spacing.md}`};
+`;
+
+// Motions
 const headingMotion = {
     visible: {
         transition: {
@@ -65,7 +75,7 @@ const letterMotion = {
         opacity: 1,
         y: 0,
         transition: {
-            type: "spring",
+            type: 'spring',
             stiffness: 50
         }
     }
@@ -172,25 +182,67 @@ function SubHeading() {
     )
 }
 
+function BackgroundLayer(props) {
+    const { headerHeight } = props;
+    //const { targetRef } = useParallaxElement({ speed: 0.7 });
+    const theme = useTheme();
+
+    return (
+        <BackgroundWrapper $headerHeight={headerHeight}>
+            <svg
+                viewBox='0 0 100 100'
+                xmlns='http://www.w3.org/2000/svg'
+                fill={theme.colors.primary}
+                className='bg1'>
+                <motion.circle
+                    initial={{
+                        y: '-100%',
+                        x: '-100%',
+                        scale: 0.1,
+                    }}
+                    animate={{
+                        y: 0,
+                        x: '50%',
+                        scale: 1,
+                        transition: { type: 'spring', stiffness: 100 }
+                    }}
+                    viewport={{ once: true }}
+                    cx='50'
+                    cy='50'
+                    r='50' />
+            </svg>
+        </BackgroundWrapper>
+    );
+}
+
+BackgroundLayer.propTypes = {
+    headerHeight: PropTypes.number
+};
+
 export default function Hero(props) {
     const { headerHeight } = props;
 
     function handleOnClick() {
         const projectEl = document.querySelector('#projects');
         projectEl.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
+            behavior: 'smooth',
+            block: 'start'
         });
     }
 
     return (
-        <Wrapper headerHeight={headerHeight}>
+        <Wrapper $headerHeight={headerHeight}>
             <HeroHeading />
             <SubHeading />
             <Button
                 label='Check my projects'
                 icon={<Icon name='chevronDown' />}
                 onClick={handleOnClick} />
+            <BackgroundLayer headerHeight={headerHeight} />
         </Wrapper >
     )
 }
+
+Hero.propTypes = {
+    headerHeight: PropTypes.number
+};

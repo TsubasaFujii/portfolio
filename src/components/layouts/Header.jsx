@@ -1,7 +1,7 @@
-import React, { forwardRef } from 'react';
-import { useContext } from 'react';
+import React, { forwardRef, useContext } from 'react';
 import styled, { useTheme } from 'styled-components';
 import { ThemeContext } from '../styles/ContextProviders';
+import PropTypes from 'prop-types';
 
 import sun from '../../assets/icons/sun.svg';
 import moon from '../../assets/icons/moon.svg';
@@ -43,8 +43,7 @@ const MenuItem = styled.div`
     padding-top: 1rem;
     padding-bottom: 1rem;
     ${({ theme, $current }) =>
-        $current && `border-bottom: 0.3rem solid ${theme.colors.primary}};`
-    }
+        $current && `border-bottom: 0.3rem solid ${theme.colors.primary}};`}
 
     // H5 settings
     text-transform: capitalize;
@@ -154,3 +153,8 @@ export const Header = forwardRef((props, ref) => {
         </Wrapper>
     )
 });
+
+Header.displayName = 'Header';
+Header.propTypes = {
+    toggleTheme: PropTypes.func,
+};

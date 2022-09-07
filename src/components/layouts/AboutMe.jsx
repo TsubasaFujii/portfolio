@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
 import profile from '../../assets/profile.png';
-import { useEffect } from 'react';
 import { H2, Heading } from '../Heading';
 import Text from '../Text';
 
@@ -54,12 +54,6 @@ const Image = styled(motion.img)`
     clip-path: url(#clipPathLower);
 `;
 
-const IntroductionWrapper = styled(motion.div).attrs(() => ({
-    initial: "hidden",
-}))`
-    
-`;
-
 function AboutMeHeading(props) {
     const { isVisible } = props;
 
@@ -71,20 +65,21 @@ function AboutMeHeading(props) {
     )
 }
 
-function ProfileImage() {
-    const { ref, inView } = useInView({
-        initialInView: false,
-        threshold: 0.2,
-    });
+AboutMeHeading.propTypes = {
+    isVisible: PropTypes.bool
+};
+
+function ProfileImage(props) {
+    const { isVisible } = props;
 
     return (
-        <ImageWrapper ref={ref} className={inView ? 'isVisible' : null}>
+        <ImageWrapper className={isVisible ? 'isVisible' : null}>
             <Image
                 src={profile}
                 alt='my profile'
                 animate={{
-                    top: inView ? 0 : '-2rem',
-                    opacity: inView ? 1 : 0,
+                    top: isVisible ? 0 : '-2rem',
+                    opacity: isVisible ? 1 : 0,
                 }} />
             <svg width="0" height="0" xmlns="http://www.w3.org/2000/svg">
                 <defs>
@@ -100,9 +95,13 @@ function ProfileImage() {
     )
 }
 
+ProfileImage.propTypes = {
+    isVisible: PropTypes.bool
+};
+
 function Introduction() {
     return (
-        <IntroductionWrapper>
+        <motion.div initial='hidden'>
             <Heading size={4}>Lorem ipsum dolor sit amet, consectetur adipiscing elit</Heading>
             <Text>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus.
@@ -113,7 +112,7 @@ function Introduction() {
             <Text>
                 Curabitur vel bibendum lorem. Morbi convallis convallis diam sit amet lacinia. Aliquam in elementum tellus.
             </Text>
-        </IntroductionWrapper>
+        </motion.div>
     );
 }
 
@@ -122,6 +121,7 @@ export default function AboutMe() {
     const { ref, entry } = useInView({
         initialInView: false,
         threshold: 0.2,
+        triggerOnce: true,
     });
 
     useEffect(() => {

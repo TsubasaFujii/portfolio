@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const TextWrapper = styled(motion.p)`
     color: ${({ theme }) => theme.fontColor};
@@ -29,3 +30,10 @@ export default function Text(props) {
         </TextWrapper>
     )
 }
+
+Text.propTypes = {
+    children: PropTypes.oneOfType([
+        PropTypes.array,
+        PropTypes.string,
+    ]),
+};

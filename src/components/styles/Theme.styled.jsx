@@ -1,5 +1,6 @@
-import React from "react";
-import { ThemeProvider } from "styled-components";
+import React from 'react';
+import { ThemeProvider } from 'styled-components';
+import PropTypes from 'prop-types';
 
 const fonts = {
 };
@@ -72,3 +73,8 @@ export default function Theme({ theme, children }) {
         </ThemeProvider>
     );
 }
+
+Theme.propTypes = {
+    theme: PropTypes.string,
+    children: PropTypes.object,
+};

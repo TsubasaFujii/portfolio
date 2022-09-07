@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from 'react';
 
 const breakpoints = {
     sm: 576,
@@ -19,7 +19,6 @@ function getScreenSize() {
     } else {
         return 'xl';
     }
-
 }
 
 export function useScreenSize() {

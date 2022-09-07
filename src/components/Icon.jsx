@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const icons = {
     chevronDown: {
@@ -73,6 +74,8 @@ export default function Icon(props) {
             </svg>
         </Wrapper>
     )
-
-
 }
+
+Icon.propTypes = {
+    name: PropTypes.string,
+};

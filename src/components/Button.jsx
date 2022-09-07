@@ -2,6 +2,8 @@ import React from 'react';
 import { cloneElement, useContext } from 'react';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
+
 import { ScreenSizeContext, ThemeContext } from './styles/ContextProviders';
 
 const Wrapper = styled(motion.button)`
@@ -13,8 +15,7 @@ const Wrapper = styled(motion.button)`
     box-shadow: ${({ $flat, $currentTheme }) =>
         $flat ? 'none' :
             `4px 4px 8px rgba(${$currentTheme === 'dark' ? '102, 96, 85, 0.5' : '26, 13, 6, 0.2'}), ` +
-            `-4px -4px 8px ${$currentTheme === 'dark' ? 'rgba(102, 96, 85, 0.8)' : '#ffffff7d'}`
-    };
+            `-4px -4px 8px ${$currentTheme === 'dark' ? 'rgba(102, 96, 85, 0.8)' : '#ffffff7d'}`};
     border: none;
     // (vertical paddings * 2 + font-size) /2
     border-radius: calc((1.25rem + 1.25rem + 1.3em) / 2);
@@ -32,9 +33,9 @@ const Wrapper = styled(motion.button)`
         background: ${({ theme, $currentTheme }) =>
         $currentTheme === 'dark' ?
             `${theme.colors.grey}99` :
-            theme.colors.disabled
-    };
+            theme.colors.disabled};
         box-shadow: none;
+        cursor: not-allowed;
     }
 `;
 
@@ -72,6 +73,10 @@ function Icon(props) {
     );
 }
 
+Icon.propTypes = {
+    icon: PropTypes.element,
+};
+
 const labelMotion = {
     init: {
         flex: '1 1 calc(100% + 0.6rem)',
@@ -91,6 +96,10 @@ function Label(props) {
     );
 }
 
+Label.propTypes = {
+    text: PropTypes.string,
+};
+
 function Content({ children }) {
     return (
         <ContentWrapper>
@@ -98,6 +107,10 @@ function Content({ children }) {
         </ContentWrapper>
     );
 }
+
+Content.propTypes = {
+    children: PropTypes.array,
+};
 
 export default function Button(props) {
     const { label, disabled, icon, align, onClick, flat } = props;
@@ -112,7 +125,7 @@ export default function Button(props) {
             initial={'init'}
             whileHover={!disabled && 'hover'}
             whileTap={!disabled && { scale: 0.9 }}
-            transition={{ type: "spring", stiffness: 400, damping: 17 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 17 }}
             onClick={onClick}
             $flat={flat}>
             <Content>
@@ -122,3 +135,12 @@ export default function Button(props) {
         </Wrapper>
     )
 }
+
+Button.propTypes = {
+    label: PropTypes.string,
+    disabled: PropTypes.bool,
+    icon: PropTypes.element,
+    align: PropTypes.string,
+    onClick: PropTypes.func,
+    flat: PropTypes.bool
+};

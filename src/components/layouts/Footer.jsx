@@ -3,6 +3,7 @@ import React, { useContext, useState, useEffect } from 'react'
 import styled from 'styled-components';
 
 import { ThemeContext } from '../styles/ContextProviders';
+import PropTypes from 'prop-types';
 
 import Button from '../Button';
 import { Heading } from '../Heading';
@@ -55,7 +56,7 @@ const Input = styled.input.attrs(({ id }) => ({
 
 const Textarea = styled.textarea.attrs(({ id }) => ({
     required: true,
-    rows: "5",
+    rows: 5,
     name: id,
     placeholder: `${id}*`,
 }))`
@@ -79,8 +80,7 @@ const InputFieldWrapper = styled.div`
         background-color: ${({ theme, $currentTheme }) =>
         $currentTheme === 'dark' ?
             theme.colors.white :
-            theme.colors.grey
-    };
+            theme.colors.grey};
     }
 
     & > ${Input}::placeholder,
@@ -140,6 +140,15 @@ function InputField(props) {
         </InputFieldWrapper >
     )
 }
+
+InputField.propTypes = {
+    item: PropTypes.string,
+    value: PropTypes.string,
+    isError: PropTypes.bool,
+    isFocused: PropTypes.bool,
+    handleOnFocus: PropTypes.func,
+    handleInput: PropTypes.func,
+};
 
 function ContactForm() {
     const [inputValues, setInputValues] = useState({
@@ -272,6 +281,7 @@ function Sns() {
         </div>
     )
 }
+
 function CopyRight() {
     return (
         <div className='copyright'>
