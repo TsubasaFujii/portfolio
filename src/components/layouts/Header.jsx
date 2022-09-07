@@ -100,6 +100,9 @@ const Switch = styled(motion.div)`
     background: ${({ theme, $currentTheme }) => `
         no-repeat ${$currentTheme === 'dark' ? '30%' : '70%'}/1.3rem ` +
         `url(${$currentTheme === 'dark' ? moon : sun}) ${theme.colors.primary70}`};
+    box-shadow: ${({ theme }) =>
+        `inset 4px 4px 4px 4px ${theme.colors.black10}, ` +
+        `inset -1px -1px 1px 1px ${theme.colors.black10}`};
 
     &:hover {
         cursor: pointer;
@@ -115,6 +118,11 @@ const Marker = styled(motion.div)`
     background: ${({ theme }) => theme.colors.white};
     border-radius: 50%;
 
+    box-shadow: ${({ theme }) =>
+        'inset 2px 2px 0 #ffffff, ' +
+        `inset -1px -1px 0 ${theme.colors.black20}`};
+
+    // This pseudo element is here so that component get displayed
     &::before {
         content: '.';
         visibility: hidden;
@@ -135,7 +143,8 @@ function ThemeSwitch() {
         <ThemeSwitchWrapper onClick={toggleTheme}>
             <Label
                 animate={{
-                    color: currentTheme === 'light' ? theme.colors.black : `${theme.colors.white}66`
+                    color: currentTheme === 'light' ?
+                        theme.colors.black : `${theme.colors.white}66`
                 }}>
                 light
             </Label>
@@ -149,7 +158,8 @@ function ThemeSwitch() {
             </Switch>
             <Label
                 animate={{
-                    color: currentTheme === 'dark' ? theme.colors.white : theme.colors.grey
+                    color: currentTheme === 'light' ?
+                        theme.colors.grey : theme.colors.white
                 }}>
                 dark
             </Label>
