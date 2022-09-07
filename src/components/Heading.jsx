@@ -9,16 +9,15 @@ const Wrapper = styled.h1.attrs(({ size }) => (
         { as: `h${size}` } :
         null
 ))`
-    color: ${({ theme }) => theme.fontColor};
     text-transform: capitalize;
 `;
 
 const H2Wrapper = styled(motion.h2)`
     width: 100%;
-    color: ${({ theme }) => theme.fontColor};
-    text-transform: capitalize;
     position: relative;
     top: 0;
+    
+    text-transform: capitalize;
     text-transform: uppercase;
     text-align: left;
 `;
