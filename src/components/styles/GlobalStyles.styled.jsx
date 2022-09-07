@@ -34,10 +34,6 @@ export const GlobalStyles = createGlobalStyle`
     header {
         width: 100vw;
         z-index: 500;
-        @media screen and (${devices.desktopL}) {
-            width: 1200px;
-            margin: auto;
-        }
     }
 
     footer {

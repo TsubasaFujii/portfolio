@@ -17,10 +17,6 @@ const Wrapper = styled.header`
     right: 0;
     z-index: 300;
 
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap-reverse;
-
      // CC in HEX is 80% opacity
     background: ${({ theme, $currentTheme }) =>
         $currentTheme === 'dark' ?
@@ -29,7 +25,19 @@ const Wrapper = styled.header`
     backdrop-filter: blur(1rem);
 
     @media screen and (${devices.mobileL}) {
-        padding: ${({ theme }) => `${theme.spacing.sm} ${theme.spacing.xl} 0`};
+        padding: ${({ theme }) => `${theme.spacing.sm} ${theme.spacing.xl}`};
+    }
+`;
+
+const Content = styled.div`
+    width: 100%;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap-reverse;
+
+    @media screen and (${devices.desktopL}) {
+        width: 1200px;
     }
 `;
 
@@ -155,12 +163,14 @@ export const Header = forwardRef((props, ref) => {
 
     return (
         <Wrapper $currentTheme={currentTheme} ref={ref}>
-            <Navigation>
-                <MenuItem $current>Home</MenuItem>
-                <MenuItem>Projects</MenuItem>
-                <MenuItem>Contact</MenuItem>
-            </Navigation>
-            <ThemeSwitch toggleTheme={toggleTheme} />
+            <Content>
+                <Navigation>
+                    <MenuItem $current>Home</MenuItem>
+                    <MenuItem>Projects</MenuItem>
+                    <MenuItem>Contact</MenuItem>
+                </Navigation>
+                <ThemeSwitch toggleTheme={toggleTheme} />
+            </Content>
         </Wrapper>
     )
 });
