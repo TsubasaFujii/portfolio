@@ -7,6 +7,7 @@ import { useInView } from 'react-intersection-observer';
 import profile from '../../assets/profile.png';
 import { H2, Heading } from '../Heading';
 import Text from '../Text';
+import { devices } from '../../hooks/viewport';
 
 
 const Wrapper = styled.section`
@@ -18,6 +19,26 @@ const Wrapper = styled.section`
     align-items: center;
     justify-content: center;
     gap: ${({ theme }) => theme.spacing.md};
+`;
+
+const Flex = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: ${({ theme }) => theme.spacing.md};
+
+    @media screen and (${devices.tablet}) {
+        padding: ${({ theme }) => `0 ${theme.spacing.md}`};
+    }
+
+    @media screen and (${devices.desktop}) {
+        flex-direction: row;
+
+        & > div.introduction {
+            flex: 1;
+        }
+    }
 `;
 
 const NewLine = styled(motion.span)`
@@ -44,6 +65,11 @@ const ImageWrapper = styled(motion.div)`
     &.isVisible:after {
         clip-path: circle(45% at center 55%);
     }
+
+    @media screen and (${devices.mobileL}) {
+        height: 30vmin;
+        width: 30vmin;
+    }
 `;
 
 const Image = styled(motion.img)`
@@ -52,6 +78,10 @@ const Image = styled(motion.img)`
 
     position: absolute;
     clip-path: url(#clipPathLower);
+
+    @media screen and (${devices.mobileL}) {
+        width: 30vmin;
+    }
 `;
 
 function AboutMeHeading(props) {
@@ -101,7 +131,7 @@ ProfileImage.propTypes = {
 
 function Introduction() {
     return (
-        <motion.div initial='hidden'>
+        <motion.div initial='hidden' className='introduction'>
             <Heading size={4}>Lorem ipsum dolor sit amet, consectetur adipiscing elit</Heading>
             <Text>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus.
@@ -116,12 +146,25 @@ function Introduction() {
     );
 }
 
+function Content(props) {
+    const { isVisible } = props;
+    return (
+        <Flex>
+            <ProfileImage isVisible={isVisible} />
+            <Introduction />
+        </Flex>
+    )
+}
+
+Content.propTypes = {
+    isVisible: PropTypes.bool
+};
+
 export default function AboutMe() {
     const [isVisible, setIsVisible] = useState(false);
     const { ref, entry } = useInView({
         initialInView: false,
         threshold: 0.2,
-        triggerOnce: true,
     });
 
     useEffect(() => {
@@ -132,8 +175,7 @@ export default function AboutMe() {
     return (
         <Wrapper ref={ref}>
             <AboutMeHeading isVisible={isVisible} />
-            <ProfileImage isVisible={isVisible} />
-            <Introduction />
+            <Content isVisible={isVisible} />
         </Wrapper >
 
     )

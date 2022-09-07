@@ -2,19 +2,16 @@ import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import PropTypes from 'prop-types';
 
-const fonts = {
-};
-
 const spacing = {
     xs: '0.5rem',
     sm: '1rem',
     md: '2rem',
     lg: '3rem',
-    xl: '8rem',
+    xl: '4rem',
+    gap: '8rem',
 };
 
 const common = {
-    fonts,
     spacing,
 };
 

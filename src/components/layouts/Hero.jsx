@@ -8,7 +8,6 @@ import Icon from '../Icon';
 
 const Wrapper = styled.section`
     min-height: ${({ $headerHeight }) => `calc(100vh - ${$headerHeight}px)`};
-    padding-left: ${({ theme }) => theme.spacing.md};
     margin-top: ${({ $headerHeight }) => `${$headerHeight}px`};
     position: relative;
 
@@ -32,12 +31,6 @@ const Letter = styled(motion.span)`
 const H1 = styled(motion.h1)`
     display: flex;
     flex-direction: column;
-`;
-
-const Sub = styled(motion.span)`
-    font-family: 'Josefin Sans', sans-serif;
-    font-weight: 400;
-    font-size: 1rem;
 `;
 
 const BackgroundWrapper = styled(motion.div)`
@@ -111,8 +104,10 @@ function HeroHeading() {
 
 const subText = [
     'foodie',
-    'cat lover',
-    'traveler'
+    'cat-lover',
+    'a good cook',
+    'traveller',
+    'a gardener',
 ];
 
 const infoMotion = {
@@ -175,9 +170,9 @@ function SubHeading() {
     return (
         <motion.div initial='initial' animate='visible' variants={subMotion}>
             <motion.h5 variants={subMotion}>Frontend developer</motion.h5>
-            <Sub className='intro'>
+            <motion.span className='intro'>
                 and <WordLoop />
-            </Sub>
+            </motion.span>
         </motion.div>
     )
 }
@@ -236,6 +231,7 @@ export default function Hero(props) {
             <SubHeading />
             <Button
                 label='Check my projects'
+                align='flex-start'
                 icon={<Icon name='chevronDown' />}
                 onClick={handleOnClick} />
             <BackgroundLayer headerHeight={headerHeight} />

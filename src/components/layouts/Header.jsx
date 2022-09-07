@@ -6,9 +6,9 @@ import PropTypes from 'prop-types';
 import sun from '../../assets/icons/sun.svg';
 import moon from '../../assets/icons/moon.svg';
 import { motion } from 'framer-motion';
+import { devices } from '../../hooks/viewport';
 
 const Wrapper = styled.header`
-    width: 100vw;
     padding: ${({ theme }) => `${theme.spacing.xs} ${theme.spacing.sm}`};
 
     position: fixed;
@@ -27,21 +27,28 @@ const Wrapper = styled.header`
             `${theme.colors.black}CC` :
             `${theme.colors.white}CC`};
     backdrop-filter: blur(1rem);
+
+    @media screen and (${devices.mobileL}) {
+        padding: ${({ theme }) => `${theme.spacing.sm} ${theme.spacing.xl} 0`};
+    }
 `;
 
 const Navigation = styled.nav`
     width: 100%;
-    padding: ${({ theme }) => `calc(${theme.spacing.sm}/2) ${theme.spacing.sm}`};
+    //padding: ${({ theme }) => `calc(${theme.spacing.sm}/2) ${theme.spacing.sm}`};
 
     display: flex;
     flex-direction: row;
     gap: 0.6rem;
+
+    @media screen and (${devices.mobileL}) {
+        width: fit-content;
+    }
 `;
 
 const MenuItem = styled.div`
     flex: 1;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    padding: ${({ theme }) => `${theme.spacing.sm} 0`};
     ${({ theme, $current }) =>
         $current && `border-bottom: 0.3rem solid ${theme.colors.primary}};`}
 
@@ -56,6 +63,10 @@ const MenuItem = styled.div`
     &:hover {
         cursor: pointer;
         // TODO Need to add more to this later
+    }
+
+    @media screen and (${devices.mobileL}) {
+        padding: ${({ theme }) => `${theme.spacing.sm} ${theme.spacing.md}`};
     }
 `;
 

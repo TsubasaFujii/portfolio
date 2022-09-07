@@ -2,26 +2,27 @@ import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import Hero from '../components/layouts/Hero';
 import { Header } from '../components/layouts/Header';
+import Hero from '../components/layouts/Hero';
 import AboutMe from '../components/layouts/AboutMe';
 import Projects from '../components/layouts/Projects';
 import Footer from '../components/layouts/Footer';
+import { devices } from '../hooks/viewport';
 
 const Container = styled.main`
-    width: 100vw;
-    padding: ${({ theme }) => `0 ${theme.spacing.md} 0`};
-
+    padding: ${({ theme }) => `0 ${theme.spacing.md}`};
     z-index: 200;
-    position: relative;
-    overflow-x: hidden;
     
     display: flex;
     flex-direction: column;
-    gap: ${({ theme }) => theme.spacing.xl};
+    gap: ${({ theme }) => theme.spacing.gap};
 
     & section:last-child {
-        margin-bottom: ${({ theme }) => theme.spacing.xl};
+        margin-bottom: ${({ theme }) => theme.spacing.gap};
+    }
+    
+    @media screen and (${devices.mobileL}) {
+        padding: ${({ theme }) => `0 ${theme.spacing.xl}`};
     }
 `;
 

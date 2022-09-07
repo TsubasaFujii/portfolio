@@ -11,19 +11,24 @@ import Text from '../Text';
 
 import project1 from '../../assets/projects/webShop.JPG';
 import externalIcon from '../../assets/icons/external.svg';
+import { devices } from '../../hooks/viewport';
 
 const projects = [
     {
         title: 'e-commance website',
         img: project1,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Donec ut rhoncus ex. Suspendisse ac rhoncus nisl, eu tempor urna.',
-        tools: ['react', 'vue', 'node']
+        tools: ['react', 'vue', 'node'],
+        url: 'http://google.com',
+        github: 'http://google.com',
     },
     {
         title: 'To do list',
         img: project1,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Donec ut rhoncus ex. Suspendisse ac rhoncus nisl, eu tempor urna.',
-        tools: ['vue', 'node']
+        tools: ['vue', 'node'],
+        url: 'http://google.com',
+        github: 'http://google.com',
     }
 ]
 
@@ -55,7 +60,11 @@ const ProjectWrapper = styled.div`
 const List = styled.div`
     display: flex;
     flex-direction: column;
-    gap: ${({ theme }) => theme.spacing.xl};
+    gap: ${({ theme }) => theme.spacing.gap};
+
+    @media screen and (${devices.tablet}) {
+        padding: ${({ theme }) => theme.spacing.md};
+    }
 `;
 
 const ProjectThumbnail = styled.div`
@@ -81,6 +90,26 @@ const ProjectThumbnail = styled.div`
     &.isVisible:before {
         clip-path: circle(35% at 55% center);
     }
+
+    @media screen and (${devices.tablet}) {
+        padding: 0;
+
+        &:before {
+            clip-path: circle(5% at center);
+            background-color: ${({ theme }) => theme.colors.primary};
+
+            transition: clip-path 0.3s;
+        }
+
+        &.isVisible:before {
+            clip-path: circle(30% at center);
+        }
+    }
+
+/*     @media screen and (${devices.desktop}) {
+        width: 70%;
+        margin: auto;
+    } */
 `;
 
 const ThumbnailImage = styled(motion.div)`
@@ -111,6 +140,15 @@ const ThumbnailImage = styled(motion.div)`
         mask-size: cover;
         background-color: ${({ theme }) => theme.colors.primary};
     }
+
+    @media screen and (${devices.tablet}) {
+        width: 100%;
+        margin: auto;
+    }
+`;
+
+const Link = styled.a`
+    text-decoration: none;
 `;
 
 const ProjectTitle = styled(motion.h4)`
@@ -167,10 +205,10 @@ const GroupedTools = styled.div`
 `;
 
 function Thumbnail(props) {
-    const { img, isVisible } = props;
+    const { img, isVisible, url } = props;
 
     function handleOnClick() {
-        console.log('open product version');
+        console.log('open product version', url);
     }
 
     return (
@@ -188,25 +226,29 @@ function Thumbnail(props) {
 
 Thumbnail.propTypes = {
     img: PropTypes.string,
+    url: PropTypes.string,
     isVisible: PropTypes.bool,
 };
 
 function Title(props) {
-    const { title, isVisible } = props;
+    const { title, isVisible, url } = props;
 
     return (
-        <ProjectTitle
-            initial={{ left: 0, }}
-            animate={{
-                opacity: isVisible ? 1 : 0,
-            }}>
-            <AnimatedUnderline className={isVisible ? 'isVisible' : null}>{title}</AnimatedUnderline>
-        </ProjectTitle>
+        <Link href={url}>
+            <ProjectTitle
+                initial={{ left: 0, }}
+                animate={{
+                    opacity: isVisible ? 1 : 0,
+                }}>
+                <AnimatedUnderline className={isVisible ? 'isVisible' : null}>{title}</AnimatedUnderline>
+            </ProjectTitle>
+        </Link>
     );
 }
 
 Title.propTypes = {
     title: PropTypes.string,
+    url: PropTypes.string,
     isVisible: PropTypes.bool,
 };
 
@@ -224,20 +266,27 @@ Description.propTypes = {
 };
 
 function Project(props) {
-    const { title, img, tools, description } = props;
+    const { title, img, tools, description, github, url } = props;
     const { ref, inView } = useInView({
         initialInView: false,
         threshold: 0.3,
     });
 
+    function onClick() {
+        console.log('Open', github);
+    }
+
     return (
         <ProjectWrapper ref={ref}>
-            <Thumbnail img={img} isVisible={inView} />
-            <Title title={title} isVisible={inView} />
+            <Thumbnail img={img} isVisible={inView} url={url} />
+            <Title title={title} isVisible={inView} url={url} />
             <Details>
                 <Description description={description} />
                 <GroupedTools>{tools.map((tool, index) => <Icon key={index} name={tool} />)}</GroupedTools>
-                <Button label='GitHub' icon={<Icon name='code' />} />
+                <Button
+                    label='GitHub'
+                    icon={<Icon name='code' />}
+                    onClick={onClick} />
             </Details>
         </ProjectWrapper>
     );
@@ -247,7 +296,9 @@ Project.propTypes = {
     title: PropTypes.string,
     img: PropTypes.string,
     tools: PropTypes.array,
-    description: PropTypes.string
+    description: PropTypes.string,
+    github: PropTypes.string,
+    url: PropTypes.string,
 };
 
 function Heading(props) {
