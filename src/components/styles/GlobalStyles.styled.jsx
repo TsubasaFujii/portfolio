@@ -52,7 +52,8 @@ export const GlobalStyles = createGlobalStyle`
     h4,
     h5,
     button,
-    span.intro {
+    span.intro,
+    div.navItem {
         font-family: 'Josefin Sans', sans-serif;
         font-weight: 700;
     }
@@ -96,7 +97,8 @@ export const GlobalStyles = createGlobalStyle`
     }
 
     h5,
-    button {
+    button,
+    div.navItem {
         font-weight: 600;
         font-size: 1.3em;
         @media screen and (${devices.mobileL}) {
