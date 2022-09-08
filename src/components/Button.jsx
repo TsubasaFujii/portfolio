@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import { ScreenSizeContext, ThemeContext } from './styles/ContextProviders';
+import { ThemeContext } from './styles/ContextProviders';
 
 const Wrapper = styled(motion.button)`
     align-self: ${({ align }) => align ? align : 'center'};
@@ -43,18 +43,15 @@ const ContentWrapper = styled(motion.div)`
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: row;
     gap: 0.6rem;
 `;
 
 const IconWrapper = styled(motion.div)`
-    flex: 1;
     min-width:0;
-    overflow:hidden;
 `;
 
 const iconMotion = {
-    init: {
+    hidden: {
         opacity: 0,
     },
     hover: {
@@ -62,27 +59,28 @@ const iconMotion = {
     },
 };
 
-function Icon(props) {
+function ButtonIcon(props) {
     const { icon } = props;
     return (
         <IconWrapper
-            transition={{ type: 'spring' }}
-            variants={iconMotion}>
+            variants={iconMotion}
+            layout>
             {cloneElement(icon)}
         </IconWrapper>
     );
 }
 
-Icon.propTypes = {
+ButtonIcon.propTypes = {
     icon: PropTypes.element,
 };
 
+// calc((1.5rem + 0.6rem) /2) 1.5rem = icon width & gap
 const labelMotion = {
-    init: {
-        flex: '1 1 calc(100% + 0.6rem)',
+    hidden: {
+        x: 'calc((1.5rem + 0.6rem) /2)',
     },
     hover: {
-        flex: '0 1 content',
+        x: 0,
     },
 };
 
@@ -90,6 +88,9 @@ function Label(props) {
     const { text } = props;
     return (
         <motion.div
+            transition={{
+                duration: 0.3,
+            }}
             variants={labelMotion}>
             {text}
         </motion.div>
@@ -100,38 +101,24 @@ Label.propTypes = {
     text: PropTypes.string,
 };
 
-function Content({ children }) {
-    return (
-        <ContentWrapper>
-            {children}
-        </ContentWrapper>
-    );
-}
-
-Content.propTypes = {
-    children: PropTypes.array,
-};
-
 export default function Button(props) {
     const { label, disabled, icon, align, onClick, flat } = props;
-    const { currentTheme } = useContext(ThemeContext);
-    const screenSize = useContext(ScreenSizeContext);
+    const { currentTheme, screenSize } = useContext(ThemeContext);
 
     return (
         <Wrapper
             align={align}
             $currentTheme={currentTheme}
             disabled={disabled}
-            initial={'init'}
+            initial={'hidden'}
             whileHover={!disabled && 'hover'}
             whileTap={!disabled && { scale: 0.9 }}
-            transition={{ type: 'spring', stiffness: 400, damping: 17 }}
             onClick={onClick}
             $flat={flat}>
-            <Content>
+            <ContentWrapper>
                 <Label text={label} />
-                {screenSize === 'sm' ? cloneElement(icon) : <Icon icon={icon} />}
-            </Content>
+                {screenSize === 'sm' ? cloneElement(icon) : <ButtonIcon icon={icon} />}
+            </ContentWrapper>
         </Wrapper>
     )
 }
