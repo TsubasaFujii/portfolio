@@ -1,12 +1,14 @@
-import React, { forwardRef, useContext, useState } from 'react';
+import React, { forwardRef, useContext } from 'react';
 import styled, { useTheme } from 'styled-components';
+import { motion } from 'framer-motion';
 import { ThemeContext } from '../styles/ContextProviders';
 import PropTypes from 'prop-types';
 
 import sun from '../../assets/icons/sun.svg';
 import moon from '../../assets/icons/moon.svg';
-import { motion } from 'framer-motion';
 import { devices } from '../../hooks/viewport';
+import { scrollTo, scrollToTop } from '../../js/window';
+import { useNavigate } from 'react-router-dom';
 
 const Wrapper = styled.header`
     padding: ${({ theme }) => `${theme.spacing.xs} ${theme.spacing.sm}`};
@@ -54,23 +56,41 @@ const Navigation = styled.nav`
     }
 `;
 
-const MenuItem = styled.div`
-    flex: 1;
+const MenuItem = styled.div.attrs(() => ({
+    className: 'navItem',
+}))`
     padding: ${({ theme }) => `${theme.spacing.sm} 0`};
-    ${({ theme, $current }) =>
-        $current && `border-bottom: 0.3rem solid ${theme.colors.primary}};`}
+    position: relative;
 
-    // H5 settings
-    text-transform: capitalize;
-    font-family: 'Josefin Sans', sans-serif;
-    font-weight: 600; 
-    font-size: 1.3rem;
+    flex: 1;
+
     text-align: center;
     color: ${({ theme }) => theme.fontColor};
 
+    &:after {
+        content: '';
+        width: 0%;
+        margin: auto;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border-bottom: 0.3rem solid ${({ theme }) => theme.colors.primary};
+        transition: all ease-in 0.3s;
+    }
+
     &:hover {
         cursor: pointer;
-        // TODO Need to add more to this later
+
+        &:after {
+            width: 100%;
+            border-bottom-color: ${({ theme }) => theme.colors.primary20};
+        }
+    }
+
+    &.current:after {
+        width: 100%;
+        border-bottom-color: ${({ theme }) => theme.colors.primary};
     }
 
     @media screen and (${devices.mobileL}) {
@@ -167,29 +187,16 @@ function ThemeSwitch() {
     )
 }
 
-const links = [
-    {
-        name: 'Home',
-        route: '/',
-    }, {
-        name: 'Projects',
-        route: '/projects',
-    }, {
-        name: 'Contact',
-        route: '#contactForm',
-    }
-];
+function Nav(props) {
+    const { current, links } = props;
+    const navigate = useNavigate();
 
-function Nav() {
-    const [current, setCurrent] = useState(0);
-
-    function handleOnClick(index, route) {
-        setCurrent(index);
+    function handleOnClick(route) {
         if (route.charAt(0) === '#') {
             scrollTo(route);
         } else {
-            // Add router later
-            // <Link to={route}>
+            navigate(route);
+            scrollToTop();
         }
         return;
     }
@@ -199,8 +206,8 @@ function Nav() {
             {links.map((link, index) =>
                 <MenuItem
                     key={index}
-                    $current={index === current && true}
-                    onClick={() => handleOnClick(index, link.route)}>
+                    className={index === current ? 'current' : null}
+                    onClick={() => handleOnClick(link.route)}>
                     {link.name}
                 </MenuItem>
             )}
@@ -208,14 +215,19 @@ function Nav() {
     )
 }
 
+Nav.propTypes = {
+    current: PropTypes.number,
+    links: PropTypes.array,
+};
+
 export const Header = forwardRef((props, ref) => {
-    const { toggleTheme } = props;
+    const { toggleTheme, current, links } = props;
     const { currentTheme } = useContext(ThemeContext);
 
     return (
         <Wrapper $currentTheme={currentTheme} ref={ref}>
             <Content>
-                <Nav />
+                <Nav current={current} links={links} />
                 <ThemeSwitch toggleTheme={toggleTheme} />
             </Content>
         </Wrapper>
@@ -225,4 +237,6 @@ export const Header = forwardRef((props, ref) => {
 Header.displayName = 'Header';
 Header.propTypes = {
     toggleTheme: PropTypes.func,
+    current: PropTypes.number,
+    links: PropTypes.array,
 };

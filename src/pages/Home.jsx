@@ -1,12 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import { Header } from '../components/layouts/Header';
 import Hero from '../components/layouts/Hero';
 import AboutMe from '../components/layouts/AboutMe';
 import Projects from '../components/layouts/Projects';
-import Footer from '../components/layouts/Footer';
 import { devices } from '../hooks/viewport';
 
 const Container = styled.main`
@@ -24,13 +22,9 @@ const Container = styled.main`
     @media screen and (${devices.mobileL}) {
         padding: ${({ theme }) => `0 ${theme.spacing.xl}`};
     }
-
-    @media screen and (${devices.desktop}) {
-        padding: 0;
-    }
 `;
 
-function ContentLayer(props) {
+export default function Home(props) {
     const { headerHeight } = props;
 
     return (
@@ -39,34 +33,9 @@ function ContentLayer(props) {
             <AboutMe />
             <Projects />
         </Container>
-    );
-}
-
-ContentLayer.propTypes = {
-    headerHeight: PropTypes.number
-};
-
-export default function Home() {
-    const headerRef = useRef(null);
-    const [headerHeight, setHeaderHeight] = useState(null);
-
-    useEffect(() => {
-        if (!headerRef.current) return;
-        function handleResize() {
-            setHeaderHeight(headerRef.current.clientHeight);
-        }
-
-        setHeaderHeight(headerRef.current.clientHeight);
-
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, [headerRef]);
-
-    return (
-        <>
-            <Header ref={headerRef} />
-            <ContentLayer headerHeight={headerHeight} />
-            <Footer />
-        </>
     )
 }
+
+Home.propTypes = {
+    headerHeight: PropTypes.number,
+};
