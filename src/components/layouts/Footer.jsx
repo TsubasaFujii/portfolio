@@ -13,7 +13,8 @@ import linkedin from '../../assets/icons/linkedin.svg';
 import { devices } from '../../hooks/viewport';
 
 const FormHeading = styled(Heading).attrs(() => ({
-    as: 'h2'
+    as: 'h2',
+    id: 'contactForm',
 }))`
     text-align: center;
     color: ${({ theme, $currentTheme }) => $currentTheme === 'dark' ? theme.colors.black : theme.colors.white};
@@ -35,15 +36,15 @@ const FooterWrapper = styled.footer`
 
 const FormWrapper = styled.div`
     width: 100%;
+
     display: flex;
     flex-direction: column;
     gap: ${({ theme }) => theme.spacing.sm};
 `;
 
-const Form = styled.form.attrs(() => ({
-    id: 'contactForm'
-}))`
+const Form = styled.form`
     width: 100%;
+
     display: flex;
     flex-direction: column;
     gap: ${({ theme }) => theme.spacing.sm};
@@ -299,11 +300,13 @@ function CopyRight() {
     )
 }
 
-export default function Footer() {
+export default function Footer(props) {
+    const { contactRef } = props;
     const { currentTheme } = useContext(ThemeContext);
+
     return (
         <FooterWrapper $currentTheme={currentTheme}>
-            <FormWrapper>
+            <FormWrapper ref={contactRef}>
                 <FormHeading $currentTheme={currentTheme}>
                     Contact me
                 </FormHeading>
@@ -314,3 +317,7 @@ export default function Footer() {
         </FooterWrapper>
     )
 }
+
+Footer.propTypes = {
+    contactRef: PropTypes.func,
+};

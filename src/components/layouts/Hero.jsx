@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 
 import Button from '../Button';
 import Icon from '../Icon';
+import { scrollTo } from '../../js/window';
 
 const Wrapper = styled.section`
     min-height: ${({ $headerHeight }) => `calc(100vh - ${$headerHeight}px)`};
@@ -218,11 +219,7 @@ export default function Hero(props) {
     const { headerHeight } = props;
 
     function handleOnClick() {
-        const projectEl = document.querySelector('#projects');
-        projectEl.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-        });
+        scrollTo('#projects');
     }
 
     return (
