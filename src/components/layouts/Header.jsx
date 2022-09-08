@@ -1,4 +1,4 @@
-import React, { forwardRef, useContext } from 'react';
+import React, { forwardRef, useContext, useState } from 'react';
 import styled, { useTheme } from 'styled-components';
 import { ThemeContext } from '../styles/ContextProviders';
 import PropTypes from 'prop-types';
@@ -159,11 +159,52 @@ function ThemeSwitch() {
             <Label
                 animate={{
                     color: currentTheme === 'light' ?
-                        theme.colors.grey : theme.colors.white
+                        `${theme.colors.black}66` : theme.colors.white
                 }}>
                 dark
             </Label>
         </ThemeSwitchWrapper >
+    )
+}
+
+const links = [
+    {
+        name: 'Home',
+        route: '/',
+    }, {
+        name: 'Projects',
+        route: '/projects',
+    }, {
+        name: 'Contact',
+        route: '#contactForm',
+    }
+];
+
+function Nav() {
+    const [current, setCurrent] = useState(0);
+
+    function handleOnClick(index, route) {
+        setCurrent(index);
+        if (route.charAt(0) === '#') {
+            scrollTo(route);
+        } else {
+            // Add router later
+            // <Link to={route}>
+        }
+        return;
+    }
+
+    return (
+        <Navigation>
+            {links.map((link, index) =>
+                <MenuItem
+                    key={index}
+                    $current={index === current && true}
+                    onClick={() => handleOnClick(index, link.route)}>
+                    {link.name}
+                </MenuItem>
+            )}
+        </Navigation>
     )
 }
 
@@ -174,11 +215,7 @@ export const Header = forwardRef((props, ref) => {
     return (
         <Wrapper $currentTheme={currentTheme} ref={ref}>
             <Content>
-                <Navigation>
-                    <MenuItem $current>Home</MenuItem>
-                    <MenuItem>Projects</MenuItem>
-                    <MenuItem>Contact</MenuItem>
-                </Navigation>
+                <Nav />
                 <ThemeSwitch toggleTheme={toggleTheme} />
             </Content>
         </Wrapper>
