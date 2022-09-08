@@ -14,7 +14,7 @@ const TextWrapper = styled(motion.p)`
 export default function Text(props) {
     const { children } = props;
     const ref = useRef(null);
-    const isInView = useInView(ref, { once: true });
+    const isInView = useInView(ref);
 
     return (
         <TextWrapper
