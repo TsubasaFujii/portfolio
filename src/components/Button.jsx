@@ -103,7 +103,7 @@ Label.propTypes = {
 
 export default function Button(props) {
     const { label, disabled, icon, align, onClick, flat } = props;
-    const { currentTheme, screenSize } = useContext(ThemeContext);
+    const { currentTheme, pointingMethod } = useContext(ThemeContext);
 
     return (
         <Wrapper
@@ -116,8 +116,8 @@ export default function Button(props) {
             onClick={onClick}
             $flat={flat}>
             <ContentWrapper>
-                <Label text={label} />
-                {screenSize === 'sm' ? cloneElement(icon) : <ButtonIcon icon={icon} />}
+                {pointingMethod === 'touch' ? label : <Label text={label} />}
+                {pointingMethod === 'touch' ? cloneElement(icon) : <ButtonIcon icon={icon} />}
             </ContentWrapper>
         </Wrapper>
     )
