@@ -57,7 +57,23 @@ export const GlobalStyles = createGlobalStyle`
         font-weight: 700;
     }
 
-    h1, h2 {
+    h1 {
+        font-size: 3em;
+
+        @media screen and (${devices.mobileL}) {
+            font-size: 5.6em;
+        }
+
+        @media screen and (${devices.tablet}) {
+            font-size: 7em;
+        }
+
+        @media screen and (${devices.desktop}) {
+            font-size: 8em;
+        }
+    }
+
+    h2 {
         font-size: 3em;
         @media screen and (${devices.mobileL}) {
             font-size: 5.6em;
