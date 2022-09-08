@@ -40,7 +40,9 @@ const FormWrapper = styled.div`
     gap: ${({ theme }) => theme.spacing.sm};
 `;
 
-const Form = styled.form`
+const Form = styled.form.attrs(() => ({
+    id: 'contactForm'
+}))`
     width: 100%;
     display: flex;
     flex-direction: column;
