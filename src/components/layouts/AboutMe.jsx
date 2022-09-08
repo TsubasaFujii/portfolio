@@ -27,12 +27,12 @@ const Flex = styled.div`
     align-items: center;
     justify-content: center;
     gap: ${({ theme }) => theme.spacing.md};
-
+    
     @media screen and (${devices.tablet}) {
         padding: ${({ theme }) => `0 ${theme.spacing.md}`};
     }
 
-    @media screen and (${devices.desktop}) {
+    @media screen and (${devices.desktopL}) {
         flex-direction: row;
 
         & > div.introduction {
@@ -70,6 +70,11 @@ const ImageWrapper = styled(motion.div)`
         height: 30vmin;
         width: 30vmin;
     }
+
+    @media screen and (${devices.desktop}) {
+        height: 40vmin;
+        width: 40vmin;
+    }
 `;
 
 const Image = styled(motion.img)`
@@ -81,6 +86,10 @@ const Image = styled(motion.img)`
 
     @media screen and (${devices.mobileL}) {
         width: 30vmin;
+    }
+
+    @media screen and (${devices.desktop}) {
+        width: 40vmin;
     }
 `;
 
