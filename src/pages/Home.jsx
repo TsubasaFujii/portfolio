@@ -24,6 +24,10 @@ const Container = styled.main`
     @media screen and (${devices.mobileL}) {
         padding: ${({ theme }) => `0 ${theme.spacing.xl}`};
     }
+
+    @media screen and (${devices.desktop}) {
+        padding: 0;
+    }
 `;
 
 function ContentLayer(props) {
