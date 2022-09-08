@@ -105,11 +105,6 @@ const ProjectThumbnail = styled.div`
             clip-path: circle(30% at center);
         }
     }
-
-/*     @media screen and (${devices.desktop}) {
-        width: 70%;
-        margin: auto;
-    } */
 `;
 
 const ThumbnailImage = styled(motion.div)`
@@ -142,7 +137,7 @@ const ThumbnailImage = styled(motion.div)`
     }
 
     @media screen and (${devices.tablet}) {
-        width: 100%;
+        max-width: 30rem;
         margin: auto;
     }
 `;
@@ -151,7 +146,7 @@ const Link = styled.a`
     text-decoration: none;
 `;
 
-const ProjectTitle = styled(motion.h4)`
+const ProjectTitle = styled(motion.h3)`
     position: relative;
     right: ${({ theme }) => `-${theme.spacing.sm}`};
     padding-right: ${({ theme }) => `calc(${theme.spacing.sm} + 0.5em)`};
