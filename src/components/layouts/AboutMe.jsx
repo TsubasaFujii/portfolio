@@ -52,28 +52,36 @@ const ImageWrapper = styled(motion.div)`
 
     &:after {
         content: ' ';
-        width: 100%;
-        height: 100%;
+        width: 10%;
+        height: 10%;
         position: absolute;
-        top: 0;
-        
-        clip-path: circle(5% at center 55%);
+        // (100% - width(%)) / 2
+        top: 45%;
+        // (100% - height(%)) / 2
+        left: 45%;
+        border-radius: 50%;
         background-color: ${({ theme }) => theme.colors.primary};
-        transition: clip-path 0.3s;
+        transition: all 0.25s cubic-bezier(0.55, 0.06, 0.68, 0.19);
     }
 
     &.isVisible:after {
-        clip-path: circle(45% at center 55%);
+        width: 90%;
+        height: 90%;
+        position: absolute;
+        // 100% - width(%)
+        top: 10%;
+        // (100% - height(%)) / 2
+        left: 5%;
     }
 
     @media screen and (${devices.mobileL}) {
-        height: 30vmin;
-        width: 30vmin;
+        height: max(30vmin, 20rem);
+        width: max(30vmin, 20rem);
     }
 
     @media screen and (${devices.desktop}) {
-        height: 40vmin;
-        width: 40vmin;
+        height: min(30vmin, 25rem);
+        width: min(30vmin, 25rem);
     }
 `;
 
@@ -85,11 +93,11 @@ const Image = styled(motion.img)`
     clip-path: url(#clipPathLower);
 
     @media screen and (${devices.mobileL}) {
-        width: 30vmin;
+        width: max(30vmin, 20rem);
     }
 
     @media screen and (${devices.desktop}) {
-        width: 40vmin;
+        width: min(30vmin, 25rem);
     }
 `;
 
@@ -117,16 +125,15 @@ function ProfileImage(props) {
                 src={profile}
                 alt='my profile'
                 animate={{
-                    top: isVisible ? 0 : '-2rem',
+                    y: isVisible ? 0 : '-2rem',
                     opacity: isVisible ? 1 : 0,
+                    transitionDelay: '0.1s',
+                    transitionDuration: '0.2s'
                 }} />
             <svg width="0" height="0" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                     <clipPath id="clipPathLower" clipPathUnits="objectBoundingBox">
                         <path d="M1,0 H0 V0.5 C0,0.776,0.224,1,0.5,1 C0.776,1,1,0.776,1,0.5 V0" />
-                    </clipPath>
-                    <clipPath id="clipPathUpper" clipPathUnits="objectBoundingBox">
-                        <path d="M0,1 H1 V0.5 C1,0.224,0.776,0,0.5,0 C0.224,0,0,0.224,0,0.5 V1" />
                     </clipPath>
                 </defs>
             </svg>
