@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 
 import Button from '../Button';
 import { Heading } from '../Heading';
-import Icon from '../Icon';
+import { Icon } from '../Icon';
 
 import linkedin from '../../assets/icons/linkedin.svg';
 import { devices } from '../../hooks/viewport';

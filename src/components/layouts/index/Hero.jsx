@@ -3,14 +3,13 @@ import { AnimatePresence, motion } from 'framer-motion';
 import styled, { useTheme } from 'styled-components';
 import PropTypes from 'prop-types';
 
-import Button from '../Button';
-import Icon from '../Icon';
-import { scrollTo } from '../../js/window';
-import { selfIntroduction } from '../../data/content';
+import Button from '../../Button';
+import { Icon } from '../../Icon';
+import { scrollTo } from '../../../js/window';
+import { selfIntroduction } from '../../../data/content';
 
 const Wrapper = styled.section`
     min-height: ${({ $headerHeight }) => `calc(100vh - ${$headerHeight}px)`};
-    margin-top: ${({ $headerHeight }) => `${$headerHeight}px`};
     position: relative;
 
     display: flex;
@@ -171,13 +170,11 @@ function SubHeading() {
     )
 }
 
-function BackgroundLayer(props) {
-    const { headerHeight } = props;
-    //const { targetRef } = useParallaxElement({ speed: 0.7 });
+function BackgroundLayer() {
     const theme = useTheme();
 
     return (
-        <BackgroundWrapper $headerHeight={headerHeight}>
+        <BackgroundWrapper>
             <svg
                 viewBox='0 0 100 100'
                 xmlns='http://www.w3.org/2000/svg'
