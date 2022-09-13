@@ -10,19 +10,7 @@ import { Route, Routes } from 'react-router-dom';
 import { Header } from './components/layouts/Header';
 import Footer from './components/layouts/Footer';
 import { useTrackViewport } from './hooks/viewport';
-
-const links = [
-    {
-        name: 'Home',
-        route: '/',
-    }, {
-        name: 'Projects',
-        route: '/',
-    }, {
-        name: 'Contact',
-        route: '#contactForm',
-    }
-];
+import { links } from './data/content';
 
 function App() {
     const [headerHeight, setHeaderHeight] = useState(null);

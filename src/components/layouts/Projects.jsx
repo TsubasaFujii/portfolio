@@ -8,29 +8,11 @@ import Button from '../Button';
 import { H2 } from '../Heading';
 import Icon from '../Icon';
 import Text from '../Text';
+import Image from '../Image';
 
-import project1 from '../../assets/projects/webShop.JPG';
 import externalIcon from '../../assets/icons/external.svg';
 import { devices } from '../../hooks/viewport';
-
-const projects = [
-    {
-        title: 'e-commance website',
-        img: project1,
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Donec ut rhoncus ex. Suspendisse ac rhoncus nisl, eu tempor urna.',
-        tools: ['react', 'vue', 'node'],
-        url: 'http://google.com',
-        github: 'http://google.com',
-    },
-    {
-        title: 'To do list',
-        img: project1,
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Donec ut rhoncus ex. Suspendisse ac rhoncus nisl, eu tempor urna.',
-        tools: ['vue', 'node'],
-        url: 'http://google.com',
-        github: 'http://google.com',
-    }
-]
+import { projects } from '../../data/content';
 
 const Wrapper = styled.section.attrs(() => ({
     id: 'projects'
@@ -43,18 +25,104 @@ const Wrapper = styled.section.attrs(() => ({
     justify-content: center;
 
     scroll-margin: 10vh;
+
+    @media screen and (${devices.tablet}) {
+        padding: ${({ theme }) => theme.spacing.xl};
+    }
+`;
+
+
+const ProjectTitle = styled(motion.h3)`
+    position: relative;
+    right: ${({ theme }) => `-${theme.spacing.sm}`};
+    padding-right: ${({ theme }) => `calc(${theme.spacing.sm} + 0.5em)`};
+    color: ${({ theme }) => theme.fontColor};
+    text-transform: capitalize;
+`;
+
+const Thumbnail = styled(Image)`
+    &:hover {
+        cursor: pointer;
+    }
+
+    & > .image {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        display: block;
+        margin: auto 0;
+
+        position: relative;
+        z-index: 250;
+
+        background-size: contain;
+    }
+
+    &:before {
+        content: '';
+        width: 1rem;
+        height: 1rem;
+
+        position: absolute;
+        right: 0.5rem;
+        bottom: 0.5rem;
+
+        mask: url(${externalIcon}) no-repeat 50% 50%;
+        mask-size: cover;
+        background-color: ${({ theme }) => theme.colors.primary};
+    }
 `;
 
 const ProjectWrapper = styled.div`
     width: 100%;
-    min-height: 100vh;
 
-    display: flex;
-    flex-direction: column;
-    flex: 1;
+    display: grid;
     gap: ${({ theme }) => theme.spacing.md};
-    justify-content: flex-start;
-    
+
+    @media screen and (${devices.desktop}) {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, auto);
+
+        & ${ProjectTitle} {
+            grid-row: 1 / span 1;
+        }
+
+        & .details {
+            grid-row: 2 / span 2;
+        }
+
+        & ${Thumbnail} {
+            grid-row: 1 / span 3;
+            align-self: center;
+        }
+
+        &:nth-child(odd) {
+            & ${ProjectTitle} {
+                grid-column: 2 / span 1;
+            }
+
+            & .details {
+                grid-column: 2 / span 1;
+            }
+
+            & ${Thumbnail} {
+                grid-column: 1 / span 1;
+            }
+        }
+
+        &:nth-child(even) {
+            & ${ProjectTitle} {
+                grid-column: 1 / span 1;
+            }
+
+            & .details {
+                grid-column: 1 / span 1;
+            }
+
+            & ${Thumbnail} {
+                grid-column: 2 / span 1;
+            }
+        }
+    }
 `;
 
 const List = styled.div`
@@ -65,9 +133,12 @@ const List = styled.div`
     @media screen and (${devices.tablet}) {
         padding: ${({ theme }) => theme.spacing.md};
     }
+    @media screen and (${devices.desktop}) {
+        gap: ${({ theme }) => `calc(${theme.spacing.gap} * 2)`};
+    }
 `;
 
-const ProjectThumbnail = styled.div`
+/* const ProjectThumbnail = styled.div`
     width: 100%;
     padding: ${({ theme }) => theme.spacing.md};
     position: relative;
@@ -140,23 +211,19 @@ const ThumbnailImage = styled(motion.div)`
         max-width: 30rem;
         margin: auto;
     }
-`;
+`; */
 
 const Link = styled.a`
     text-decoration: none;
 `;
 
-const ProjectTitle = styled(motion.h3)`
-    position: relative;
-    right: ${({ theme }) => `-${theme.spacing.sm}`};
-    padding-right: ${({ theme }) => `calc(${theme.spacing.sm} + 0.5em)`};
-    color: ${({ theme }) => theme.fontColor};
-    text-transform: capitalize;
-`;
 
 const expand = keyframes`
+    0% {
+        transform: scaleX(0%);
+    }
     100% {
-      width: 100%;
+      transform: scaleX(100%) skew(-12deg);
     }
 `;
 
@@ -167,7 +234,7 @@ const AnimatedUnderline = styled(motion.span)`
     &:before {
         content: '';
         height: 0.5em;
-        width: 0%;
+        width: 100%;
         display: block;
         
         position: absolute;
@@ -175,12 +242,11 @@ const AnimatedUnderline = styled(motion.span)`
         bottom: 0;
         // HEX 45% = 73
         background: ${({ theme }) => `${theme.colors.primary50}73`};
-        transform: skew(-12deg);
         z-index: -1;
     }
 
-    &.isVisible:before {
-        animation: ${expand} 1.2s ease-in forwards;
+    &.shown:before {
+        animation: ${expand} 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
     }
 `;
 
@@ -199,7 +265,7 @@ const GroupedTools = styled.div`
     font-size: 1.5rem;
 `;
 
-function Thumbnail(props) {
+/* function Thumbnail(props) {
     const { img, isVisible, url } = props;
 
     function handleOnClick() {
@@ -223,7 +289,7 @@ Thumbnail.propTypes = {
     img: PropTypes.string,
     url: PropTypes.string,
     isVisible: PropTypes.bool,
-};
+}; */
 
 function Title(props) {
     const { title, isVisible, url } = props;
@@ -235,7 +301,7 @@ function Title(props) {
                 animate={{
                     opacity: isVisible ? 1 : 0,
                 }}>
-                <AnimatedUnderline className={isVisible ? 'isVisible' : null}>{title}</AnimatedUnderline>
+                <AnimatedUnderline className={isVisible ? 'shown' : null}>{title}</AnimatedUnderline>
             </ProjectTitle>
         </Link>
     );
@@ -261,7 +327,7 @@ Description.propTypes = {
 };
 
 function Project(props) {
-    const { title, img, tools, description, github, url } = props;
+    const { title, thumbnail, tools, description, github, url } = props;
     const { ref, inView } = useInView({
         initialInView: false,
         threshold: 0.3,
@@ -273,9 +339,9 @@ function Project(props) {
 
     return (
         <ProjectWrapper ref={ref}>
-            <Thumbnail img={img} isVisible={inView} url={url} />
+            <Thumbnail img={thumbnail} isVisible={inView} />
             <Title title={title} isVisible={inView} url={url} />
-            <Details>
+            <Details className='details'>
                 <Description description={description} />
                 <GroupedTools>{tools.map((tool, index) => <Icon key={index} name={tool} />)}</GroupedTools>
                 <Button
@@ -289,7 +355,7 @@ function Project(props) {
 
 Project.propTypes = {
     title: PropTypes.string,
-    img: PropTypes.string,
+    thumbnail: PropTypes.string,
     tools: PropTypes.array,
     description: PropTypes.string,
     github: PropTypes.string,

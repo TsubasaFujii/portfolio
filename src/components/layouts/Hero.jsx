@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import Button from '../Button';
 import Icon from '../Icon';
 import { scrollTo } from '../../js/window';
+import { selfIntroduction } from '../../data/content';
 
 const Wrapper = styled.section`
     min-height: ${({ $headerHeight }) => `calc(100vh - ${$headerHeight}px)`};
@@ -103,14 +104,6 @@ function HeroHeading() {
     )
 }
 
-const subText = [
-    'foodie',
-    'cat-lover',
-    'a good cook',
-    'traveller',
-    'a gardener',
-];
-
 const infoMotion = {
     show: {
         opacity: 1,
@@ -133,7 +126,7 @@ function WordLoop() {
     useEffect(() => {
         function switchText() {
             setCurrent(prev =>
-                prev === subText.length - 1 ? 0 : prev + 1
+                prev === selfIntroduction.keywords.length - 1 ? 0 : prev + 1
             );
         }
         const intervalId = setInterval(switchText, 2500);
@@ -149,7 +142,7 @@ function WordLoop() {
                 exit='hidden'
                 variants={infoMotion}
             >
-                {subText[current]}
+                {selfIntroduction.keywords[current]}
             </motion.span>
         </AnimatePresence>
     )

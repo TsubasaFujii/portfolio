@@ -8,6 +8,8 @@ import profile from '../../assets/profile.png';
 import { H2, Heading } from '../Heading';
 import Text from '../Text';
 import { devices } from '../../hooks/viewport';
+import Image from '../Image';
+import { selfIntroduction } from '../../data/content';
 
 
 const Wrapper = styled.section`
@@ -27,7 +29,7 @@ const Flex = styled.div`
     align-items: center;
     justify-content: center;
     gap: ${({ theme }) => theme.spacing.md};
-    
+
     @media screen and (${devices.tablet}) {
         padding: ${({ theme }) => `0 ${theme.spacing.md}`};
     }
@@ -39,12 +41,23 @@ const Flex = styled.div`
             flex: 1;
         }
     }
+
+    & img {
+        width: 70vw;
+        @media screen and (${devices.mobileL}) {
+            width: max(30vw, 20rem);
+        }
+
+        @media screen and (${devices.desktop}) {
+            width: min(25vw, 20rem);
+        }
+    }
 `;
 
 const NewLine = styled(motion.span)`
     display: block;
 `;
-
+/* 
 const ImageWrapper = styled(motion.div)`
     height: 70vmin;
     width: 70vmin;
@@ -99,7 +112,7 @@ const Image = styled(motion.img)`
     @media screen and (${devices.desktop}) {
         width: min(30vmin, 25rem);
     }
-`;
+`; */
 
 function AboutMeHeading(props) {
     const { isVisible } = props;
@@ -116,7 +129,7 @@ AboutMeHeading.propTypes = {
     isVisible: PropTypes.bool
 };
 
-function ProfileImage(props) {
+/* function ProfileImage(props) {
     const { isVisible } = props;
 
     return (
@@ -139,25 +152,13 @@ function ProfileImage(props) {
             </svg>
         </ImageWrapper>
     )
-}
-
-ProfileImage.propTypes = {
-    isVisible: PropTypes.bool
-};
+} */
 
 function Introduction() {
     return (
         <motion.div initial='hidden' className='introduction'>
-            <Heading size={4}>Lorem ipsum dolor sit amet, consectetur adipiscing elit</Heading>
-            <Text>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus.
-            </Text>
-            <Text>
-                Maecenas eget condimentum velit, sit amet feugiat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent auctor purus luctus enim egestas, ac scelerisque ante pulvinar. Donec ut rhoncus ex. Suspendisse ac rhoncus nisl, eu tempor urna.
-            </Text>
-            <Text>
-                Curabitur vel bibendum lorem. Morbi convallis convallis diam sit amet lacinia. Aliquam in elementum tellus.
-            </Text>
+            <Heading size={4}>{selfIntroduction.subHeading}</Heading>
+            {selfIntroduction.body.map((paragraph, index) => <Text key={index}>{paragraph}</Text>)}
         </motion.div>
     );
 }
@@ -166,7 +167,7 @@ function Content(props) {
     const { isVisible } = props;
     return (
         <Flex>
-            <ProfileImage isVisible={isVisible} />
+            <Image isVisible={isVisible} img={profile} alt='my profile' clipped />
             <Introduction />
         </Flex>
     )
