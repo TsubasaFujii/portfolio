@@ -6,7 +6,7 @@ export const links = [
         route: '/',
     }, {
         name: 'Projects',
-        route: '/',
+        route: '/projects',
     }, {
         name: 'Contact',
         route: '#contactForm',
@@ -29,7 +29,7 @@ export const selfIntroduction = {
     ],
 }
 
-export const projects = [
+export const projectsData = [
     {
         title: 'Project title1',
         github: 'https://github.com/TsubasaFujii/',
@@ -37,13 +37,15 @@ export const projects = [
         thumbnail: project1,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Donec ut rhoncus ex. Suspendisse ac rhoncus nisl, eu tempor urna.',
         tools: ['react', 'vue', 'node'],
+        starred: true,
     }, {
         title: 'Project title2',
         github: 'https://github.com/TsubasaFujii/',
         production: 'https://github.com/TsubasaFujii/',
         thumbnail: project1,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Donec ut rhoncus ex. Suspendisse ac rhoncus nisl, eu tempor urna.',
-        tools: ['react', 'node'],
+        tools: ['react', 'node', 'javaScript'],
+        starred: true,
     }, {
         title: 'Project title3',
         github: 'https://github.com/TsubasaFujii/',
@@ -51,5 +53,22 @@ export const projects = [
         thumbnail: project1,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Donec ut rhoncus ex. Suspendisse ac rhoncus nisl, eu tempor urna.',
         tools: ['react', 'vue', 'node'],
+        starred: true,
+    }, {
+        title: 'Project title4',
+        github: 'https://github.com/TsubasaFujii/',
+        production: 'https://github.com/TsubasaFujii/',
+        thumbnail: project1,
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Donec ut rhoncus ex. Suspendisse ac rhoncus nisl, eu tempor urna.',
+        tools: ['vue'],
+        starred: false,
+    }, {
+        title: 'Project title5',
+        github: 'https://github.com/TsubasaFujii/',
+        production: 'https://github.com/TsubasaFujii/',
+        thumbnail: project1,
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Donec ut rhoncus ex. Suspendisse ac rhoncus nisl, eu tempor urna.',
+        tools: ['node'],
+        starred: false,
     }
 ]
