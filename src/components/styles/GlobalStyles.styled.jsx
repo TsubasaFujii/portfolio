@@ -39,6 +39,10 @@ export const GlobalStyles = createGlobalStyle`
     footer {
     }
 
+    a {
+        text-decoration: none;
+    }
+    
     ///
     // Typography
     ///
@@ -51,6 +55,7 @@ export const GlobalStyles = createGlobalStyle`
     h3,
     h4,
     h5,
+    h6,
     button,
     span.intro,
     div.navItem {
@@ -106,6 +111,14 @@ export const GlobalStyles = createGlobalStyle`
         }
     }
 
+    h6 {
+        font-weight: 400;
+        font-size: 1em;
+        @media screen and (${devices.mobileL}) {
+            font-size: 1.2em;
+        }
+    }
+
     span.intro {
         font-weight: 400;
         font-size: 1em;
@@ -141,6 +154,7 @@ export const GlobalStyles = createGlobalStyle`
     h3,
     h4,
     h5,
+    h6,
     span.intro,
     p {
         color: ${({ theme }) => theme.fontColor};
