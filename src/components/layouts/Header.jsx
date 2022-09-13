@@ -91,6 +91,7 @@ const MenuItem = styled.div.attrs(() => ({
     &.current:after {
         width: 100%;
         border-bottom-color: ${({ theme }) => theme.colors.primary};
+        border-radius: 0.5rem;
     }
 
     @media screen and (${devices.mobileL}) {
