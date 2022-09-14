@@ -84,14 +84,15 @@ const MenuItem = styled.div.attrs(() => ({
 
         &:after {
             width: 100%;
+            border-radius: 0.15rem;
             border-bottom-color: ${({ theme }) => theme.colors.primary20};
         }
     }
 
     &.current:after {
         width: 100%;
+        border-radius: 0.15rem;
         border-bottom-color: ${({ theme }) => theme.colors.primary};
-        border-radius: 0.5rem;
     }
 
     @media screen and (${devices.mobileL}) {
