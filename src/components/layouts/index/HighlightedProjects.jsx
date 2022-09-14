@@ -140,7 +140,7 @@ Description.propTypes = {
 };
 
 function Project(props) {
-    const { title, thumbnail, tools, description, github, url } = props;
+    const { title, thumbnail, tools, description, github, production } = props;
     const { ref, inView } = useInView({
         initialInView: false,
         threshold: 0.3,
@@ -153,7 +153,7 @@ function Project(props) {
     return (
         <ProjectWrapper ref={ref}>
             <Thumbnail src={thumbnail} isVisible={inView} clickable landscape />
-            <Title title={title} isVisible={inView} url={url} />
+            <Title title={title} isVisible={inView} url={production} />
             <Details className='details'>
                 <Description description={description} />
                 <GroupedIcons names={tools} />
@@ -172,7 +172,7 @@ Project.propTypes = {
     tools: PropTypes.array,
     description: PropTypes.string,
     github: PropTypes.string,
-    url: PropTypes.string,
+    production: PropTypes.string,
 };
 
 function Heading(props) {
