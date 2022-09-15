@@ -9,6 +9,9 @@ import { GroupedIcons, Icon } from '../components/Icon';
 import Button from '../components/Button';
 import Text from '../components/Text';
 import externalIcon from '../assets/icons/external.svg';
+import Main from '../components/layouts/Main';
+import { useContext } from 'react';
+import { ThemeContext } from '../components/styles/ContextProviders';
 
 const Grid = styled.section`
     display: grid;
@@ -16,7 +19,7 @@ const Grid = styled.section`
     gap: ${({ theme }) => `${theme.spacing.lg} ${theme.spacing.md}`};
 
     @media screen and (${devices.tablet}) {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
     }
 
 `;
@@ -25,7 +28,10 @@ const Card = styled.article`
     width: 100%;
     height: 100%;
 
-    background: rgba(255, 255, 255, 0.3);
+    background: ${({ $currentTheme }) =>
+        $currentTheme === 'dark' ?
+            'rgba(255, 255, 255, 0.3)' :
+            'rgba(255, 255, 255, 0.1)'};
     border-radius: 1rem;
     overflow: hidden;
 `;
@@ -45,7 +51,10 @@ const Thumbnail = styled.div`
     aspect-ratio: 16/9;
     position: relative;
 
-    background: ${({ $img }) => `center / cover no-repeat url(${$img})`};
+    background: ${({ $img }) => `center no-repeat url(${$img})`};
+    background-size: auto 100%;
+
+    transition: background-size 0.2s ease-in;
 
     &:before {
         content: '';
@@ -63,15 +72,23 @@ const Thumbnail = styled.div`
 
     &:hover {
         cursor: pointer;
+        background-size: auto 120%;
     }
     
 `;
 
-const CheckboxWrapper = styled.div`
+const CheckboxWrapper = styled.aside.attrs(() => ({
+    className: 'filters'
+}))`
     width: 100%;
-    height: 100%;
+    padding: ${({ theme }) => `${theme.spacing.md} 0`};
+
+    z-index: 300;
+`;
+
+const GroupedCheckbox = styled.div`
+    width: 100%;
     padding: ${({ theme }) => `${theme.spacing.xs} ${theme.spacing.sm}`};
-    grid-row: 1 / span 2;
 
     display: flex;
     flex-direction: row;
@@ -81,6 +98,7 @@ const CheckboxWrapper = styled.div`
     gap: ${({ theme }) => theme.spacing.sm};
 
     background: ${({ theme }) => theme.colors.primary20};
+    color: ${({ theme }) => theme.colors.black};
 
     & > div {
         flex: 0;
@@ -101,11 +119,6 @@ const CheckboxWrapper = styled.div`
         text-transform: capitalize;
         font-family: 'Josefin Sans', sans-serif;
     }
-
-    @media screen and (${devices.tablet}) {
-        grid-column: 1 / span 2;
-    }
-
 `;
 
 function Project(props) {
@@ -168,13 +181,39 @@ Checkbox.propTypes = {
     handleOnChange: PropTypes.func,
 }
 
+function Filter(props) {
+    const { headerHeight, updateFilterBy } = props;
+    return (
+        <CheckboxWrapper $headerHeight={headerHeight}>
+            <GroupedCheckbox>
+                {
+                    list.map(item =>
+                        <Checkbox
+                            key={item}
+                            item={item}
+                            handleOnChange={updateFilterBy} />
+                    )
+                }
+            </GroupedCheckbox>
+        </CheckboxWrapper>
+    )
+}
+
+Filter.propTypes = {
+    headerHeight: PropTypes.number,
+    updateFilterBy: PropTypes.func,
+    isActive: PropTypes.bool,
+}
+
 const list = ['react', 'javaScript', 'node', 'vue'];
 
-export default function Projects() {
+export default function Projects(props) {
+    const { headerHeight } = props;
     const [filterBy, setFilterBy] = useState([]);
     const [projectList, setProjectList] = useState([]);
+    const { currentTheme } = useContext(ThemeContext);
 
-    function handleOnChange(event) {
+    function updateFilterBy(event) {
         const target = event.target;
         setFilterBy(prev => {
             if (target.checked) {
@@ -189,26 +228,31 @@ export default function Projects() {
         const newList = projectsData.filter(data =>
             filterBy.length === 0 ?
                 projectsData :
-                filterBy.some(item => data.tools.includes(item))
+                filterBy.every(item => data.tools.includes(item))
         );
         setProjectList(newList);
     }, [filterBy]);
 
     return (
-        <>
+        <Main headerHeight={headerHeight}>
+            <Filter
+                updateFilterBy={updateFilterBy}
+                headerHeight={headerHeight} />
             <Grid>
-                <CheckboxWrapper>
-                    {
-                        list.map(item =>
-                            <Checkbox key={item} item={item} handleOnChange={handleOnChange} />
-                        )
-                    }
-                </CheckboxWrapper>
                 {
-                    projectList.map(project => <Project key={project.title} {...project} />)
+                    projectList.map(project =>
+                        <Project
+                            key={project.title}
+                            {...project}
+                            $currentTheme={currentTheme} />
+                    )
                 }
             </Grid>
 
-        </>
+        </Main>
     )
 }
+
+Projects.propTypes = {
+    headerHeight: PropTypes.number,
+};
