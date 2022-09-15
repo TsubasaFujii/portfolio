@@ -1,4 +1,4 @@
-import React, { forwardRef, useContext } from 'react';
+import React, { forwardRef, useContext, useEffect, useState } from 'react';
 import styled, { useTheme } from 'styled-components';
 import { motion } from 'framer-motion';
 import { ThemeContext } from '../styles/ContextProviders';
@@ -10,7 +10,7 @@ import { devices } from '../../hooks/viewport';
 import { scrollTo, scrollToTop } from '../../js/window';
 import { useNavigate } from 'react-router-dom';
 
-const Wrapper = styled.header`
+const Wrapper = styled(motion.header)`
     @media screen and (${devices.mobileL}) {
         padding: ${({ theme }) => `${theme.spacing.sm} ${theme.spacing.xl}`};
     }
@@ -208,8 +208,47 @@ export const Header = forwardRef((props, ref) => {
     const { toggleTheme, current, links } = props;
     const { currentTheme } = useContext(ThemeContext);
 
+    // For smaller screen
+    const [y, setY] = useState(0);
+    // -1: up, 0: page top, 1: down
+    const [direction, setDirection] = useState(0);
+    const [isHidden, setIsHidden] = useState(false);
+
+    useEffect(() => {
+        function detectDirection() {
+            const scrolled = window.pageYOffset;
+            if (scrolled < window.innerHeight) {
+                setDirection(0);
+            } else if (scrolled > y) {
+                setDirection(1);
+            } else if (scrolled < y) {
+                setDirection(-1);
+            }
+            setY(scrolled);
+        }
+
+        window.addEventListener('scroll', detectDirection);
+        return () => window.removeEventListener('scroll', detectDirection);
+    }, [y]);
+
+    useEffect(() => {
+        if (matchMedia(devices.mobileL).matches) return;
+
+        // Show always at the top
+        if (direction < 0) {
+            setIsHidden(false);
+        } else if (direction > 0) {
+            setIsHidden(true);
+        }
+    }, [direction]);
+
     return (
-        <Wrapper $currentTheme={currentTheme} ref={ref}>
+        <Wrapper
+            ref={ref}
+            $currentTheme={currentTheme}
+            animate={{
+                y: isHidden ? '-100%' : 0,
+            }}>
             <Content>
                 <Nav current={current} links={links} />
                 <ThemeSwitch toggleTheme={toggleTheme} />
