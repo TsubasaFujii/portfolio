@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { devices } from '../hooks/viewport';
+import externalIcon from '../assets/icons/external.svg';
 
 const ImageWrapper = styled(motion.div)`
     height: 70vmin;
@@ -10,6 +11,7 @@ const ImageWrapper = styled(motion.div)`
     margin: 0 auto;
     position: relative;
 
+    // Background
     &:after {
         content: ' ';
         width: 10%;
@@ -36,6 +38,33 @@ const ImageWrapper = styled(motion.div)`
         // (100% - height(%)) / 2
         left: 5%;
     }
+
+    // Icon
+    ${({ $clickable, theme }) => {
+        if ($clickable) {
+            return (
+                `    
+                    &:before {
+                        content: '';
+                        width: 1rem;
+                        height: 1rem;
+
+                        position: absolute;
+                        right: 0.5rem;
+                        bottom: 0.5rem;
+
+                        mask: url(${externalIcon}) no-repeat 50% 50%;
+                        mask-size: cover;
+                        background-color: ${theme.colors.primary};
+                    }
+
+                    &:hover {
+                        cursor: pointer;
+                    }
+                `
+            )
+        }
+    }}
 
     @media screen and (${devices.mobileL}) {
         height: max(30vw, 20rem);
@@ -64,15 +93,24 @@ const Img = styled(motion.div).attrs(() => ({
         height: 100%;
         visibility: hidden;
     }
+
+    ${({ $landscape }) => {
+        if ($landscape) {
+            return (`
+                aspect-ratio: 16 / 9;
+                background-size: contain;
+            `)
+        }
+    }}
 `;
 
 export default function Image(props) {
-    const { img, isVisible, alt, clipped, className } = props;
+    const { src, isVisible, alt, clipped, className, clickable, landscape } = props;
 
     return (
-        <ImageWrapper className={`${className ? className : ''} ${isVisible ? 'shown' : ''}`}>
+        <ImageWrapper className={`${className ? className : ''} ${isVisible ? 'shown' : ''}`} $clickable={clickable}>
             <Img
-                $img={img}
+                $img={src}
                 alt={alt}
                 animate={{
                     y: isVisible ? 0 : '-2rem',
@@ -80,15 +118,18 @@ export default function Image(props) {
                     transitionDelay: '0.1s',
                     transitionDuration: '0.2s'
                 }}
-                $clipped={clipped} />
+                $clipped={clipped}
+                $landscape={landscape} />
         </ImageWrapper>
     )
 }
 
 Image.propTypes = {
     isVisible: PropTypes.bool,
+    clickable: PropTypes.bool,
+    landscape: PropTypes.bool,
     className: PropTypes.string,
     clipped: PropTypes.bool,
-    img: PropTypes.string,
+    src: PropTypes.string,
     alt: PropTypes.string,
 };
