@@ -9,6 +9,10 @@ export const GlobalStyles = createGlobalStyle`
         margin: 0;
         padding: 0;
     }
+
+    ///
+    // Position, width, height, padding, margin, z-index, overflow
+    ///
     body {
         width: 100vw;
         position: relative;
@@ -19,34 +23,43 @@ export const GlobalStyles = createGlobalStyle`
         width: 100%;
     }
 
-    section {
-        width: 100%;
+    header {
+        width: 100vw;
+        padding: ${({ theme }) => `${theme.spacing.xs} ${theme.spacing.sm}`};
+
+        position: sticky;
+        top: 0;
+        left: 0;
+        right: 0;
+
+        z-index: 300;
     }
 
     main {
         width: 100%;
+        padding: ${({ theme }) => `0 ${theme.spacing.md}`};
+
+        position: relative;
+        z-index: 200;
+
         @media screen and (${devices.desktopL}) {
             width: 1200px;
             margin: auto;
         }
     }
 
-    header {
-        width: 100vw;
-        z-index: 500;
-    }
-
     footer {
-    }
+        width: 100vw;
+        padding: ${({ theme }) => `${theme.spacing.gap} ${theme.spacing.md} ${theme.spacing.md}`};
+        min-height: 50vh;
 
-    a {
-        text-decoration: none;
+        z-index: 300;
     }
     
     ///
     // Typography
     ///
-    body {
+    body, main {
         font-size: 1rem;
     }
 
@@ -146,9 +159,14 @@ export const GlobalStyles = createGlobalStyle`
         font-size: 1.2em;
     }
 
+    a {
+        text-decoration: none;
+    }
+
     ///
     // Colors
     ///
+
     h1,
     h2,
     h3,
@@ -156,11 +174,27 @@ export const GlobalStyles = createGlobalStyle`
     h5,
     h6,
     span.intro,
-    p {
+    p,
+    header {
         color: ${({ theme }) => theme.fontColor};
     }
 
     button {
         color: ${({ theme }) => theme.black};
+    }
+
+    body {
+        background-color: ${({ theme, currentTheme }) =>
+        currentTheme === 'dark' ? theme.colors.black : theme.colors.white};
+    }
+
+    header,
+    aside.filters {
+        // CC in HEX is 80% opacity
+        background: ${({ theme, currentTheme }) =>
+        currentTheme === 'dark' ?
+            `${theme.colors.black}CC` :
+            `${theme.colors.white}CC`};
+        backdrop-filter: blur(1rem);
     }
     `;

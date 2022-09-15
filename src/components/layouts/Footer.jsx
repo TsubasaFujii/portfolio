@@ -21,10 +21,6 @@ const FormHeading = styled(Heading).attrs(() => ({
 `;
 
 const FooterWrapper = styled.footer`
-    width: 100%;
-    min-height: 50vh;
-    padding: ${({ theme }) => `${theme.spacing.gap} ${theme.spacing.md} ${theme.spacing.md}`};
-
     display: flex;
     flex-direction: column;
     gap: ${({ theme }) => theme.spacing.lg};

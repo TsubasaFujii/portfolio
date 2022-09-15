@@ -17,8 +17,6 @@ const Wrapper = styled.section`
     align-items: flex-start;
     justify-content: center;
     gap: ${({ theme }) => theme.spacing.md};
-
-    color: ${({ theme }) => theme.fontColor};
 `;
 
 const NewLine = styled(motion.span)`
@@ -205,13 +203,26 @@ BackgroundLayer.propTypes = {
     headerHeight: PropTypes.number
 };
 
-export default function Hero(props) {
-    const { headerHeight } = props;
+export default function Hero() {
+    const [headerHeight, setHeaderHeight] = useState(null);
 
     function handleOnClick() {
         scrollTo('#projects');
     }
 
+    useEffect(() => {
+        const header = document.querySelector('header');
+
+        function handleResize() {
+            setHeaderHeight(header.clientHeight);
+        }
+
+        setHeaderHeight(header.clientHeight);
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+    console.log(headerHeight);
     return (
         <Wrapper $headerHeight={headerHeight}>
             <HeroHeading />
@@ -221,11 +232,7 @@ export default function Hero(props) {
                 align='flex-start'
                 icon={<Icon name='chevronDown' />}
                 onClick={handleOnClick} />
-            <BackgroundLayer headerHeight={headerHeight} />
+            <BackgroundLayer />
         </Wrapper >
     )
 }
-
-Hero.propTypes = {
-    headerHeight: PropTypes.number
-};

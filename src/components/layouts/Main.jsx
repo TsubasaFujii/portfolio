@@ -1,15 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import { devices } from '../../hooks/viewport';
+import { ThemeContext } from '../styles/ContextProviders';
 
 const Container = styled.main`
-    margin-top: ${({ $headerHeight }) => `${$headerHeight}px`};
-    padding: ${({ theme }) => `0 ${theme.spacing.md}`};
-    position: relative;
-    z-index: 200;
-
     & section:last-child {
         margin-bottom: ${({ theme }) => theme.spacing.gap};
     }
@@ -20,16 +16,19 @@ const Container = styled.main`
 `;
 
 export default function Main(props) {
-    const { children, headerHeight, className } = props;
+    const { children, className } = props;
+    const { currentTheme } = useContext(ThemeContext);
+
     return (
-        <Container $headerHeight={headerHeight} className={className}>
+        <Container
+            className={className}
+            $currentTheme={currentTheme}>
             {children}
         </Container>
     )
 }
 
 Main.propTypes = {
-    headerHeight: PropTypes.number,
     className: PropTypes.string,
     children: PropTypes.oneOfType([
         PropTypes.array,

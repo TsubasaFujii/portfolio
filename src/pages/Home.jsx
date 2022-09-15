@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import Main from '../components/layouts/Main';
@@ -13,18 +12,13 @@ const Container = styled(Main)`
     gap: ${({ theme }) => theme.spacing.gap};
 `;
 
-export default function Home(props) {
-    const { headerHeight } = props;
+export default function Home() {
 
     return (
-        <Container headerHeight={headerHeight}>
-            <Hero headerHeight={headerHeight} />
+        <Container>
+            <Hero />
             <AboutMe />
             <HighlightedProjects />
         </Container>
     )
 }
-
-Home.propTypes = {
-    headerHeight: PropTypes.number,
-};

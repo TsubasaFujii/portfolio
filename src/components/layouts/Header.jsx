@@ -11,21 +11,6 @@ import { scrollTo, scrollToTop } from '../../js/window';
 import { useNavigate } from 'react-router-dom';
 
 const Wrapper = styled.header`
-    padding: ${({ theme }) => `${theme.spacing.xs} ${theme.spacing.sm}`};
-
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 300;
-
-     // CC in HEX is 80% opacity
-    background: ${({ theme, $currentTheme }) =>
-        $currentTheme === 'dark' ?
-            `${theme.colors.black}CC` :
-            `${theme.colors.white}CC`};
-    backdrop-filter: blur(1rem);
-
     @media screen and (${devices.mobileL}) {
         padding: ${({ theme }) => `${theme.spacing.sm} ${theme.spacing.xl}`};
     }
@@ -45,7 +30,6 @@ const Content = styled.div`
 
 const Navigation = styled.nav`
     width: 100%;
-    //padding: ${({ theme }) => `calc(${theme.spacing.sm}/2) ${theme.spacing.sm}`};
 
     display: flex;
     flex-direction: row;
@@ -63,9 +47,7 @@ const MenuItem = styled.div.attrs(() => ({
     position: relative;
 
     flex: 1;
-
     text-align: center;
-    color: ${({ theme }) => theme.fontColor};
 
     &:after {
         content: '';
