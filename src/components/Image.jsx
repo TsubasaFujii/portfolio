@@ -83,10 +83,13 @@ const Img = styled(motion.div).attrs(() => ({
     width: 100%;
     height: 100%;
     z-index: 90;
-    background: ${({ $img }) => `center / cover no-repeat url(${$img})`};
+    background-image: ${({ $img }) => `url(${$img})`};
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
     filter: drop-shadow(4px 4px 4px rgba(26, 13, 6, 0.2));
     ${({ $clipped }) => $clipped && 'clip-path: url(#clipPathLower);'}
-
+    
     &:after {
         content: '.';
         width: 100%;
