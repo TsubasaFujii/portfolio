@@ -34,6 +34,13 @@ const ProjectTitle = styled(H3)`
 `;
 
 const Thumbnail = styled(Image)`
+    & .image {
+        background-size: 100%;
+    }
+    
+    &:hover .image {
+        background-size: 120%;
+    }
 `;
 
 const ProjectWrapper = styled.div`
