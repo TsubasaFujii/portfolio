@@ -232,6 +232,19 @@ export const Header = forwardRef((props, ref) => {
     }, [y]);
 
     useEffect(() => {
+        // Show always for larger screens
+        function handleResize() {
+            if (matchMedia(devices.mobileL).matches) {
+                setIsHidden(false);
+            }
+        }
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    useEffect(() => {
+        // Ignore if larger screen
         if (matchMedia(devices.mobileL).matches) return;
 
         // Show always at the top
