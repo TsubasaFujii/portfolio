@@ -14,12 +14,13 @@ import { useContext } from 'react';
 import { ThemeContext } from '../components/styles/ContextProviders';
 
 const Grid = styled.section`
+    min-height: 50vh;
     display: grid;
     grid-template-columns: 100%;
     gap: ${({ theme }) => `${theme.spacing.lg} ${theme.spacing.md}`};
 
     @media screen and (${devices.tablet}) {
-        grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
     }
 
 `;
@@ -240,12 +241,14 @@ export default function Projects(props) {
                 headerHeight={headerHeight} />
             <Grid>
                 {
-                    projectList.map(project =>
-                        <Project
-                            key={project.title}
-                            {...project}
-                            $currentTheme={currentTheme} />
-                    )
+                    projectList.length > 0 ?
+                        projectList.map(project =>
+                            <Project
+                                key={project.title}
+                                {...project}
+                                $currentTheme={currentTheme} />
+                        ) :
+                        <div>No match</div>
                 }
             </Grid>
 
