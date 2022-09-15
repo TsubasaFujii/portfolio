@@ -8,7 +8,7 @@ import sun from '../../assets/icons/sun.svg';
 import moon from '../../assets/icons/moon.svg';
 import { devices } from '../../hooks/viewport';
 import { scrollTo, scrollToTop } from '../../js/window';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Wrapper = styled(motion.header)`
     @media screen and (${devices.mobileL}) {
@@ -207,6 +207,7 @@ Nav.propTypes = {
 export const Header = forwardRef((props, ref) => {
     const { toggleTheme, current, links } = props;
     const { currentTheme } = useContext(ThemeContext);
+    const location = useLocation();
 
     // For smaller screen
     const [y, setY] = useState(0);
@@ -217,7 +218,8 @@ export const Header = forwardRef((props, ref) => {
     useEffect(() => {
         function detectDirection() {
             const scrolled = window.pageYOffset;
-            if (scrolled < window.innerHeight) {
+            // Only always-show at the top of the index page
+            if (location.pathname === '/' && scrolled < window.innerHeight) {
                 setDirection(0);
             } else if (scrolled > y) {
                 setDirection(1);
