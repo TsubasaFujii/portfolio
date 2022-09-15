@@ -222,7 +222,7 @@ export default function Hero() {
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     }, []);
-    console.log(headerHeight);
+
     return (
         <Wrapper $headerHeight={headerHeight}>
             <HeroHeading />
