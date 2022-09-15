@@ -248,6 +248,9 @@ export const Header = forwardRef((props, ref) => {
             $currentTheme={currentTheme}
             animate={{
                 y: isHidden ? '-100%' : 0,
+                transition: {
+                    duration: 0.3
+                }
             }}>
             <Content>
                 <Nav current={current} links={links} />
