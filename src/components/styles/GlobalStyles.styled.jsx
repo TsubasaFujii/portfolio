@@ -52,7 +52,7 @@ export const GlobalStyles = createGlobalStyle`
         }
     }
 
-    #modal {
+    #overlay {
         z-index: 250;
     }
 
@@ -60,7 +60,6 @@ export const GlobalStyles = createGlobalStyle`
         width: 100%;
         padding: ${({ theme }) => `0 ${theme.spacing.md}`};
 
-        position: relative;
         z-index: 200;
 
         @media screen and (${devices.desktopL}) {
