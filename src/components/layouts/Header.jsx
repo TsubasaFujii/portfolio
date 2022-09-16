@@ -10,12 +10,6 @@ import { devices } from '../../hooks/viewport';
 import { scrollTo, scrollToTop } from '../../js/window';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-const Wrapper = styled(motion.header)`
-    @media screen and (${devices.mobileL}) {
-        padding: ${({ theme }) => `${theme.spacing.sm} ${theme.spacing.xl}`};
-    }
-`;
-
 const Content = styled.div`
     width: 100%;
     margin: auto;
@@ -24,7 +18,7 @@ const Content = styled.div`
     flex-wrap: wrap-reverse;
 
     @media screen and (${devices.desktopL}) {
-        width: 1200px;
+        width: ${({ theme }) => theme.max.width};
     }
 `;
 
@@ -206,7 +200,6 @@ Nav.propTypes = {
 
 export const Header = forwardRef((props, ref) => {
     const { toggleTheme, current, links } = props;
-    const { currentTheme } = useContext(ThemeContext);
     const location = useLocation();
 
     // For smaller screen
@@ -258,9 +251,8 @@ export const Header = forwardRef((props, ref) => {
     }, [direction]);
 
     return (
-        <Wrapper
+        <motion.header
             ref={ref}
-            $currentTheme={currentTheme}
             animate={{
                 y: isHidden ? '-100%' : 0,
                 transition: {
@@ -271,7 +263,7 @@ export const Header = forwardRef((props, ref) => {
                 <Nav current={current} links={links} />
                 <ThemeSwitch toggleTheme={toggleTheme} />
             </Content>
-        </Wrapper>
+        </motion.header>
     )
 });
 

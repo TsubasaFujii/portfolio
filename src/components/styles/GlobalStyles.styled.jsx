@@ -17,6 +17,11 @@ export const GlobalStyles = createGlobalStyle`
         width: 100vw;
         position: relative;
         overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    body.lock {
+        overflow-y: hidden;
     }
 
     #root {
@@ -33,6 +38,22 @@ export const GlobalStyles = createGlobalStyle`
         right: 0;
 
         z-index: 300;
+
+        aside {
+            width: 100%;
+        }
+
+        @media screen and (${devices.mobileL}) {
+            padding: ${({ theme }) => `${theme.spacing.sm} ${theme.spacing.xl}`};
+
+            header aside {
+                width: ${({ theme }) => `calc(100% + ${theme.spacing.xl})`};
+            }
+        }
+    }
+
+    #modal {
+        z-index: 250;
     }
 
     main {
@@ -43,7 +64,7 @@ export const GlobalStyles = createGlobalStyle`
         z-index: 200;
 
         @media screen and (${devices.desktopL}) {
-            width: 1200px;
+            width: ${({ theme }) => theme.max.width};
             margin: auto;
         }
     }
@@ -71,7 +92,8 @@ export const GlobalStyles = createGlobalStyle`
     h6,
     button,
     span.intro,
-    div.navItem {
+    div.navItem,
+    aside.filters {
         font-family: 'Josefin Sans', sans-serif;
         font-weight: 700;
     }
@@ -144,7 +166,8 @@ export const GlobalStyles = createGlobalStyle`
     label,
     input,
     textarea,
-    div.copyright {
+    div.copyright,
+    aside.filters {
         font-family: 'Lato', sans-serif;
         font-weight: 400;
     }
@@ -174,6 +197,7 @@ export const GlobalStyles = createGlobalStyle`
     h5,
     h6,
     span.intro,
+    aside.filters,
     p,
     header {
         color: ${({ theme }) => theme.fontColor};
@@ -189,7 +213,7 @@ export const GlobalStyles = createGlobalStyle`
     }
 
     header,
-    aside.filters {
+    div.modal {
         // CC in HEX is 80% opacity
         background: ${({ theme, currentTheme }) =>
         currentTheme === 'dark' ?
@@ -197,4 +221,12 @@ export const GlobalStyles = createGlobalStyle`
             `${theme.colors.white}CC`};
         backdrop-filter: blur(1rem);
     }
-    `;
+
+    body.lock header,
+    body.lock div.modal {
+        background: ${({ theme, currentTheme }) =>
+        currentTheme === 'dark' ?
+            theme.colors.black :
+            theme.colors.white};
+    }
+`;
