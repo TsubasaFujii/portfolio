@@ -19,9 +19,10 @@ const Grid = styled.section`
     gap: ${({ theme }) => `${theme.spacing.lg} ${theme.spacing.md}`};
 
     @media screen and (${devices.tablet}) {
-        grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
     }
     @media screen and (${devices.desktop}) {
+        grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
         gap: ${({ theme }) => `${theme.spacing.gap} ${theme.spacing.lg}`};
     }
 `;
