@@ -11,8 +11,13 @@ const spacing = {
     gap: '8rem',
 };
 
+const max = {
+    width: '1200px',
+}
+
 const common = {
     spacing,
+    max,
 };
 
 ////
