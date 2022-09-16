@@ -9,7 +9,7 @@ const Container = styled.main`
     & section:last-child {
         margin-bottom: ${({ theme }) => theme.spacing.gap};
     }
-    
+
     @media screen and (${devices.mobileL}) {
         padding: ${({ theme }) => `0 ${theme.spacing.xl}`};
     }
@@ -33,5 +33,6 @@ Main.propTypes = {
     children: PropTypes.oneOfType([
         PropTypes.array,
         PropTypes.string,
+        PropTypes.object,
     ]),
 };
