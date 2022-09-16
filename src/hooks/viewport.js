@@ -24,7 +24,9 @@ export function useTrackViewport(links) {
     const {refs, entries} = links.reduce((result, current, index) => {
         // Return ref only for elements
         if(current.route.includes('#')) {
-            const { ref, entry } = useInView();
+            const { ref, entry } = useInView({
+                threshold: 0.45,
+            });
             result.refs[`${current.name.toLowerCase()}Ref`] = ref;
             result.entries.push({
                 isIntersecting: entry?.isIntersecting,
