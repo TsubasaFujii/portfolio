@@ -5,6 +5,8 @@ import styled from 'styled-components';
 import { ThemeContext } from './styles/ContextProviders';
 
 const OverlayWrapper = styled.div`
+    width: 100vw;
+    height: 100vh;
     position: absolute;
     top: 0;
     left: 0;
@@ -23,7 +25,7 @@ export const Overlay = forwardRef((_, ref) => {
     const { currentTheme } = useContext(ThemeContext);
 
     return createPortal((
-        <OverlayWrapper id='modal' ref={ref} $currentTheme={currentTheme} />
+        <OverlayWrapper id='overlay' ref={ref} $currentTheme={currentTheme} />
     ), document.querySelector('main'));
 });
 
