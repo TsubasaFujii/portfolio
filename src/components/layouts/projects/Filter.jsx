@@ -8,6 +8,7 @@ import { useControlVisibility } from '../../../hooks/component';
 
 import { Icon } from '../../Icon';
 import { Overlay } from '../../Overlay';
+import { AnimatePresence, motion } from 'framer-motion';
 
 const FilterWrapper = styled.aside.attrs(() => ({
     className: 'filters'
@@ -106,12 +107,13 @@ const GroupedCheckbox = styled.div`
         font-family: inherit;
     }
 `;
-const CriteriaWrapper = styled.div.attrs(() => ({
+const CriteriaWrapper = styled(motion.div).attrs(() => ({
     className: 'modal'
 }))`
     // width = (Header vertical padding) * 2 + 100%
     width: 100vw;
-    
+    transform-origin: top center;
+
     position: absolute;
     // (Header bottom padding) * 2 + 100%
     top: ${({ theme }) => `calc(${theme.spacing.xs} + 100%)`};
@@ -174,7 +176,7 @@ Checkbox.propTypes = {
 }
 
 function Modal(props) {
-    const { updateFilterBy, value, updateModalState } = props;
+    const { updateFilterBy, value, updateModalState, isOpen } = props;
 
     const criteria = Object.keys(value).map(item =>
         <Checkbox
@@ -185,21 +187,39 @@ function Modal(props) {
     );
 
     return (
-        <CriteriaWrapper>
-            <CriteriaInnerWrapper>
-                <div onClick={() => updateModalState(false)}>
-                    <Icon name='close' />
-                </div>
-                <GroupedCheckbox>
-                    {criteria}
-                </GroupedCheckbox>
-            </CriteriaInnerWrapper>
-        </CriteriaWrapper>
+        <AnimatePresence>
+            {isOpen && (
+                <CriteriaWrapper
+                    initial={{
+                        scaleY: 0,
+                        opacity: 0
+                    }}
+                    animate={{
+                        scaleY: 1,
+                        opacity: 1,
+                        transition: 'ease',
+                    }}
+                    exit={{
+                        scaleY: 0,
+                        opacity: 0,
+                    }}>
+                    <CriteriaInnerWrapper>
+                        <div onClick={() => updateModalState(false)}>
+                            <Icon name='close' />
+                        </div>
+                        <GroupedCheckbox>
+                            {criteria}
+                        </GroupedCheckbox>
+                    </CriteriaInnerWrapper>
+                </CriteriaWrapper>
+            )}
+        </AnimatePresence>
     )
 }
 
 Modal.propTypes = {
     value: PropTypes.object,
+    isOpen: PropTypes.bool,
     updateFilterBy: PropTypes.func,
     updateModalState: PropTypes.func,
 }
@@ -223,16 +243,12 @@ export default function Filter(props) {
                     Filter by
                     <Icon name='funnel' />
                 </FilterButton>
-                {
-                    isOpen &&
-                    <>
-                        <Modal
-                            updateFilterBy={updateFilterBy}
-                            value={value}
-                            updateModalState={setIsVisible} />
-                        <Overlay ref={ref} />
-                    </>
-                }
+                <Modal
+                    value={value}
+                    isOpen={isOpen}
+                    updateFilterBy={updateFilterBy}
+                    updateModalState={setIsVisible} />
+                {isOpen && <Overlay ref={ref} />}
             </FilterInnerWrapper>
         </FilterWrapper>
         , document.querySelector('header')
