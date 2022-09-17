@@ -6,30 +6,18 @@ import { useInView } from 'react-intersection-observer';
 
 import profile from '../../../assets/profile.png';
 import { H2, Heading } from '../../Heading';
-import Text from '../../Text';
+import { NewLine, Text } from '../../Text';
 import { devices } from '../../../hooks/viewport';
 import Image from '../../Image';
 import { selfIntroduction } from '../../../data/content';
+import { FlexColumn } from '../../Flex';
+import { SectionRef } from '../../Section';
 
-
-const Wrapper = styled.section`
-    min-height: 100vh;
-    position: relative;
-
-    display: flex;
-    flex-direction: column;
+const Wrapper = styled(SectionRef)`
     align-items: center;
-    justify-content: center;
-    gap: ${({ theme }) => theme.spacing.md};
 `;
 
-const Flex = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: ${({ theme }) => theme.spacing.md};
-
+const ContentWrapper = styled(FlexColumn)`
     @media screen and (${devices.tablet}) {
         padding: ${({ theme }) => `0 ${theme.spacing.md}`};
     }
@@ -52,10 +40,6 @@ const Flex = styled.div`
             width: min(25vw, 20rem);
         }
     }
-`;
-
-const NewLine = styled(motion.span)`
-    display: block;
 `;
 
 function AboutMeHeading(props) {
@@ -85,10 +69,10 @@ function Introduction() {
 function Content(props) {
     const { isVisible } = props;
     return (
-        <Flex>
+        <ContentWrapper>
             <Image isVisible={isVisible} src={profile} alt='my profile' clipped />
             <Introduction />
-        </Flex>
+        </ContentWrapper>
     )
 }
 

@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect, useMemo } from 'react';
 
 import Main from '../components/layouts/Main';
-
-import { projectsData } from '../data/content';
 import GridView from '../components/layouts/projects/GridView';
 import Filter from '../components/layouts/projects/Filter';
-import { useMemo } from 'react';
+
+import { projectsData } from '../data/content';
 
 export default function Projects() {
     const [projectList, setProjectList] = useState([]);
@@ -14,19 +12,10 @@ export default function Projects() {
         projectsData
             .reduce((result, current) => result.concat(current.tools), [])
             .filter((tool, i, arr) => arr.indexOf(tool) === i)), [projectsData]);
-
     const [filterBy, setFilterBy] = useState(tools.reduce((result, current) => {
         result[current] = false;
         return result;
     }, {}));
-
-    function updateFilterBy(event) {
-        const target = event.target;
-        setFilterBy(prev => ({
-            ...prev,
-            [target.id]: !prev[target.id],
-        }));
-    }
 
     useEffect(() => {
         if (Object.keys(filterBy).filter(k => filterBy[k]).length === 0) {
@@ -40,6 +29,14 @@ export default function Projects() {
         }
     }, [filterBy]);
 
+    function updateFilterBy(event) {
+        const target = event.target;
+        setFilterBy(prev => ({
+            ...prev,
+            [target.id]: !prev[target.id],
+        }));
+    }
+
     return (
         <Main>
             <Filter
@@ -51,7 +48,3 @@ export default function Projects() {
         </Main>
     )
 }
-
-Projects.propTypes = {
-    headerHeight: PropTypes.number,
-};

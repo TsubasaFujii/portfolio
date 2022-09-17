@@ -9,6 +9,7 @@ import { useControlVisibility } from '../../../hooks/component';
 import { Icon } from '../../Icon';
 import { Overlay } from '../../Overlay';
 import { AnimatePresence, motion } from 'framer-motion';
+import { FlexRow } from '../../Flex';
 
 const FilterWrapper = styled.aside.attrs(() => ({
     className: 'filters'
@@ -23,14 +24,12 @@ const FilterWrapper = styled.aside.attrs(() => ({
     }
 `;
 
-const FilterInnerWrapper = styled.div`
+const FilterInnerWrapper = styled(FlexRow)`
     width: 100%;
     padding: ${({ theme }) => `${theme.spacing.md} 0 0`};
 
-    display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    align-items: center;
     gap: ${({ theme }) => theme.spacing.md};
 
     @media screen and (${devices.desktopL}) {
@@ -39,11 +38,9 @@ const FilterInnerWrapper = styled.div`
     }
 `;
 
-const FilterButton = styled.div`
+const FilterButton = styled(FlexRow)`
     margin-left: auto;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+
     gap: ${({ theme }) => theme.spacing.xs};
 
     font-family: inherit;
@@ -65,26 +62,23 @@ const FilterButton = styled.div`
     }
 `;
 
-const GroupedCheckbox = styled.div`
+const GroupedCheckbox = styled(FlexRow)`
     padding: ${({ theme }) => `${theme.spacing.sm} 0`};
 
-    display: flex;
-    flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
-    align-items: center;
     gap: ${({ theme }) => theme.spacing.sm};
 
     color: ${({ theme }) => theme.fontColor};
     z-index: 300;
 
     @media screen and (${devices.tablet}) {
-        justify-content: space-between;
+        justify-content: space-around;
     }
 
     @media screen and (${devices.desktop}) {
         justify-content: center;
-        gap: ${({ theme }) => theme.spacing.lg}
+        gap: ${({ theme }) => theme.spacing.lg};
     }
 
     & > div {
@@ -107,6 +101,7 @@ const GroupedCheckbox = styled.div`
         font-family: inherit;
     }
 `;
+
 const CriteriaWrapper = styled(motion.div).attrs(() => ({
     className: 'modal'
 }))`

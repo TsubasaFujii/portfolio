@@ -11,7 +11,11 @@ const TextWrapper = styled(motion.p)`
     }
 `;
 
-export default function Text(props) {
+export const NewLine = styled(motion.span)`
+    display: inline-block;
+`;
+
+export function Text(props) {
     const { children } = props;
     const ref = useRef(null);
     const isInView = useInView(ref);

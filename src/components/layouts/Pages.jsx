@@ -9,7 +9,7 @@ import Home from '../../pages/Home';
 import Projects from '../../pages/Projects';
 import Footer from './Footer';
 
-export default function Page() {
+export default function Pages() {
     const headerRef = useRef(null);
 
     const { currentSection, refs } = useTrackViewport(links);

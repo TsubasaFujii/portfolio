@@ -71,4 +71,14 @@ export const projectsData = [
         tools: ['node'],
         starred: false,
     }
-]
+];
+
+export const socialMedia = [
+    {
+        name: 'linkedin',
+        url: 'http://google.com'
+    },{
+        name: 'github',
+        url: 'http://google.com'
+    },
+];

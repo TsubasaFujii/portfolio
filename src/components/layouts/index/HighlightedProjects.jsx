@@ -6,22 +6,17 @@ import PropTypes from 'prop-types';
 import Button from '../../Button';
 import { H2, H3 } from '../../Heading';
 import { GroupedIcons, Icon } from '../../Icon';
-import Text from '../../Text';
+import { Text } from '../../Text';
 import Image from '../../Image';
 
 import { devices } from '../../../hooks/viewport';
 import { projectsData } from '../../../data/content';
+import { SectionRef } from '../../Section';
+import { FlexColumn } from '../../Flex';
 
-const Wrapper = styled.section.attrs(() => ({
+const Wrapper = styled(SectionRef).attrs(() => ({
     id: 'projects'
 }))`
-    position: relative;
-
-    display: flex;
-    flex-direction: column;
-    gap: ${({ theme }) => theme.spacing.md};
-    justify-content: center;
-
     scroll-margin: 10vh;
 
     @media screen and (${devices.tablet}) {
@@ -47,7 +42,11 @@ const ProjectWrapper = styled.div`
     width: 100%;
 
     display: grid;
-    gap: ${({ theme }) => theme.spacing.md};
+    gap: ${({ theme }) => theme.spacing.sm};
+
+    @media screen and (${devices.tablet}) {
+        gap: ${({ theme }) => theme.spacing.md};
+    }
 
     @media screen and (${devices.desktop}) {
         grid-template-columns: repeat(2, 1fr);
@@ -96,9 +95,7 @@ const ProjectWrapper = styled.div`
     }
 `;
 
-const List = styled.div`
-    display: flex;
-    flex-direction: column;
+const List = styled(FlexColumn)`
     gap: ${({ theme }) => theme.spacing.gap};
 
     @media screen and (${devices.tablet}) {
@@ -109,12 +106,9 @@ const List = styled.div`
     }
 `;
 
-const Details = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: ${({ theme }) => theme.spacing.md};
+const Details = styled(FlexColumn)`
     flex-wrap: wrap;
-    justify-content: center;
+    align-items: flex-start;
 `
 
 function Title(props) {

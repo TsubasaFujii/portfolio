@@ -7,20 +7,14 @@ import Button from '../../Button';
 import { Icon } from '../../Icon';
 import { scrollTo } from '../../../js/window';
 import { selfIntroduction } from '../../../data/content';
+import { Section } from '../../Section';
+import { NewLine } from '../../Text';
 
-const Wrapper = styled.section`
+const Wrapper = styled(Section)`
     min-height: ${({ $headerHeight }) => `calc(100vh - ${$headerHeight}px)`};
     position: relative;
 
-    display: flex;
-    flex-direction: column;
     align-items: flex-start;
-    justify-content: center;
-    gap: ${({ theme }) => theme.spacing.md};
-`;
-
-const NewLine = styled(motion.span)`
-    display: inline-block;
 `;
 
 const Letter = styled(motion.span)`

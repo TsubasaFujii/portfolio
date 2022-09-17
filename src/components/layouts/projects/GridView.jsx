@@ -8,12 +8,14 @@ import { ThemeContext } from '../../styles/ContextProviders';
 import externalIcon from '../../../assets/icons/external.svg';
 import { GroupedIcons, Icon } from '../../Icon';
 import Button from '../../Button';
-import Text from '../../Text';
+import { Text } from '../../Text';
 import { useInView } from 'react-intersection-observer';
+import { FlexColumn } from '../../Flex';
 
 const Grid = styled.section`
     min-height: 50vh;
     margin-top: ${({ theme }) => theme.spacing.md};
+
     display: grid;
     grid-template-columns: 100%;
     gap: ${({ theme }) => `${theme.spacing.lg} ${theme.spacing.md}`};
@@ -39,13 +41,11 @@ const Card = styled.article`
     overflow: hidden;
 `;
 
-const Flex = styled.div`
+const ContentWrapper = styled(FlexColumn)`
     width: 100%;
-    height: 100%;
     padding: ${({ theme }) => `${theme.spacing.sm}`};
 
-    display: flex;
-    flex-direction: column;
+    align-items: flex-start;
     gap: ${({ theme }) => theme.spacing.sm};
 `;
 
@@ -97,7 +97,7 @@ function Project(props) {
                 className='thumbnail'
                 $img={thumbnail}
                 onClick={() => openExternalLink(production)} />
-            <Flex>
+            <ContentWrapper>
                 <a href={production}><h4>{title}</h4></a>
                 <Text>{description}</Text>
                 <GroupedIcons names={tools} size='1rem' />
@@ -105,7 +105,7 @@ function Project(props) {
                     label='GitHub'
                     icon={<Icon name='code' />}
                     onClick={() => openExternalLink(github)} />
-            </Flex>
+            </ContentWrapper>
         </Card>
     )
 }
