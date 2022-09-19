@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import styled, { keyframes } from 'styled-components';
 import PropTypes from 'prop-types';
 import { ThemeContext } from './styles/ContextProviders';
+import { useInView } from 'react-intersection-observer';
 
 const Wrapper = styled.h1.attrs(({ size }) => (
     size ?
@@ -23,9 +24,6 @@ const H2Wrapper = styled(motion.h2)`
 `;
 
 const H3Wrapper = styled(motion.h3)`
-    position: relative;
-    right: ${({ theme }) => `-${theme.spacing.sm}`};
-    padding-right: ${({ theme }) => `calc(${theme.spacing.sm} + 0.5em)`};
     color: ${({ theme }) => theme.fontColor};
     text-transform: capitalize;
     text-align: left;
@@ -87,9 +85,9 @@ Heading.propTypes = {
 };
 
 const headingMotion = {
-    hidden: { x: 0, opacity: 0 },
-    slideIn: { x: '-1rem', opacity: 1 },
-    fallIn: { y: '-1rem', opacity: 1 },
+    slideIn: { x: '-1rem', opacity: 0 },
+    fallIn: { y: '-1rem', opacity: 0 },
+    visible: { x: 0, opacity: 1 },
 }
 
 export function H2(props) {
@@ -99,7 +97,7 @@ export function H2(props) {
     return (
         <H2Wrapper
             $currentTheme={currentTheme}
-            animate={isVisible ? 'slideIn' : 'hidden'}
+            animate={isVisible ? 'hidden' : 'slideIn'}
             variants={headingMotion}
             transition={{
                 ease: 'linear',
@@ -120,12 +118,18 @@ H2.propTypes = {
 };
 
 export function H3(props) {
-    const { children, isVisible } = props;
+    const { children } = props;
+    const { ref, inView } = useInView({
+        initialInView: false,
+        threshold: 0.5,
+    });
+
     return (
         <H3Wrapper
-            animate={isVisible ? 'fallIn' : 'hidden'}
-            variants={headingMotion}>
-            <AnimatedUnderline className={isVisible ? 'shown' : null}>
+            animate={inView ? 'hidden' : 'fallIn'}
+            variants={headingMotion}
+            ref={ref}>
+            <AnimatedUnderline className={inView ? 'shown' : null}>
                 {children}
             </AnimatedUnderline>
         </H3Wrapper>

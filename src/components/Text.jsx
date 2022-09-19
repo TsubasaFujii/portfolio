@@ -1,7 +1,8 @@
-import React, { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import React from 'react';
+import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { useInView } from 'react-intersection-observer';
 
 const TextWrapper = styled(motion.p)`
     color: ${({ theme }) => theme.fontColor};
@@ -17,17 +18,19 @@ export const NewLine = styled(motion.span)`
 
 export function Text(props) {
     const { children } = props;
-    const ref = useRef(null);
-    const isInView = useInView(ref);
+    const { ref, inView } = useInView({
+        initialInView: false,
+        threshold: 0.3,
+    });
 
     return (
         <TextWrapper
             ref={ref}
             animate={{
-                opacity: isInView ? 1 : 0,
-                y: isInView ? 0 : '-1rem',
+                opacity: inView ? 1 : 0,
+                y: inView ? 0 : '-1rem',
                 transition: {
-                    duration: 0.5
+                    duration: 0.3
                 }
             }}>
             {children}

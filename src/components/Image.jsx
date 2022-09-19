@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { devices } from '../hooks/viewport';
 import externalIcon from '../assets/icons/external.svg';
+import { useInView } from 'react-intersection-observer';
 
 const ImageWrapper = styled(motion.div)`
     height: 70vmin;
@@ -108,18 +109,25 @@ const Img = styled(motion.div).attrs(() => ({
 `;
 
 export default function Image(props) {
-    const { src, isVisible, alt, clipped, className, clickable, landscape } = props;
+    const { src, alt, clipped, className, clickable, landscape } = props;
+    const { ref, inView } = useInView({
+        initialInView: false,
+        threshold: 0.5,
+    });
 
     return (
-        <ImageWrapper className={`${className ? className : ''} ${isVisible ? 'shown' : ''}`} $clickable={clickable}>
+        <ImageWrapper
+            className={`${className ? className : ''} ${inView ? 'shown' : ''}`}
+            $clickable={clickable}
+            ref={ref}>
             <Img
                 $img={src}
                 alt={alt}
                 animate={{
-                    y: isVisible ? 0 : '-2rem',
-                    opacity: isVisible ? 1 : 0,
+                    y: inView ? 0 : '-2rem',
+                    opacity: inView ? 1 : 0,
                     transitionDelay: '0.1s',
-                    transitionDuration: '0.2s'
+                    transitionDuration: '0.3s'
                 }}
                 $clipped={clipped}
                 $landscape={landscape} />
