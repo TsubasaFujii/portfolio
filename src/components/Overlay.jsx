@@ -26,7 +26,7 @@ export const Overlay = forwardRef((_, ref) => {
 
     return createPortal((
         <OverlayWrapper id='overlay' ref={ref} $currentTheme={currentTheme} />
-    ), document.querySelector('main'));
+    ), document.querySelector('body'));
 });
 
 Overlay.displayName = 'Overlay';
