@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { useInView } from 'react-intersection-observer';
 
 import { devices } from '../../../hooks/viewport';
 import { ThemeContext } from '../../styles/ContextProviders';
@@ -8,10 +9,10 @@ import { ThemeContext } from '../../styles/ContextProviders';
 import { GroupedIcons } from '../../Icon';
 import { Button } from '../../Button';
 import { Text } from '../../Text';
-import { useInView } from 'react-intersection-observer';
 import { FlexColumn } from '../../Flex';
 
 import externalIcon from '../../../assets/icons/external.svg';
+import { Content } from '../../Content';
 
 const Grid = styled.section`
     min-height: 50vh;
@@ -19,7 +20,7 @@ const Grid = styled.section`
 
     display: grid;
     grid-template-columns: 100%;
-    gap: ${({ theme }) => `${theme.spacing.lg} ${theme.spacing.md}`};
+    gap: ${({ theme }) => `${theme.spacing.gap} ${theme.spacing.md}`};
 
     @media screen and (${devices.tablet}) {
         grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
@@ -44,7 +45,7 @@ const Card = styled.article`
 
 const ContentWrapper = styled(FlexColumn)`
     width: 100%;
-    padding: ${({ theme }) => `${theme.spacing.sm}`};
+    margin-top: ${({ theme }) => theme.spacing.sm};
 
     align-items: flex-start;
     gap: ${({ theme }) => theme.spacing.sm};
@@ -125,18 +126,20 @@ export default function GridView(props) {
     const { projectList } = props;
     const { currentTheme } = useContext(ThemeContext);
     return (
-        <Grid>
-            {
-                projectList.length > 0 ?
-                    projectList.map(project =>
-                        <Project
-                            key={project.title}
-                            {...project}
-                            $currentTheme={currentTheme} />
-                    ) :
-                    <div>No match</div>
-            }
-        </Grid>
+        <Content>
+            <Grid>
+                {
+                    projectList.length > 0 ?
+                        projectList.map(project =>
+                            <Project
+                                key={project.title}
+                                {...project}
+                                $currentTheme={currentTheme} />
+                        ) :
+                        <div>No match</div>
+                }
+            </Grid>
+        </Content>
     )
 }
 

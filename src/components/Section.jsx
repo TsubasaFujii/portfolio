@@ -7,10 +7,8 @@ const Wrapper = styled.section`
     min-height: 100vh;
     position: relative;
 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: ${({ theme }) => theme.spacing.md};
+    display: grid;
+    place-content: center;
 `;
 
 export function Section(props) {

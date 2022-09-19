@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Main from '../components/layouts/Main';
 import Hero from '../components/layouts/index/Hero';
 import AboutMe from '../components/layouts/index/AboutMe';
 import HighlightedProjects from '../components/layouts/index/HighlightedProjects';
+
 import { devices } from '../hooks/viewport';
 
-const Container = styled(Main)`
+const Container = styled.main`
     display: flex;
     flex-direction: column;
     gap: ${({ theme }) => theme.spacing.gap};

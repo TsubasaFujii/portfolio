@@ -43,11 +43,15 @@ export const GlobalStyles = createGlobalStyle`
             width: 100%;
         }
 
+        & .modal {
+            padding: ${({ theme }) => `0 ${theme.spacing.sm}`};
+        }
+
         @media screen and (${devices.mobileL}) {
             padding: ${({ theme }) => `${theme.spacing.sm} ${theme.spacing.xl}`};
 
-            header aside {
-                width: ${({ theme }) => `calc(100% + ${theme.spacing.xl})`};
+            & .modal {
+                padding: 0;
             }
         }
     }
@@ -58,25 +62,34 @@ export const GlobalStyles = createGlobalStyle`
 
     main {
         width: 100%;
-        padding: ${({ theme }) => `0 ${theme.spacing.md}`};
-
         z-index: 200;
 
-        @media screen and (${devices.desktopL}) {
-            width: ${({ theme }) => theme.max.width};
-            margin: auto;
+        & section:last-child {
+            margin-bottom: ${({ theme }) => theme.spacing.gap};
+        }
+    }
+
+    section {
+        padding: ${({ theme }) => `0 ${theme.spacing.md}`};
+
+        @media screen and (${devices.mobileL}) {
+            padding: ${({ theme }) => `0 ${theme.spacing.xl}`};
         }
     }
 
     footer {
         width: 100vw;
-        margin-top: ${({ theme }) => theme.spacing.doubleGap};
+        margin-top: ${({ theme }) => theme.spacing.gap};
         padding: ${({ theme }) => `${theme.spacing.gap} ${theme.spacing.md} ${theme.spacing.md}`};
         min-height: 50vh;
 
         z-index: 300;
+
+        @media screen and (${devices.tablet}) {
+            margin-top: ${({ theme }) => theme.spacing.doubleGap};
+        }
     }
-    
+
     ///
     // Typography
     ///

@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
 
-import Main from '../components/layouts/Main';
 import GridView from '../components/layouts/projects/GridView';
 import Filter from '../components/layouts/projects/Filter';
 
@@ -38,13 +37,13 @@ export default function Projects() {
     }
 
     return (
-        <Main>
+        <main>
             <Filter
                 updateFilterBy={updateFilterBy}
                 projectTotal={projectList.length}
                 value={filterBy}
                 isActive={Object.values(filterBy).filter(v => v).length > 0} />
             <GridView projectList={projectList} />
-        </Main>
+        </main>
     )
 }

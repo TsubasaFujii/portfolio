@@ -4,14 +4,16 @@ import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
-import profile from '../../../assets/profile.png';
 import { H2, Heading } from '../../Heading';
 import { NewLine, Text } from '../../Text';
-import { devices } from '../../../hooks/viewport';
 import Image from '../../Image';
-import { selfIntroduction } from '../../../data/content';
-import { FlexColumn } from '../../Flex';
 import { SectionRef } from '../../Section';
+
+import { devices } from '../../../hooks/viewport';
+import profile from '../../../assets/profile.png';
+import { selfIntroduction } from '../../../data/content';
+import { Content } from '../../Content';
+import { FlexColumn } from '../../Flex';
 
 const Wrapper = styled(SectionRef)`
     align-items: center;
@@ -57,26 +59,20 @@ AboutMeHeading.propTypes = {
     isVisible: PropTypes.bool
 };
 
-function Introduction() {
-    return (
-        <motion.div initial='hidden' className='introduction'>
-            <Heading size={4}>{selfIntroduction.subHeading}</Heading>
-            {selfIntroduction.body.map((paragraph, index) => <Text key={index}>{paragraph}</Text>)}
-        </motion.div>
-    );
-}
-
-function Content(props) {
+function Introduction(props) {
     const { isVisible } = props;
     return (
         <ContentWrapper>
             <Image isVisible={isVisible} src={profile} alt='my profile' clipped />
-            <Introduction />
+            <motion.div initial='hidden' className='introduction'>
+                <Heading size={4}>{selfIntroduction.subHeading}</Heading>
+                {selfIntroduction.body.map((paragraph, index) => <Text key={index}>{paragraph}</Text>)}
+            </motion.div>
         </ContentWrapper>
     )
 }
 
-Content.propTypes = {
+Introduction.propTypes = {
     isVisible: PropTypes.bool
 };
 
@@ -94,8 +90,10 @@ export default function AboutMe() {
 
     return (
         <Wrapper ref={ref}>
-            <AboutMeHeading isVisible={isVisible} />
-            <Content isVisible={isVisible} />
+            <Content>
+                <AboutMeHeading isVisible={isVisible} />
+                <Introduction isVisible={isVisible} />
+            </Content>
         </Wrapper >
 
     )
