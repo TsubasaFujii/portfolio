@@ -70,6 +70,7 @@ export const GlobalStyles = createGlobalStyle`
 
     footer {
         width: 100vw;
+        margin-top: ${({ theme }) => theme.spacing.doubleGap};
         padding: ${({ theme }) => `${theme.spacing.gap} ${theme.spacing.md} ${theme.spacing.md}`};
         min-height: 50vh;
 

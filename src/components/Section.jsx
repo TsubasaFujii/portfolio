@@ -22,10 +22,11 @@ export function Section(props) {
 }
 
 export const SectionRef = forwardRef((props, ref) => {
-    const { children, className } = props;
+    const { children, className, id } = props;
     return (
         <Wrapper
             ref={ref}
+            id={id}
             className={className}>
             {children}
         </Wrapper>
@@ -44,6 +45,7 @@ Section.propTypes = {
 
 SectionRef.propTypes = {
     className: PropTypes.string,
+    id: PropTypes.string,
     children: PropTypes.oneOfType([
         PropTypes.array,
         PropTypes.string,

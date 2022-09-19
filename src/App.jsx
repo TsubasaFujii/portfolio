@@ -5,7 +5,7 @@ import { ThemeContext } from './components/styles/ContextProviders';
 import { useSwitchTheme } from './hooks/theme';
 import { getPointingMethod } from './js/device';
 
-import Page from './components/layouts/Page';
+import Pages from './components/layouts/Pages';
 
 function App() {
     const { currentTheme, toggleTheme } = useSwitchTheme();
@@ -15,7 +15,7 @@ function App() {
         <Theme theme={currentTheme}>
             <ThemeContext.Provider value={{ currentTheme, toggleTheme, pointingMethod }}>
                 <GlobalStyles currentTheme={currentTheme} />
-                <Page />
+                <Pages />
             </ThemeContext.Provider>
         </Theme>
     );

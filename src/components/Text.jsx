@@ -12,7 +12,7 @@ const TextWrapper = styled(motion.p)`
 `;
 
 export const NewLine = styled(motion.span)`
-    display: inline-block;
+    display: block;
 `;
 
 export function Text(props) {

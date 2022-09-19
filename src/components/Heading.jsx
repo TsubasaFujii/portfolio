@@ -36,7 +36,7 @@ const expand = keyframes`
         transform: scaleX(0%);
     }
     100% {
-      transform: scaleX(100%) skew(-12deg);
+        transform: scaleX(100%) skew(-12deg);
     }
 `;
 
@@ -64,7 +64,6 @@ const AnimatedUnderline = styled(motion.span)`
 `;
 
 export function Heading(props) {
-    // className for styled component
     const { size, children, transform, className } = props;
 
     return (
@@ -88,8 +87,9 @@ Heading.propTypes = {
 };
 
 const headingMotion = {
-    visible: { x: '-1rem', opacity: 1 },
-    hidden: { x: 0, opacity: 0 }
+    hidden: { x: 0, opacity: 0 },
+    slideIn: { x: '-1rem', opacity: 1 },
+    fallIn: { y: '-1rem', opacity: 1 },
 }
 
 export function H2(props) {
@@ -99,7 +99,7 @@ export function H2(props) {
     return (
         <H2Wrapper
             $currentTheme={currentTheme}
-            animate={isVisible ? 'visible' : 'hidden'}
+            animate={isVisible ? 'slideIn' : 'hidden'}
             variants={headingMotion}
             transition={{
                 ease: 'linear',
@@ -123,11 +123,11 @@ export function H3(props) {
     const { children, isVisible } = props;
     return (
         <H3Wrapper
-            initial={{ left: 0, }}
-            animate={{
-                opacity: isVisible ? 1 : 0,
-            }}>
-            <AnimatedUnderline className={isVisible ? 'shown' : null}>{children}</AnimatedUnderline>
+            animate={isVisible ? 'fallIn' : 'hidden'}
+            variants={headingMotion}>
+            <AnimatedUnderline className={isVisible ? 'shown' : null}>
+                {children}
+            </AnimatedUnderline>
         </H3Wrapper>
     )
 }

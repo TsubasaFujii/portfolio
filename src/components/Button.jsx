@@ -1,10 +1,11 @@
 import React from 'react';
-import { cloneElement, useContext } from 'react';
+import { useContext } from 'react';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import { ThemeContext } from './styles/ContextProviders';
+import { Icon } from './Icon';
 
 const Wrapper = styled(motion.button)`
     align-self: ${({ align }) => align ? align : 'center'};
@@ -60,18 +61,18 @@ const iconMotion = {
 };
 
 function ButtonIcon(props) {
-    const { icon } = props;
+    const { name } = props;
     return (
         <IconWrapper
             variants={iconMotion}
             layout>
-            {cloneElement(icon)}
+            {<Icon name={name} />}
         </IconWrapper>
     );
 }
 
 ButtonIcon.propTypes = {
-    icon: PropTypes.element,
+    name: PropTypes.string,
 };
 
 // calc((1.5rem + 0.6rem) /2) 1.5rem = icon width & gap
@@ -101,7 +102,7 @@ Label.propTypes = {
     text: PropTypes.string,
 };
 
-export default function Button(props) {
+export function Button(props) {
     const { label, disabled, icon, align, onClick, flat } = props;
     const { currentTheme, pointingMethod } = useContext(ThemeContext);
 
@@ -117,7 +118,7 @@ export default function Button(props) {
             $flat={flat}>
             <ContentWrapper>
                 {pointingMethod === 'touch' ? label : <Label text={label} />}
-                {pointingMethod === 'touch' ? cloneElement(icon) : <ButtonIcon icon={icon} />}
+                {pointingMethod === 'touch' ? <Icon name={icon} /> : <ButtonIcon name={icon} />}
             </ContentWrapper>
         </Wrapper>
     )
@@ -126,7 +127,7 @@ export default function Button(props) {
 Button.propTypes = {
     label: PropTypes.string,
     disabled: PropTypes.bool,
-    icon: PropTypes.element,
+    icon: PropTypes.string,
     align: PropTypes.string,
     onClick: PropTypes.func,
     flat: PropTypes.bool

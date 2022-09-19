@@ -5,12 +5,13 @@ import styled from 'styled-components';
 import { devices } from '../../../hooks/viewport';
 import { ThemeContext } from '../../styles/ContextProviders';
 
-import externalIcon from '../../../assets/icons/external.svg';
-import { GroupedIcons, Icon } from '../../Icon';
-import Button from '../../Button';
+import { GroupedIcons } from '../../Icon';
+import { Button } from '../../Button';
 import { Text } from '../../Text';
 import { useInView } from 'react-intersection-observer';
 import { FlexColumn } from '../../Flex';
+
+import externalIcon from '../../../assets/icons/external.svg';
 
 const Grid = styled.section`
     min-height: 50vh;
@@ -103,7 +104,7 @@ function Project(props) {
                 <GroupedIcons names={tools} size='1rem' />
                 <Button
                     label='GitHub'
-                    icon={<Icon name='code' />}
+                    icon='code'
                     onClick={() => openExternalLink(github)} />
             </ContentWrapper>
         </Card>

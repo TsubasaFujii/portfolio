@@ -9,10 +9,11 @@ const spacing = {
     lg: '3rem',
     xl: '4rem',
     gap: '8rem',
+    doubleGap: '16rem',
 };
 
 const max = {
-    width: '1200px',
+    width: '80rem',
 }
 
 const common = {

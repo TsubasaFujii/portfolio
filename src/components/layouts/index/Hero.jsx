@@ -3,10 +3,9 @@ import { AnimatePresence, motion } from 'framer-motion';
 import styled, { useTheme } from 'styled-components';
 import PropTypes from 'prop-types';
 
-import Button from '../../Button';
-import { Icon } from '../../Icon';
+import { Button } from '../../Button';
 import { scrollTo } from '../../../js/window';
-import { selfIntroduction } from '../../../data/content';
+import { headingText, selfIntroduction } from '../../../data/content';
 import { Section } from '../../Section';
 import { NewLine } from '../../Text';
 
@@ -26,13 +25,14 @@ const H1 = styled(motion.h1)`
     flex-direction: column;
 `;
 
-const BackgroundWrapper = styled(motion.div)`
+const BackgroundWrapper = styled.div`
     width: 100vw;
 
     z-index: -1;
     position: absolute;
-    top: 0;
+    top: 50%;
     left: ${({ theme }) => `-${theme.spacing.md}`};
+    transform: translateY(-50%);
 `;
 
 // Motions
@@ -66,8 +66,6 @@ const letterMotion = {
         }
     }
 }
-
-const headingText = ['Hello,', 'I\'m', 'Tsubasa.'];
 
 function HeroHeading() {
     return (
@@ -109,7 +107,6 @@ const infoMotion = {
         },
     }
 };
-
 
 function WordLoop() {
     const [current, setCurrent] = useState(0);
@@ -224,9 +221,9 @@ export default function Hero() {
             <Button
                 label='Check my projects'
                 align='flex-start'
-                icon={<Icon name='chevronDown' />}
+                icon='chevronDown'
                 onClick={handleOnClick} />
-            <BackgroundLayer />
+            {/* <BackgroundLayer /> */}
         </Wrapper >
     )
 }

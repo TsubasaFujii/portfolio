@@ -1,27 +1,25 @@
 import React from 'react';
-import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
-import Button from '../../Button';
+import { Button } from '../../Button';
 import { H2, H3 } from '../../Heading';
-import { GroupedIcons, Icon } from '../../Icon';
+import { GroupedIcons } from '../../Icon';
 import { Text } from '../../Text';
 import Image from '../../Image';
+import { SectionRef } from '../../Section';
+import { FlexColumn } from '../../Flex';
 
 import { devices } from '../../../hooks/viewport';
 import { projectsData } from '../../../data/content';
-import { SectionRef } from '../../Section';
-import { FlexColumn } from '../../Flex';
+import { scrollToTop } from '../../../js/window';
 
 const Wrapper = styled(SectionRef).attrs(() => ({
     id: 'projects'
 }))`
     scroll-margin: 10vh;
-
-    @media screen and (${devices.tablet}) {
-        padding: ${({ theme }) => theme.spacing.xl};
-    }
 `;
 
 // To call in ProjectWrapper
@@ -101,44 +99,16 @@ const List = styled(FlexColumn)`
     @media screen and (${devices.tablet}) {
         padding: ${({ theme }) => theme.spacing.md};
     }
+
     @media screen and (${devices.desktop}) {
-        gap: ${({ theme }) => `calc(${theme.spacing.gap} * 2)`};
+        gap: ${({ theme }) => theme.spacing.doubleGap};
     }
 `;
 
 const Details = styled(FlexColumn)`
     flex-wrap: wrap;
     align-items: flex-start;
-`
-
-function Title(props) {
-    const { title, isVisible, url } = props;
-
-    return (
-        <a href={url}>
-            <H3 isVisible={isVisible}>{title}</H3>
-        </a>
-    );
-}
-
-Title.propTypes = {
-    title: PropTypes.string,
-    url: PropTypes.string,
-    isVisible: PropTypes.bool,
-};
-
-function Description(props) {
-    const { description } = props;
-    return (
-        <Text>
-            {description}
-        </Text>
-    )
-}
-
-Description.propTypes = {
-    description: PropTypes.string,
-};
+`;
 
 function Project(props) {
     const { title, thumbnail, tools, description, github, production } = props;
@@ -154,13 +124,13 @@ function Project(props) {
     return (
         <ProjectWrapper ref={ref}>
             <Thumbnail src={thumbnail} isVisible={inView} clickable landscape />
-            <Title title={title} isVisible={inView} url={production} />
+            <a href={production}><H3 isVisible={inView}>{title}</H3></a>
             <Details className='details'>
-                <Description description={description} />
+                <Text>{description}</Text>
                 <GroupedIcons names={tools} />
                 <Button
                     label='GitHub'
-                    icon={<Icon name='code' />}
+                    icon='code'
                     onClick={onClick} />
             </Details>
         </ProjectWrapper>
@@ -176,37 +146,22 @@ Project.propTypes = {
     production: PropTypes.string,
 };
 
-function Heading(props) {
-    const { isVisible } = props;
-    return (
-        <>
-            <H2 isVisible={isVisible}>
-                projects
-            </H2>
-        </>
-    )
-}
-Heading.propTypes = {
-    isVisible: PropTypes.bool,
-};
-
-function ProjectList() {
-    return (
-        <List>
-            {projectsData.filter(p => p.starred).map(project => <Project {...project} key={project.title} />)}
-        </List>
-    )
-}
-
 export default function HighlightedProjects() {
     const { ref, inView } = useInView({
         initialInView: false,
     });
+    const navigate = useNavigate();
 
     return (
         <Wrapper ref={ref}>
-            <Heading isVisible={inView} />
-            <ProjectList />
+            <H2 isVisible={inView}>projects</H2>
+            <List>
+                {projectsData.filter(p => p.starred).map(project => <Project {...project} key={project.title} />)}
+            </List>
+            <Button label='check more projects' icon='chevronRight' onClick={() => {
+                navigate('/projects');
+                scrollToTop();
+            }} />
         </Wrapper>
     )
 }

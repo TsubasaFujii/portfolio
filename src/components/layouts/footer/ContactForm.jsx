@@ -3,9 +3,8 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 
-import Button from '../../Button';
+import { Button } from '../../Button';
 import { Heading } from '../../Heading';
-import { Icon } from '../../Icon';
 import { devices } from '../../../hooks/viewport';
 import { ThemeContext } from '../../styles/ContextProviders';
 
@@ -245,7 +244,7 @@ function Content() {
                 handleInput={handleInput}
                 isError={isError.message} />
             <Button
-                icon={<Icon name='paperPlane' />}
+                icon='paperPlane'
                 label='Send Message'
                 onClick={handleOnClick}
                 disabled={!isReady}
