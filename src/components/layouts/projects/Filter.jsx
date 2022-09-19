@@ -33,7 +33,7 @@ const FilterInnerWrapper = styled(FlexRow)`
     gap: ${({ theme }) => theme.spacing.md};
 
     @media screen and (${devices.desktopL}) {
-        width: ${({ theme }) => theme.max.width};
+        max-width: ${({ theme }) => theme.max.width};
         margin: auto;
     }
 `;
@@ -144,7 +144,7 @@ const CriteriaInnerWrapper = styled.div`
     }
 
     @media screen and (${devices.desktopL}) {
-        width: ${({ theme }) => theme.max.width};
+        max-width: ${({ theme }) => theme.max.width};
         margin: auto;
     }
 `;

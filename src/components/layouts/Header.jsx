@@ -18,7 +18,7 @@ const Content = styled.div`
     flex-wrap: wrap-reverse;
 
     @media screen and (${devices.desktopL}) {
-        width: ${({ theme }) => theme.max.width};
+        max-width: ${({ theme }) => theme.max.width};
     }
 `;
 
