@@ -13,7 +13,7 @@ const spacing = {
 };
 
 const max = {
-    width: '80rem',
+    width: '70rem',
 }
 
 const common = {
