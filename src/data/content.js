@@ -13,6 +13,8 @@ export const links = [
     }
 ];
 
+export const headingText = ['Hello,', 'I\'m', 'Tsubasa.'];
+
 export const selfIntroduction = {
     subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
     body: [
