@@ -8,11 +8,14 @@ import { scrollTo } from '../../../js/window';
 import { headingText, selfIntroduction } from '../../../data/content';
 import { Section } from '../../Section';
 import { NewLine } from '../../Text';
+import { Content } from '../../Content';
 
 const Wrapper = styled(Section)`
     min-height: ${({ $headerHeight }) => `calc(100vh - ${$headerHeight}px)`};
     position: relative;
+`;
 
+const ContentWrapper = styled(Content)`
     align-items: flex-start;
 `;
 
@@ -216,14 +219,16 @@ export default function Hero() {
 
     return (
         <Wrapper $headerHeight={headerHeight}>
-            <HeroHeading />
-            <SubHeading />
-            <Button
-                label='Check my projects'
-                align='flex-start'
-                icon='chevronDown'
-                onClick={handleOnClick} />
-            {/* <BackgroundLayer /> */}
+            <ContentWrapper>
+                <HeroHeading />
+                <SubHeading />
+                <Button
+                    label='Check my projects'
+                    align='flex-start'
+                    icon='chevronDown'
+                    onClick={handleOnClick} />
+                {/* <BackgroundLayer /> */}
+            </ContentWrapper>
         </Wrapper >
     )
 }
