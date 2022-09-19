@@ -39,6 +39,7 @@ const FilterInnerWrapper = styled(FlexRow)`
 `;
 
 const FilterButton = styled(FlexRow)`
+    width: auto;
     margin-left: auto;
 
     gap: ${({ theme }) => theme.spacing.xs};
@@ -117,7 +118,6 @@ const CriteriaWrapper = styled(motion.div).attrs(() => ({
     right: 0;
 
     @media screen and (${devices.mobileL}) {
-        padding: ${({ theme }) => `${theme.spacing.sm} ${theme.spacing.xl}`};
         top: ${({ theme }) => `calc(${theme.spacing.sm} + 100%)`};
         left: ${({ theme }) => `-${theme.spacing.xl}`};
     }

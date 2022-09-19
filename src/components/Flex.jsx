@@ -8,6 +8,7 @@ const Flex = styled.div`
 `;
 
 const RowWrapper = styled(Flex)`
+    width: 100%;
     flex-direction: row;
     align-items: center;
     gap: ${({ theme }) => theme.spacing.md};
