@@ -15,6 +15,7 @@ import { FlexColumn } from '../../Flex';
 import { devices } from '../../../hooks/viewport';
 import { projectsData } from '../../../data/content';
 import { scrollToTop } from '../../../js/window';
+import { Content } from '../../Content';
 
 const Wrapper = styled(SectionRef).attrs(() => ({
     id: 'projects'
@@ -112,19 +113,15 @@ const Details = styled(FlexColumn)`
 
 function Project(props) {
     const { title, thumbnail, tools, description, github, production } = props;
-    const { ref, inView } = useInView({
-        initialInView: false,
-        threshold: 0.3,
-    });
 
     function onClick() {
         console.log('Open', github);
     }
 
     return (
-        <ProjectWrapper ref={ref}>
-            <Thumbnail src={thumbnail} isVisible={inView} clickable landscape />
-            <a href={production}><H3 isVisible={inView}>{title}</H3></a>
+        <ProjectWrapper>
+            <Thumbnail src={thumbnail} clickable landscape />
+            <a href={production}><H3>{title}</H3></a>
             <Details className='details'>
                 <Text>{description}</Text>
                 <GroupedIcons names={tools} />
@@ -154,14 +151,18 @@ export default function HighlightedProjects() {
 
     return (
         <Wrapper ref={ref}>
-            <H2 isVisible={inView}>projects</H2>
-            <List>
-                {projectsData.filter(p => p.starred).map(project => <Project {...project} key={project.title} />)}
-            </List>
-            <Button label='check more projects' icon='chevronRight' onClick={() => {
-                navigate('/projects');
-                scrollToTop();
-            }} />
+            <Content>
+                <H2 isVisible={inView}>projects</H2>
+                <List>
+                    {projectsData
+                        .filter(p => p.starred)
+                        .map(project => <Project {...project} key={project.title} />)}
+                </List>
+                <Button label='check more projects' icon='chevronRight' onClick={() => {
+                    navigate('/projects');
+                    scrollToTop();
+                }} />
+            </Content>
         </Wrapper>
     )
 }
