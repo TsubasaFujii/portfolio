@@ -88,6 +88,7 @@ const Wrapper = styled.div`
     place-items: center;
     width: 1.5em;
     height: 1.5em;
+
     & svg {
         width: 100%;
     }
