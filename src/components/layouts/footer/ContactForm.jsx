@@ -27,7 +27,7 @@ const Wrapper = styled.div`
     gap: ${({ theme }) => theme.spacing.sm};
 `;
 
-const Form = styled.form`
+const FormWrapper = styled.form`
     width: 100%;
 
     display: flex;
@@ -132,7 +132,8 @@ InputField.propTypes = {
     handleInput: PropTypes.func,
 };
 
-function Content() {
+function Form() {
+    const [buttonLabel, setButtonLabel] = useState('Send Message');
     const [inputValues, setInputValues] = useState({
         name: '',
         email: '',
@@ -167,6 +168,9 @@ function Content() {
 
     function handleOnClick() {
         console.log(inputValues);
+        setButtonLabel('Thank you');
+        setTimeout(() => setButtonLabel('Send Message'), 1500);
+
         setIsReady(false);
         setInputValues({
             name: '',
@@ -221,7 +225,7 @@ function Content() {
     }, [isError, inputValues]);
 
     return (
-        <Form>
+        <FormWrapper>
             <InputField
                 item='name'
                 value={inputValues.name}
@@ -245,11 +249,11 @@ function Content() {
                 isError={isError.message} />
             <Button
                 icon='paperPlane'
-                label='Send Message'
+                label={buttonLabel}
                 onClick={handleOnClick}
                 disabled={!isReady}
                 flat />
-        </Form>
+        </FormWrapper>
     )
 }
 
@@ -262,7 +266,7 @@ export default function ContactForm(props) {
             <FormHeading $currentTheme={currentTheme}>
                 Contact me
             </FormHeading>
-            <Content />
+            <Form />
         </Wrapper>
     )
 }

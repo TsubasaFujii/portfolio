@@ -157,11 +157,15 @@ export default function HighlightedProjects() {
                     {projectsData
                         .filter(p => p.starred)
                         .map(project => <Project {...project} key={project.title} />)}
+                    <Button
+                        label='check more projects'
+                        icon='chevronRight'
+                        onClick={() => {
+                            navigate('/projects');
+                            scrollToTop();
+                        }}
+                        secondary />
                 </List>
-                <Button label='check more projects' icon='chevronRight' onClick={() => {
-                    navigate('/projects');
-                    scrollToTop();
-                }} />
             </Content>
         </Wrapper>
     )
