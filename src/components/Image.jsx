@@ -6,7 +6,9 @@ import { devices } from '../hooks/viewport';
 import externalIcon from '../assets/icons/external.svg';
 import { useInView } from 'react-intersection-observer';
 
-const ImageWrapper = styled(motion.div)`
+const ImageWrapper = styled(motion.div).attrs(() => ({
+    role: 'img'
+}))`
     height: 70vmin;
     width: 70vmin;
     

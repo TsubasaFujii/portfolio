@@ -85,7 +85,9 @@ const ThemeSwitchWrapper = styled.div`
     gap: ${({ theme }) => theme.spacing.xs};
 `;
 
-const Switch = styled(motion.div)`
+const Switch = styled(motion.div).attrs(() => ({
+    role: 'button'
+}))`
     width: 4.5rem;
     // height / 2 : padding + Marker height / 2
     border-radius: calc(1.5rem + 0.25rem + 0.25rem / 2);
