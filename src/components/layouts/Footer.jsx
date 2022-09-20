@@ -14,9 +14,6 @@ const FooterWrapper = styled.footer`
     flex-direction: column;
     gap: ${({ theme }) => theme.spacing.lg};
     align-items: center;
-
-    color: ${({ theme, $currentTheme }) => $currentTheme === 'dark' ? theme.colors.black : theme.colors.white};
-    background: ${({ theme, $currentTheme }) => $currentTheme === 'dark' ? theme.colors.white : theme.colors.black};
 `;
 
 const Flex = styled.div`

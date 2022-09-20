@@ -84,10 +84,6 @@ export const GlobalStyles = createGlobalStyle`
         min-height: 50vh;
 
         z-index: 300;
-
-        @media screen and (${devices.tablet}) {
-            margin-top: ${({ theme }) => theme.spacing.doubleGap};
-        }
     }
 
     ///
@@ -241,5 +237,10 @@ export const GlobalStyles = createGlobalStyle`
         currentTheme === 'dark' ?
             theme.colors.black :
             theme.colors.white};
+    }
+
+    footer {
+        color: ${({ theme, $currentTheme }) => $currentTheme === 'dark' ? theme.colors.black : theme.colors.white};
+        background: ${({ theme, $currentTheme }) => $currentTheme === 'dark' ? theme.colors.white : theme.colors.black};
     }
 `;
