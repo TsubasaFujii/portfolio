@@ -17,16 +17,25 @@ const Wrapper = styled(motion.button)`
         $flat ? 'none' :
             `4px 4px 8px rgba(${$currentTheme === 'dark' ? '102, 96, 85, 0.5' : '241, 110, 40, 0.2'} ), ` +
             `-4px -4px 8px ${$currentTheme === 'dark' ? 'rgba(102, 96, 85, 0.8)' : '#ffffff7d'}`};
-    border: none;
+    border: ${({ theme, $secondary }) =>
+        $secondary ?
+            `0.1rem solid ${theme.colors.primary70}` :
+            'none'};
     // (vertical paddings * 2 + font-size) /2
     border-radius: calc((1.25rem + 1.25rem + 1.3em) / 2);
-    background: ${({ theme }) => theme.colors.primary50};
+    background: ${({ theme, $secondary }) =>
+        $secondary ?
+            theme.colors.white :
+            theme.colors.primary50};
 
     text-transform: capitalize;
     cursor: pointer;
+    transition: all 0.3s;
 
     &:hover {
-        background: ${({ theme }) => theme.colors.primary70};
+        background: ${({ theme, $secondary }) =>
+        $secondary ? theme.colors.primary20 : theme.colors.primary70};
+        border-color: transparent;
     }
 
     &:disabled {
@@ -103,7 +112,7 @@ Label.propTypes = {
 };
 
 export function Button(props) {
-    const { label, disabled, icon, align, onClick, flat } = props;
+    const { label, disabled, icon, align, onClick, flat, secondary } = props;
     const { currentTheme, pointingMethod } = useContext(ThemeContext);
 
     return (
@@ -115,7 +124,8 @@ export function Button(props) {
             whileHover={!disabled && 'hover'}
             whileTap={!disabled && { scale: 0.9 }}
             onClick={onClick}
-            $flat={flat}>
+            $flat={flat}
+            $secondary={secondary}>
             <ContentWrapper>
                 {pointingMethod === 'touch' ? label : <Label text={label} />}
                 {pointingMethod === 'touch' ? <Icon name={icon} /> : <ButtonIcon name={icon} />}
@@ -127,6 +137,7 @@ export function Button(props) {
 Button.propTypes = {
     label: PropTypes.string,
     disabled: PropTypes.bool,
+    secondary: PropTypes.bool,
     icon: PropTypes.string,
     align: PropTypes.string,
     onClick: PropTypes.func,
