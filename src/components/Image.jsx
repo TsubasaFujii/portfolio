@@ -9,6 +9,7 @@ import { useInView } from 'react-intersection-observer';
 const ImageWrapper = styled(motion.div)`
     height: 70vmin;
     width: 70vmin;
+    
     margin: 0 auto;
     position: relative;
 
@@ -17,7 +18,7 @@ const ImageWrapper = styled(motion.div)`
         content: ' ';
         width: 10%;
         height: 10%;
-        z-index: -1;
+        z-index: 50;
         position: absolute;
         // (100% - width(%)) / 2
         top: 45%;
@@ -83,7 +84,10 @@ const Img = styled(motion.div).attrs(() => ({
 }))`
     width: 100%;
     height: 100%;
-    z-index: 90;
+
+    position: absolute;
+    z-index: 100;
+
     background-image: ${({ $img }) => `url(${$img})`};
     background-position: center;
     background-size: cover;
