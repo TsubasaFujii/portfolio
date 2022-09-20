@@ -10,11 +10,12 @@ import { GroupedIcons } from '../../Icon';
 import { Button } from '../../Button';
 import { Text } from '../../Text';
 import { FlexColumn } from '../../Flex';
-
-import externalIcon from '../../../assets/icons/external.svg';
+import { Section } from '../../Section';
 import { Content } from '../../Content';
 
-const Grid = styled.section`
+import externalIcon from '../../../assets/icons/external.svg';
+
+const Grid = styled(Content)`
     min-height: 50vh;
     margin-top: ${({ theme }) => theme.spacing.md};
 
@@ -26,7 +27,6 @@ const Grid = styled.section`
         grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
     }
     @media screen and (${devices.desktop}) {
-        grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
         gap: ${({ theme }) => `${theme.spacing.gap} ${theme.spacing.lg}`};
     }
 `;
@@ -126,7 +126,7 @@ export default function GridView(props) {
     const { projectList } = props;
     const { currentTheme } = useContext(ThemeContext);
     return (
-        <Content>
+        <Section>
             <Grid>
                 {
                     projectList.length > 0 ?
@@ -139,7 +139,7 @@ export default function GridView(props) {
                         <div>No match</div>
                 }
             </Grid>
-        </Content>
+        </Section>
     )
 }
 

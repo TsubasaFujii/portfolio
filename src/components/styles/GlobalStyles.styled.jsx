@@ -56,24 +56,12 @@ export const GlobalStyles = createGlobalStyle`
         }
     }
 
-    #overlay {
-        z-index: 250;
-    }
-
     main {
         width: 100%;
         z-index: 200;
 
         & section:last-child {
             margin-bottom: ${({ theme }) => theme.spacing.gap};
-        }
-    }
-
-    section {
-        padding: ${({ theme }) => `0 ${theme.spacing.md}`};
-
-        @media screen and (${devices.mobileL}) {
-            padding: ${({ theme }) => `0 ${theme.spacing.xl}`};
         }
     }
 
@@ -84,6 +72,18 @@ export const GlobalStyles = createGlobalStyle`
         min-height: 50vh;
 
         z-index: 300;
+    }
+
+    #overlay {
+        z-index: 250;
+    }
+    
+    section {
+        padding: ${({ theme }) => `0 ${theme.spacing.md}`};
+
+        @media screen and (${devices.mobileL}) {
+            padding: ${({ theme }) => `0 ${theme.spacing.xl}`};
+        }
     }
 
     ///
