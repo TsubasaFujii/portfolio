@@ -79,6 +79,7 @@ export const GlobalStyles = createGlobalStyle`
     }
     
     section {
+        position: relative;
         padding: ${({ theme }) => `0 ${theme.spacing.md}`};
 
         @media screen and (${devices.mobileL}) {

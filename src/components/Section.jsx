@@ -5,7 +5,6 @@ import { forwardRef } from 'react';
 
 const Wrapper = styled.section`
     min-height: 100vh;
-    position: relative;
 
     display: grid;
     place-content: center;
