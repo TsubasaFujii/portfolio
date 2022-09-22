@@ -10,8 +10,8 @@ const Wrapper = styled(FlexColumn)`
     justify-content: center;
     gap: ${({ theme }) => theme.spacing.md};
 
-    @media screen and (${devices.desktop}) {
-        width: ${({ theme }) => theme.max.width};
+    @media screen and (${devices.tablet}) {
+        max-width: ${({ theme }) => theme.max.width};
         margin: 0 auto;
     }
 `;
