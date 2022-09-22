@@ -86,7 +86,8 @@ const ThemeSwitchWrapper = styled.div`
 `;
 
 const Switch = styled(motion.div).attrs(() => ({
-    role: 'button'
+    role: 'button',
+    ['aria-label']: 'Switch theme'
 }))`
     width: 4.5rem;
     // height / 2 : padding + Marker height / 2
