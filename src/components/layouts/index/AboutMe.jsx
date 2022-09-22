@@ -8,12 +8,18 @@ import { H2, Heading } from '../../Heading';
 import { NewLine, Text } from '../../Text';
 import Image from '../../Image';
 import { SectionRef } from '../../Section';
-
-import { devices } from '../../../hooks/viewport';
-import profile from '../../../assets/profile.png';
-import { selfIntroduction } from '../../../data/content';
 import { Content } from '../../Content';
 import { FlexColumn } from '../../Flex';
+import { GroupedIcons } from '../../Icon';
+
+import { projectsData, selfIntroduction } from '../../../data/content';
+import { devices } from '../../../hooks/viewport';
+
+import profile from '../../../assets/images/profile.webp';
+
+const TOOLS = projectsData
+    .reduce((result, current) => result.concat(current.tools), [])
+    .filter((tool, i, arr) => arr.indexOf(tool) === i);
 
 const Wrapper = styled(SectionRef)`
     align-items: center;
@@ -25,10 +31,25 @@ const ContentWrapper = styled(FlexColumn)`
     }
 
     @media screen and (${devices.desktopL}) {
-        flex-direction: row;
+        display: grid;
+        grid-template-columns: auto 1fr;
+        grid-template-rows: repeat(2, auto);
+        align-items: center;
+
+        & > div[role="img"] {
+            grid-row: 1 / span 2;
+            grid-column: 1 / span 1;
+        }
 
         & > div.introduction {
-            flex: 1;
+            grid-row: 1 / span 1;
+            grid-column: 2 / span 1;
+        }
+
+        & :last-child {
+            grid-column: 2 / span 1;
+            grid-row: 2 / span 1;
+            
         }
     }
 
@@ -61,13 +82,18 @@ AboutMeHeading.propTypes = {
 
 function Introduction(props) {
     const { isVisible } = props;
+
     return (
         <ContentWrapper>
             <Image isVisible={isVisible} src={profile} alt='my profile' clipped />
             <motion.div initial='hidden' className='introduction'>
                 <Heading size={4}>{selfIntroduction.subHeading}</Heading>
-                {selfIntroduction.body.map((paragraph, index) => <Text key={index}>{paragraph}</Text>)}
+                {
+                    selfIntroduction.body.map((paragraph, index) =>
+                        <Text key={index}>{paragraph}</Text>)
+                }
             </motion.div>
+            <GroupedIcons names={TOOLS} />
         </ContentWrapper>
     )
 }

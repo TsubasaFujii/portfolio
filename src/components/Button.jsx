@@ -15,8 +15,8 @@ const Wrapper = styled(motion.button)`
 
     box-shadow: ${({ $flat, $currentTheme }) =>
         $flat ? 'none' :
-            `4px 4px 8px rgba(${$currentTheme === 'dark' ? '102, 96, 85, 0.5' : '241, 110, 40, 0.2'} ), ` +
-            `-4px -4px 8px ${$currentTheme === 'dark' ? 'rgba(102, 96, 85, 0.8)' : '#ffffff7d'}`};
+            `4px 4px 8px rgba(${$currentTheme === 'dark' ? '102, 96, 85, 0.5' : '241, 110, 40, 0.2'}), ` +
+            `-4px -4px 8px rgba(${$currentTheme === 'dark' ? '102, 96, 85, 0.8' : '255, 255, 255, 0.5'})`};
     border: ${({ theme, $secondary }) =>
         $secondary ?
             `0.1rem solid ${theme.colors.primary70}` :

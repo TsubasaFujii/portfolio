@@ -1,17 +1,17 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import GridView from '../components/layouts/projects/GridView';
 import Filter from '../components/layouts/projects/Filter';
 
 import { projectsData } from '../data/content';
 
+const TOOLS = projectsData
+    .reduce((result, current) => result.concat(current.tools), [])
+    .filter((tool, i, arr) => arr.indexOf(tool) === i);
+
 export default function Projects() {
     const [projectList, setProjectList] = useState([]);
-    const tools = useMemo(() => (
-        projectsData
-            .reduce((result, current) => result.concat(current.tools), [])
-            .filter((tool, i, arr) => arr.indexOf(tool) === i)), [projectsData]);
-    const [filterBy, setFilterBy] = useState(tools.reduce((result, current) => {
+    const [filterBy, setFilterBy] = useState(TOOLS.reduce((result, current) => {
         result[current] = false;
         return result;
     }, {}));

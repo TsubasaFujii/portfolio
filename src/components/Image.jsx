@@ -96,14 +96,6 @@ const Img = styled(motion.div).attrs(() => ({
     background-repeat: no-repeat;
     filter: drop-shadow(4px 4px 4px rgba(26, 13, 6, 0.2));
     ${({ $clipped }) => $clipped && 'clip-path: url(#clipPathLower);'}
-    
-    &:after {
-        content: '.';
-        width: 100%;
-        height: 100%;
-        visibility: hidden;
-    }
-
     ${({ $landscape }) => {
         if ($landscape) {
             return (`
@@ -112,6 +104,13 @@ const Img = styled(motion.div).attrs(() => ({
             `)
         }
     }}
+
+    &:after {
+        content: '.';
+        width: 100%;
+        height: 100%;
+        visibility: hidden;
+    }
 `;
 
 export default function Image(props) {
