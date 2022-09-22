@@ -15,12 +15,17 @@ import { Content } from '../../Content';
 
 import externalIcon from '../../../assets/icons/external.svg';
 
+const Wrapper = styled(Section)`
+    place-content: unset;
+`;
+
 const Grid = styled(Content)`
     min-height: 50vh;
     margin-top: ${({ theme }) => theme.spacing.md};
 
     display: grid;
     grid-template-columns: 100%;
+    grid-template-rows: max-content;
     gap: ${({ theme }) => `${theme.spacing.gap} ${theme.spacing.md}`};
 
     @media screen and (${devices.tablet}) {
@@ -37,8 +42,8 @@ const Card = styled.article`
 
     background: ${({ $currentTheme }) =>
         $currentTheme === 'dark' ?
-            'rgba(255, 255, 255, 0.3)' :
-            'rgba(255, 255, 255, 0.1)'};
+            'rgba(255, 255, 255, 0.1)' :
+            'rgba(255, 255, 255, 0.4)'};
     border-radius: 1rem;
     overflow: hidden;
 `;
@@ -46,6 +51,7 @@ const Card = styled.article`
 const ContentWrapper = styled(FlexColumn)`
     width: 100%;
     margin-top: ${({ theme }) => theme.spacing.sm};
+    padding: ${({ theme }) => `0 ${theme.spacing.sm} ${theme.spacing.sm}`};
 
     align-items: flex-start;
     gap: ${({ theme }) => theme.spacing.sm};
@@ -126,7 +132,7 @@ export default function GridView(props) {
     const { projectList } = props;
     const { currentTheme } = useContext(ThemeContext);
     return (
-        <Section>
+        <Wrapper>
             <Grid>
                 {
                     projectList.length > 0 ?
@@ -139,7 +145,7 @@ export default function GridView(props) {
                         <div>No match</div>
                 }
             </Grid>
-        </Section>
+        </Wrapper>
     )
 }
 
