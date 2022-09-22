@@ -101,7 +101,7 @@ export const GlobalStyles = createGlobalStyle`
     h5,
     h6,
     button,
-    span.intro,
+    div.intro,
     div.navItem,
     aside.filters {
         font-family: 'Josefin Sans', sans-serif;
@@ -109,7 +109,7 @@ export const GlobalStyles = createGlobalStyle`
     }
 
     h1 {
-        font-size: 3em;
+        font-size: 4em;
 
         @media screen and (${devices.mobileL}) {
             font-size: 5.6em;
@@ -125,7 +125,7 @@ export const GlobalStyles = createGlobalStyle`
     }
 
     h2 {
-        font-size: 3em;
+        font-size: 4em;
         @media screen and (${devices.mobileL}) {
             font-size: 5.6em;
         }
@@ -148,7 +148,8 @@ export const GlobalStyles = createGlobalStyle`
 
     h5,
     button,
-    div.navItem {
+    div.navItem,
+    div.intro > div {
         font-weight: 600;
         font-size: 1.3em;
         @media screen and (${devices.mobileL}) {
@@ -164,7 +165,7 @@ export const GlobalStyles = createGlobalStyle`
         }
     }
 
-    span.intro {
+    div.intro > span {
         font-weight: 400;
         font-size: 1em;
         @media screen and (${devices.mobileL}) {
@@ -241,7 +242,7 @@ export const GlobalStyles = createGlobalStyle`
     }
 
     footer {
-        color: ${({ theme, $currentTheme }) => $currentTheme === 'dark' ? theme.colors.black : theme.colors.white};
-        background: ${({ theme, $currentTheme }) => $currentTheme === 'dark' ? theme.colors.white : theme.colors.black};
+        color: ${({ theme, currentTheme }) => currentTheme === 'dark' ? theme.colors.black : theme.colors.white};
+        background: ${({ theme, currentTheme }) => currentTheme === 'dark' ? theme.colors.white : theme.colors.black};
     }
 `;

@@ -3,16 +3,22 @@ import { AnimatePresence, motion } from 'framer-motion';
 import styled, { useTheme } from 'styled-components';
 import PropTypes from 'prop-types';
 
-import { Button } from '../../Button';
 import { scrollTo } from '../../../js/window';
-import { headingText, selfIntroduction } from '../../../data/content';
-import { Section } from '../../Section';
+
+import { Button } from '../../Button';
+import { SectionRef } from '../../Section';
 import { NewLine } from '../../Text';
 import { Content } from '../../Content';
 
-const Wrapper = styled(Section)`
+import { headingText, selfIntroduction } from '../../../data/content';
+import { useInView } from 'react-intersection-observer';
+
+const Wrapper = styled(SectionRef)`
     min-height: ${({ $headerHeight }) => `calc(100vh - ${$headerHeight}px)`};
-    position: relative;
+    box-sizing: content-box;
+    padding-top:    ${({ $headerHeight }) => `${$headerHeight}px`};
+    top: ${({ $headerHeight }) => `-${$headerHeight}px`};
+    place-content: normal;
 `;
 
 const ContentWrapper = styled(Content)`
@@ -28,14 +34,18 @@ const H1 = styled(motion.h1)`
     flex-direction: column;
 `;
 
-const BackgroundWrapper = styled.div`
-    width: 100vw;
+const BackgroundWrapper = styled(motion.div)`
+    width: 100%;
+    height: 100%;
 
-    z-index: -1;
     position: absolute;
-    top: 50%;
-    left: ${({ theme }) => `-${theme.spacing.md}`};
-    transform: translateY(-50%);
+    z-index: -1;
+    overflow: visible;
+
+    & svg {
+        width: 100%;
+        height: 100%;
+    }
 `;
 
 // Motions
@@ -153,52 +163,66 @@ const subMotion = {
 
 function SubHeading() {
     return (
-        <motion.div initial='initial' animate='visible' variants={subMotion}>
-            <motion.h5 variants={subMotion}>Frontend developer</motion.h5>
-            <motion.span className='intro'>
+        <motion.div initial='initial' animate='visible' variants={subMotion} className='intro'>
+            <motion.div variants={subMotion}>Frontend developer</motion.div>
+            <motion.span>
                 and <WordLoop />
             </motion.span>
         </motion.div>
     )
 }
 
-function BackgroundLayer() {
+function BackgroundLayer(props) {
+    const { headerHeight, isVisible } = props;
     const theme = useTheme();
 
     return (
-        <BackgroundWrapper>
+        <BackgroundWrapper $headerHeight={headerHeight}>
             <svg
                 viewBox='0 0 100 100'
-                xmlns='http://www.w3.org/2000/svg'
-                fill={theme.colors.primary}
-                className='bg1'>
+                xmlns='http://www.w3.org/2000/svg'>
                 <motion.circle
+                    fill={theme.colors.primary}
                     initial={{
-                        y: '-100%',
-                        x: '-100%',
-                        scale: 0.1,
+                        cx: 0,
+                        cy: 0,
+                        scale: 0.5,
                     }}
                     animate={{
-                        y: 0,
-                        x: '50%',
+                        cx: isVisible ? '80%' : 0,
+                        cy: isVisible ? '55%' : 0,
                         scale: 1,
-                        transition: { type: 'spring', stiffness: 100 }
+                        transition: {
+                            default: {
+                                type: 'spring',
+                                damping: 4,
+                                stiffness: 100,
+                                restDelta: 0.1,
+                            },
+                            scale: {
+                                duration: 0.5,
+                            }
+                        },
                     }}
-                    viewport={{ once: true }}
-                    cx='50'
-                    cy='50'
-                    r='50' />
+                    cx='50%'
+                    cy='50%'
+                    r='40%' />
             </svg>
         </BackgroundWrapper>
+
     );
 }
 
 BackgroundLayer.propTypes = {
-    headerHeight: PropTypes.number
+    isVisible: PropTypes.bool,
+    headerHeight: PropTypes.number,
 };
 
 export default function Hero() {
     const [headerHeight, setHeaderHeight] = useState(null);
+    const { ref, inView } = useInView({
+        initialInView: true,
+    });
 
     function handleOnClick() {
         scrollTo('#projects');
@@ -218,7 +242,7 @@ export default function Hero() {
     }, []);
 
     return (
-        <Wrapper $headerHeight={headerHeight}>
+        <Wrapper $headerHeight={headerHeight} ref={ref}>
             <ContentWrapper>
                 <HeroHeading />
                 <SubHeading />
@@ -227,8 +251,8 @@ export default function Hero() {
                     align='flex-start'
                     icon='chevronDown'
                     onClick={handleOnClick} />
-                {/* <BackgroundLayer /> */}
             </ContentWrapper>
+            <BackgroundLayer isVisible={inView} headerHeight={headerHeight} />
         </Wrapper >
     )
 }
