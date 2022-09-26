@@ -201,16 +201,8 @@ export const GlobalStyles = createGlobalStyle`
     // Colors
     ///
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6,
-    span.intro,
-    aside.filters,
-    p,
-    header {
+    body,
+    a:visited {
         color: ${({ theme }) => theme.fontColor};
     }
 
@@ -218,9 +210,9 @@ export const GlobalStyles = createGlobalStyle`
         color: ${({ theme }) => theme.black};
     }
 
-    body {
-        background-color: ${({ theme, currentTheme }) =>
-        currentTheme === 'dark' ? theme.colors.black : theme.colors.white};
+    footer {
+        color: ${({ theme, currentTheme }) => currentTheme === 'dark' ? theme.colors.black : theme.colors.white};
+        background: ${({ theme, currentTheme }) => currentTheme === 'dark' ? theme.colors.white : theme.colors.black};
     }
 
     header,
@@ -239,10 +231,5 @@ export const GlobalStyles = createGlobalStyle`
         currentTheme === 'dark' ?
             theme.colors.black :
             theme.colors.white};
-    }
-
-    footer {
-        color: ${({ theme, currentTheme }) => currentTheme === 'dark' ? theme.colors.black : theme.colors.white};
-        background: ${({ theme, currentTheme }) => currentTheme === 'dark' ? theme.colors.white : theme.colors.black};
     }
 `;
