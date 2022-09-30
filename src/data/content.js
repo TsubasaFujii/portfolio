@@ -1,4 +1,4 @@
-import project1 from '../assets/projects/webShop.JPG';
+import project1 from '../assets/projects/placeholder.png';
 
 export const links = [
     {
