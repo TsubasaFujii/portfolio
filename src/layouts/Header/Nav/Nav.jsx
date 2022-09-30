@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import { MenuItem, Navigation } from './styled';
-import { scrollToTop } from '../../../js/window';
+import { scrollTo, scrollToTop } from '../../../js/window';
 
 export default function Nav(props) {
     const { current, links } = props;
