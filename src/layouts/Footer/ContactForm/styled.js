@@ -2,14 +2,10 @@ import styled from 'styled-components';
 import { Heading } from '../../../components';
 
 export const FormHeading = styled(Heading).attrs(() => ({
-    as: 'h2',
+    as: 'h3',
     id: 'contactForm',
 }))`
     text-align: center;
-    color: ${({ theme, $currentTheme }) =>
-        $currentTheme === 'dark' ?
-            theme.colors.black :
-            theme.colors.white};
 `;
 
 export const Wrapper = styled.div`
