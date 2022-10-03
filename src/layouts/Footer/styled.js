@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { FlexRow } from '../../components';
+import { devices } from '../../hooks/viewport';
 
 export const FooterWrapper = styled.footer`
     display: flex;
@@ -7,9 +9,17 @@ export const FooterWrapper = styled.footer`
     align-items: center;
 `;
 
-export const Flex = styled.div`
-    display: flex;
-    flex-direction: row;
+export const FooterContent = styled(FlexRow)`
+    gap: ${({ theme }) => theme.spacing.lg};
+    flex-wrap: wrap-reverse;
+    align-items: flex-start;
+
+    @media screen and (${devices.tablet}) {
+        flex-wrap: nowrap;
+    }
+`;
+
+export const SocialMedia = styled(FlexRow)`
     gap: ${({ theme }) => theme.spacing.sm};
     justify-content: center;
 `;

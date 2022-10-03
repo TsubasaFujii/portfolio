@@ -1,12 +1,13 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import PropTypes from 'prop-types';
 
 import ContactForm from './ContactForm';
 import { Icon } from '../../components';
-import { Flex, FooterWrapper, SnsIcon } from './styled';
+import { FooterContent, FooterWrapper, SnsIcon, SocialMedia } from './styled';
 
 import { socialMedia } from '../../data/content';
 import { ThemeContext } from '../../components/styles/ContextProviders';
+import FooterLinks from './FooterLinks/FooterLinks';
 
 export default function Footer(props) {
     const { contactRef } = props;
@@ -14,8 +15,11 @@ export default function Footer(props) {
 
     return (
         <FooterWrapper $currentTheme={currentTheme}>
-            <ContactForm contactRef={contactRef} />
-            <Flex>
+            <FooterContent>
+                <FooterLinks />
+                <ContactForm contactRef={contactRef} />
+            </FooterContent>
+            <SocialMedia>
                 {
                     socialMedia.map(({ name, url }) => (
                         <SnsIcon key={name} onClick={() => console.log(url)}>
@@ -23,7 +27,7 @@ export default function Footer(props) {
                         </SnsIcon>
                     ))
                 }
-            </Flex>
+            </SocialMedia>
             <div className='copyright'>
                 &copy; 2022 Tsubasa Fujii
             </div>
