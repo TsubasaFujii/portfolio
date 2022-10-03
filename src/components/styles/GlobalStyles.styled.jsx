@@ -103,7 +103,8 @@ export const GlobalStyles = createGlobalStyle`
     button,
     div.intro,
     div.navItem,
-    aside.filters {
+    aside.filters,
+    footer li {
         font-family: 'Josefin Sans', sans-serif;
         font-weight: 700;
     }
@@ -149,7 +150,8 @@ export const GlobalStyles = createGlobalStyle`
     h5,
     button,
     div.navItem,
-    div.intro > div {
+    div.intro > div,
+    footer li {
         font-weight: 600;
         font-size: 1.3em;
         @media screen and (${devices.mobileL}) {
@@ -211,6 +213,12 @@ export const GlobalStyles = createGlobalStyle`
     }
 
     footer {
+        color: ${({ theme, currentTheme }) => currentTheme === 'dark' ? theme.colors.black : theme.colors.white};
+        background: ${({ theme, currentTheme }) => currentTheme === 'dark' ? theme.colors.white : theme.colors.black};
+    }
+
+    footer a,
+    footer a:visited {
         color: ${({ theme, currentTheme }) => currentTheme === 'dark' ? theme.colors.black : theme.colors.white};
         background: ${({ theme, currentTheme }) => currentTheme === 'dark' ? theme.colors.white : theme.colors.black};
     }

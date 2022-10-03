@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 import { GridView } from './blocks/GridView';
 import Filter from './blocks/Filter';

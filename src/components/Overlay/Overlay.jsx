@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import { forwardRef } from 'react';
 import { useContext } from 'react';
 import { createPortal } from 'react-dom';
 import { ThemeContext } from '../styles/ContextProviders';

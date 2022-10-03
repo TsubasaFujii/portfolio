@@ -13,7 +13,7 @@ export default function H3(props) {
     const { children } = props;
     const { ref, inView } = useInView({
         initialInView: false,
-        threshold: 0.5,
+        threshold: 1,
     });
 
     return (

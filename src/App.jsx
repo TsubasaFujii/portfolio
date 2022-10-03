@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 
 import { GlobalStyles } from './components/styles/GlobalStyles.styled';
 import Theme from './components/styles/Theme.styled';
