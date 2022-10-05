@@ -1,8 +1,8 @@
 import { useContext } from 'react';
-import { ThemeContext } from '../styles/ContextProviders';
 import PropTypes from 'prop-types';
 
 import { H2Wrapper } from './styled';
+import { ThemeContext } from '../../context/ThemeContext';
 
 const headingMotion = {
     slideIn: { x: '-1rem', opacity: 0 },

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { FlexColumn, SectionRef } from '../../../../components';
-import { devices } from '../../../../hooks/viewport';
+import { devices } from '../../../../data/viewport';
 
 export const Wrapper = styled(SectionRef).attrs(() => ({
     id: 'projects'

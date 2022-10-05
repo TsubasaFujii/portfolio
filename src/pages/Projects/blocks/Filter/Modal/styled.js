@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { devices } from '../../../../../hooks/viewport';
 import { FlexRow } from '../../../../../components';
+import { devices } from '../../../../../data/viewport';
 
 export const GroupedCheckbox = styled(FlexRow)`
     padding: ${({ theme }) => `${theme.spacing.sm} 0`};

@@ -1,5 +1,7 @@
 import { ThemeProvider } from 'styled-components';
 import PropTypes from 'prop-types';
+import { useContext } from 'react';
+import { ThemeContext } from '../../context/ThemeContext';
 
 const spacing = {
     xs: '0.5rem',
@@ -69,16 +71,19 @@ const dark = {
     fontColor: darkThemeColors.white,
 };
 
-export default function Theme({ theme, children }) {
-
+export default function Theme({ children }) {
+    const { currentTheme } = useContext(ThemeContext);
     return (
-        <ThemeProvider theme={theme === 'dark' ? dark : light}>
+        <ThemeProvider theme={currentTheme === 'dark' ? dark : light}>
             {children}
         </ThemeProvider>
     );
 }
 
 Theme.propTypes = {
-    theme: PropTypes.string,
-    children: PropTypes.object,
+    children: PropTypes.oneOfType([
+        PropTypes.array,
+        PropTypes.string,
+        PropTypes.element,
+    ]),
 };

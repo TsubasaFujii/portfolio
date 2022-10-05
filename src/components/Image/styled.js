@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { devices } from '../../hooks/viewport';
+
+import { devices } from '../../data/viewport';
+
 import externalIcon from '../../assets/icons/external.svg';
 
 export const ImageWrapper = styled(motion.div).attrs(() => ({

@@ -6,8 +6,8 @@ import { Icon } from '../../components';
 import { FooterContent, FooterWrapper, SnsIcon, SocialMedia } from './styled';
 
 import { socialMedia } from '../../data/content';
-import { ThemeContext } from '../../components/styles/ContextProviders';
 import FooterLinks from './FooterLinks/FooterLinks';
+import { ThemeContext } from '../../context/ThemeContext';
 
 export default function Footer(props) {
     const { contactRef } = props;

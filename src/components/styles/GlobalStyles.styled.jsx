@@ -1,7 +1,10 @@
+import { useContext } from 'react';
 import { createGlobalStyle } from 'styled-components';
-import { devices } from '../../hooks/viewport';
+import { ThemeContext } from '../../context/ThemeContext';
 
-export const GlobalStyles = createGlobalStyle`
+import { devices } from '../../data/viewport';
+
+const StyledGlobalStyle = createGlobalStyle`
     *,
     *:after,
     *::before {
@@ -241,3 +244,9 @@ export const GlobalStyles = createGlobalStyle`
             theme.colors.white};
     }
 `;
+
+export default function GlobalStyles() {
+    const { currentTheme } = useContext(ThemeContext);
+    return <StyledGlobalStyle currentTheme={currentTheme} />
+}
+

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { FlexRow } from '../../../../components';
 
-import { devices } from '../../../../hooks/viewport';
+import { devices } from '../../../../data/viewport';
 
 export const FilterWrapper = styled.aside.attrs(() => ({
     className: 'filters'

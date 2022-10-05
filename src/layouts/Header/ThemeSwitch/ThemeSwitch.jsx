@@ -1,6 +1,8 @@
 import { useContext } from 'react';
 import { useTheme } from 'styled-components';
-import { ThemeContext } from '../../../components/styles/ContextProviders';
+
+import { ThemeContext } from '../../../context/ThemeContext';
+
 import { Label, Marker, Switch, ThemeSwitchWrapper } from './styled';
 
 export default function ThemeSwitch() {

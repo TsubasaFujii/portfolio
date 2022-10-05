@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { devices } from '../../hooks/viewport';
+import { devices } from '../../data/viewport';
 
 export const Main = styled.main`
     display: flex;

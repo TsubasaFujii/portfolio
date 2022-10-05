@@ -1,7 +1,8 @@
 import styled from 'styled-components';
+
 import { FlexColumn, H3, Image } from '../../../../../components';
 
-import { devices } from '../../../../../hooks/viewport';
+import { devices } from '../../../../../data/viewport';
 
 export const Thumbnail = styled(Image)`
     & .image {

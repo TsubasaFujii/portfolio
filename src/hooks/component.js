@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { devices } from './viewport';
+
+import { devices } from '../data/viewport';
 
 export function useControlVisibility() {
     const [isVisible, setIsVisible] = useState(false);

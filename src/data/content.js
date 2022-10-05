@@ -78,9 +78,9 @@ export const projectsData = [
 export const socialMedia = [
     {
         name: 'linkedin',
-        url: 'http://google.com'
+        url: 'https://www.linkedin.com/in/tsubasa-fujii/'
     },{
         name: 'github',
-        url: 'http://google.com'
+        url: 'https://github.com/TsubasaFujii/'
     },
 ];

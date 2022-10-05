@@ -2,20 +2,6 @@ import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useLocation } from 'react-router-dom';
 
-export const breakpoints = {
-    sm: 576,
-    md: 768,
-    lg: 992,
-    xl: 1200,
-};
-
-export const devices = {
-    mobileL: `(min-width: ${breakpoints.sm}px)`,
-    tablet: `(min-width: ${breakpoints.md}px)`,
-    desktop: `(min-width: ${breakpoints.lg}px)`,
-    desktopL: `(min-width: ${breakpoints.xl}px)`,
-};
-
 export function useTrackViewport(links) {
     // links[0] is default
     const [currentSection, setCurrentSection] = useState(0);

@@ -1,9 +1,10 @@
 import { useContext } from 'react';
 import PropTypes from 'prop-types';
 
+import { ThemeContext } from '../../../../context/ThemeContext';
+
 import { Card } from './Card';
 import { Grid, Wrapper } from './styled';
-import { ThemeContext } from '../../../../components/styles/ContextProviders';
 
 export default function GridView(props) {
     const { projectList } = props;

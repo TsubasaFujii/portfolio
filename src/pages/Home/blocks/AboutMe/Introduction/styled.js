@@ -1,7 +1,8 @@
 import styled from 'styled-components';
+
 import { FlexColumn } from '../../../../../components';
 
-import { devices } from '../../../../../hooks/viewport';
+import { devices } from '../../../../../data/viewport';
 
 export const ContentWrapper = styled(FlexColumn)`
     @media screen and (${devices.tablet}) {

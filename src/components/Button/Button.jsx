@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 import Label from './Label';
 import ButtonIcon from './ButtonIcon';
-import { ThemeContext } from '../styles/ContextProviders';
 import { ContentWrapper, Wrapper } from './styled';
 import { Icon } from '../Icon';
+import { ThemeContext } from '../../context/ThemeContext';
 
 export default function Button(props) {
     const { label, disabled, icon, align, onClick, flat, secondary } = props;

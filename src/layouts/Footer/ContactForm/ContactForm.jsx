@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import PropTypes from 'prop-types';
 
-import { ThemeContext } from '../../../components/styles/ContextProviders';
+import { ThemeContext } from '../../../context/ThemeContext';
 
 import Form from './Form';
 import { FormHeading, Wrapper } from './styled';

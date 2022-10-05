@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
 import { useContext } from 'react';
 import { createPortal } from 'react-dom';
-import { ThemeContext } from '../styles/ContextProviders';
+import { ThemeContext } from '../../context/ThemeContext';
 import { OverlayWrapper } from './styled';
 
 export const Overlay = forwardRef((_, ref) => {

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { devices } from '../../../hooks/viewport';
+
+import { devices } from '../../../data/viewport';
 
 export const Navigation = styled.nav`
     width: 100%;

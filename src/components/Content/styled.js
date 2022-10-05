@@ -1,6 +1,8 @@
 import styled from 'styled-components';
-import { devices } from '../../hooks/viewport';
+
 import { FlexColumn } from '../Flex';
+
+import { devices } from '../../data/viewport';
 
 export const Wrapper = styled(FlexColumn)`
     justify-content: center;

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export function useSwitchTheme() {
+export function useToggleTheme() {
     const [currentTheme, setCurrentTheme] = useState('light');
 
     useEffect(() => {
@@ -16,6 +16,6 @@ export function useSwitchTheme() {
 
     return {
         currentTheme,
-        toggleTheme
+        toggleTheme,
     }
 }

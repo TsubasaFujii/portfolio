@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-
 import { Wrapper } from './styled';
 
 export default function Content(props) {
