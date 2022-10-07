@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react';
 
-export function useToggleTheme() {
-    const [currentTheme, setCurrentTheme] = useState('light');
+function getUserPref() {
+    return matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+}
+
+export function useCurrentTheme() {
+    const [currentTheme, setCurrentTheme] = useState(getUserPref());
 
     useEffect(() => {
         // dark -> theme.colors.black, light -> theme.colors.white
