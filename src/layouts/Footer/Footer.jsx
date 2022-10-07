@@ -6,8 +6,10 @@ import { Icon } from '../../components';
 import { FooterContent, FooterWrapper, SnsIcon, SocialMedia } from './styled';
 
 import { socialMedia } from '../../data/content';
-import FooterLinks from './FooterLinks/FooterLinks';
 import { ThemeContext } from '../../context';
+import { openInNewTabTo } from '../../js/window';
+
+import FooterLinks from './FooterLinks/FooterLinks';
 
 export default function Footer(props) {
     const { contactRef } = props;
@@ -22,7 +24,7 @@ export default function Footer(props) {
             <SocialMedia>
                 {
                     socialMedia.map(({ name, url }) => (
-                        <SnsIcon key={name} onClick={() => console.log(url)}>
+                        <SnsIcon key={name} onClick={() => openInNewTabTo(url)}>
                             <Icon name={name} />
                         </SnsIcon>
                     ))

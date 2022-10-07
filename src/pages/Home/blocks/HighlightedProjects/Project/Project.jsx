@@ -1,13 +1,12 @@
 import PropTypes from 'prop-types';
 import { Button, GroupedIcons, H3, Text } from '../../../../../components';
+
+import { openInNewTabTo } from '../../../../../js/window';
+
 import { Details, ProjectWrapper, Thumbnail } from './styled';
 
 export default function Project(props) {
     const { title, thumbnail, tools, description, github, production } = props;
-
-    function onClick() {
-        console.log('Open', github);
-    }
 
     return (
         <ProjectWrapper>
@@ -19,7 +18,7 @@ export default function Project(props) {
                 <Button
                     label='GitHub'
                     icon='code'
-                    onClick={onClick} />
+                    onClick={() => openInNewTabTo(github)} />
             </Details>
         </ProjectWrapper>
     );

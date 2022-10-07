@@ -11,3 +11,7 @@ export function scrollToTop() {
         top: 0,
     });
 }
+
+export function openInNewTabTo(url) {
+    window.open(url, '_blank', 'noopener,noreferrer');
+}

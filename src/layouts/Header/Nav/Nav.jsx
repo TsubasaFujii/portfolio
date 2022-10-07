@@ -1,19 +1,19 @@
-import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
+import { useJumpTo } from '../../../hooks/route';
+
 import { MenuItem, Navigation } from './styled';
-import { scrollTo, scrollToTop } from '../../../js/window';
+import { scrollTo } from '../../../js/window';
 
 export default function Nav(props) {
     const { current, links } = props;
-    const navigate = useNavigate();
+    const { jumpTo } = useJumpTo();
 
     function handleOnClick(route) {
         if (route.charAt(0) === '#') {
             scrollTo(route);
         } else {
-            navigate(route);
-            scrollToTop();
+            jumpTo(route);
         }
         return;
     }

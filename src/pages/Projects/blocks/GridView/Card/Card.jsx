@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import { useInView } from 'react-intersection-observer';
-import { Button, GroupedIcons, Text } from '../../../../../components';
+import { Button, GroupedIcons, P } from '../../../../../components';
+
+import { openInNewTabTo } from '../../../../../js/window';
 
 import { CardWrapper, ContentWrapper, Thumbnail } from './styled';
 
@@ -11,24 +13,20 @@ export default function Card(props) {
         threshold: 0.3,
     });
 
-    function openExternalLink(url) {
-        console.log('Open', url);
-    }
-
     return (
         <CardWrapper ref={ref}>
             <Thumbnail
                 className='thumbnail'
                 $img={thumbnail}
-                onClick={() => openExternalLink(production)} />
+                onClick={() => openInNewTabTo(production)} />
             <ContentWrapper>
                 <a href={production}><h4>{title}</h4></a>
-                <Text>{description}</Text>
+                <P>{description}</P>
                 <GroupedIcons names={tools} size='1rem' />
                 <Button
                     label='GitHub'
                     icon='code'
-                    onClick={() => openExternalLink(github)} />
+                    onClick={() => openInNewTabTo(github)} />
             </ContentWrapper>
         </CardWrapper>
     )
