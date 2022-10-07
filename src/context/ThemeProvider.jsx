@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useToggleTheme } from '../hooks/theme';
+import { useCurrentTheme } from '../hooks/theme';
 import { getPointingMethod } from '../js/device';
 import { createContext } from 'react';
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';
@@ -77,7 +77,7 @@ export const ThemeContext = createContext();
 // Need to use StyledThemeProvider so I can access theme in styled component
 export function ThemeProvider(props) {
     const { children } = props;
-    const { currentTheme, toggleTheme } = useToggleTheme();
+    const { currentTheme, toggleTheme } = useCurrentTheme();
     const { pointingMethod } = getPointingMethod();
 
     return (
