@@ -19,6 +19,10 @@ export const FooterContent = styled(FlexRow)`
     @media screen and (${devices.tablet}) {
         flex-wrap: nowrap;
     }
+
+    @media screen and (${devices.desktopL}) {
+        width: ${({theme}) =>theme.max.width}
+    }
 `;
 
 export const SocialMedia = styled(FlexRow)`
