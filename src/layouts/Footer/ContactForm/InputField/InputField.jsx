@@ -2,9 +2,8 @@ import PropTypes from 'prop-types';
 import { useContext } from 'react';
 import { motion } from 'framer-motion';
 
-import { ThemeContext } from '../../../../context/ThemeContext';
-
 import { Input, InputFieldWrapper, Textarea } from './styled';
+import { ThemeContext } from '../../../../context';
 
 export default function InputField(props) {
     const { item, value, handleInput, isError, isFocused, handleOnFocus } = props;

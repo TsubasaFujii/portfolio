@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { createGlobalStyle } from 'styled-components';
-import { ThemeContext } from '../../context/ThemeContext';
+import { ThemeContext } from '../../context';
 
 import { devices } from '../../data/viewport';
 
@@ -107,12 +107,14 @@ const StyledGlobalStyle = createGlobalStyle`
     div.intro,
     div.navItem,
     aside.filters,
-    footer li {
+    footer li,
+    span.large {
         font-family: 'Josefin Sans', sans-serif;
         font-weight: 700;
     }
 
-    h1 {
+    h1,
+    span.large {
         font-size: 4em;
 
         @media screen and (${devices.mobileL}) {

@@ -1,10 +1,9 @@
 import { useContext } from 'react';
 import PropTypes from 'prop-types';
 
-import { ThemeContext } from '../../../context/ThemeContext';
-
 import Form from './Form';
 import { FormHeading, Wrapper } from './styled';
+import { ThemeContext } from '../../../context';
 
 export default function ContactForm(props) {
     const { contactRef } = props;

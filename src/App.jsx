@@ -1,7 +1,6 @@
 import { useRef } from 'react';
 
-import { ThemeProvider } from './context/ThemeContext';
-import Theme from './components/styles/Theme.styled';
+import { ThemeProvider } from './context/ThemeProvider';
 import GlobalStyles from './components/styles/GlobalStyles.styled';
 
 import { useTrackViewport } from './hooks/viewport';
@@ -18,12 +17,10 @@ function App() {
 
     return (
         <ThemeProvider>
-            <Theme>
-                <GlobalStyles />
-                <Header ref={headerRef} current={currentSection} links={links} />
-                <Main />
-                <Footer contactRef={contactRef} />
-            </Theme>
+            <GlobalStyles />
+            <Header ref={headerRef} current={currentSection} links={links} />
+            <Main />
+            <Footer contactRef={contactRef} />
         </ThemeProvider>
     );
 }

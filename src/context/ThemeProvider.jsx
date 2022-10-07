@@ -1,7 +1,8 @@
-import { ThemeProvider } from 'styled-components';
 import PropTypes from 'prop-types';
-import { useContext } from 'react';
-import { ThemeContext } from '../../context/ThemeContext';
+import { useToggleTheme } from '../hooks/theme';
+import { getPointingMethod } from '../js/device';
+import { createContext } from 'react';
+import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 
 const spacing = {
     xs: '0.5rem',
@@ -71,19 +72,33 @@ const dark = {
     fontColor: darkThemeColors.white,
 };
 
-export default function Theme({ children }) {
-    const { currentTheme } = useContext(ThemeContext);
+export const ThemeContext = createContext();
+
+// Need to use StyledThemeProvider so I can access theme in styled component
+export function ThemeProvider(props) {
+    const { children } = props;
+    const { currentTheme, toggleTheme } = useToggleTheme();
+    const { pointingMethod } = getPointingMethod();
+
     return (
-        <ThemeProvider theme={currentTheme === 'dark' ? dark : light}>
-            {children}
-        </ThemeProvider>
-    );
+        <StyledThemeProvider theme={currentTheme === 'dark' ? dark : light}>
+            <ThemeContext.Provider
+                value={{
+                    currentTheme,
+                    toggleTheme,
+                    pointingMethod
+                }}>
+                {children}
+            </ThemeContext.Provider>
+        </StyledThemeProvider >
+    )
 }
 
-Theme.propTypes = {
+ThemeProvider.propTypes = {
     children: PropTypes.oneOfType([
         PropTypes.array,
         PropTypes.string,
         PropTypes.element,
     ]),
 };
+

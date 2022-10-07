@@ -12,3 +12,7 @@ export const TextWrapper = styled(motion.p)`
 export const NewLine = styled(motion.span)`
     display: block;
 `;
+
+export const Large = styled.span.attrs(() => ({
+    className: 'large'
+}))``;

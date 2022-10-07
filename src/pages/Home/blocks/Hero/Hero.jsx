@@ -4,7 +4,7 @@ import { useInView } from 'react-intersection-observer';
 import { scrollTo } from '../../../../js/window';
 
 import { SubHeading } from './SubHeading';
-import { Button } from '../../../../components/Button';
+import { Button } from '../../../../components';
 import BackgroundLayer from './BackgroundLayer';
 import { Heading } from './Heading';
 import { ContentWrapper, Wrapper } from './styled';

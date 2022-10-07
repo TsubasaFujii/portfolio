@@ -1,3 +1,3 @@
 import Text from './Text';
-import { NewLine } from './styled';
-export { Text, NewLine };
+import { NewLine, Large } from './styled';
+export { Text, NewLine, Large };

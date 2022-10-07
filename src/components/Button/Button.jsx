@@ -5,7 +5,7 @@ import Label from './Label';
 import ButtonIcon from './ButtonIcon';
 import { ContentWrapper, Wrapper } from './styled';
 import { Icon } from '../Icon';
-import { ThemeContext } from '../../context/ThemeContext';
+import { ThemeContext } from '../../context';
 
 export default function Button(props) {
     const { label, disabled, icon, align, onClick, flat, secondary } = props;

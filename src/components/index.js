@@ -6,7 +6,7 @@ import { Icon, GroupedIcons } from './Icon';
 import { Image } from './Image';
 import { Overlay } from './Overlay';
 import { Section, SectionRef } from './Section';
-import { Text, NewLine } from './Text';
+import { Text, NewLine, Large } from './Text';
 
 export {
     Button,
@@ -23,5 +23,6 @@ export {
     Section,
     SectionRef,
     Text,
-    NewLine
+    NewLine,
+    Large
 }

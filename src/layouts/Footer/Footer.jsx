@@ -7,7 +7,7 @@ import { FooterContent, FooterWrapper, SnsIcon, SocialMedia } from './styled';
 
 import { socialMedia } from '../../data/content';
 import FooterLinks from './FooterLinks/FooterLinks';
-import { ThemeContext } from '../../context/ThemeContext';
+import { ThemeContext } from '../../context';
 
 export default function Footer(props) {
     const { contactRef } = props;

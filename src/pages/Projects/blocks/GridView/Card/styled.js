@@ -29,7 +29,7 @@ export const Thumbnail = styled.div`
     position: relative;
 
     background: ${({ $img }) => `center no-repeat url(${$img})`};
-    background-size: auto 100%;
+    background-size: auto 120%;
 
     transition: background-size 0.2s ease-in;
 
@@ -49,7 +49,7 @@ export const Thumbnail = styled.div`
 
     &:hover {
         cursor: pointer;
-        background-size: auto 120%;
+        background-size: auto 140%;
     }
     
 `;
