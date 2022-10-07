@@ -16,6 +16,10 @@ export const List = styled.ul`
 
 export const ListItem = styled.li`
     padding: 0.5em 0.7em;
+
+    &:hover {
+        cursor: pointer;
+    }
 `;
 
 export const FooterLinksHeading = styled(Heading).attrs(() => ({
