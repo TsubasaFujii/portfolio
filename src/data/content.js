@@ -16,11 +16,11 @@ export const links = [
 export const headingText = ['Hello,', 'I\'m', 'Tsubasa.'];
 
 export const selfIntroduction = {
-    subHeading: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+    subHeading: 'Self-motivated developer who enjoys challenges',
     body: [
-        'I wrote my first HTML 20 years ago when my father gave me an HTML book for beginners. Since then, I have always had an interest in programming but never had a chance to study until now. Currently I\'m studying frontend programming in Stockholm, Sweden.',
-        'I develop webpages using mainly React and JavaScript. I learned the basic usage of Node.js and built servers with packages such as Express, Socket.IO and SQL databases.',
-        'I\'m a person who loves challenges and always has a big curiosity. When I\'m not coding, you\'ll find me in nature.',
+        'I worked in the hospitality industry for almost 10 years where I developed strong communication skills and problem-solving skills. Currently I\'m studying frontend programming in Stockholm, Sweden.',
+        'I develop webpages using mainly React and JavaScript. I\'m familiar with Node.js and have experience with packages such as Express, Socket.IO and SQL databases.',
+        'I\'m a person who loves challenges and have a large curiosity. When I\'m not coding, you\'ll find me in nature.',
     ],
     keywords: [
         'foodie',
