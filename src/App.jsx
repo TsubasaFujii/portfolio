@@ -3,7 +3,7 @@ import { useRef } from 'react';
 import { ThemeProvider } from './context/ThemeProvider';
 import GlobalStyles from './components/styles/GlobalStyles.styled';
 
-import { useTrackViewport } from './hooks/viewport';
+import { useTrackViewport } from './hooks/useTrackViewport';
 import { links } from './data/content';
 
 import Header from './layouts/Header';

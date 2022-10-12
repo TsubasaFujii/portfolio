@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-import { useJumpTo } from '../../../hooks/route';
+import { useJumpTo } from '../../../hooks/useJumpTo';
 
 import { MenuItem, Navigation } from './styled';
 import { scrollTo } from '../../../js/window';

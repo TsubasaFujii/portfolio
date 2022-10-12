@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useCurrentTheme } from '../hooks/theme';
+import { useCurrentTheme } from '../hooks/useCurrentTheme';
 import { getPointingMethod } from '../js/device';
 import { createContext } from 'react';
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';

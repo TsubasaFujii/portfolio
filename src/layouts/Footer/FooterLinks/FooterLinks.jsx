@@ -1,5 +1,5 @@
 import { FooterLinksHeading, List, ListItem, Wrapper } from './styled';
-import { useJumpTo } from '../../../hooks/route';
+import { useJumpTo } from '../../../hooks/useJumpTo';
 import { links as pageList } from '../../../data/content';
 
 const pages = pageList.filter(({ route }) => route.charAt(0) === '/');

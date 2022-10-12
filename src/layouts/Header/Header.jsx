@@ -2,7 +2,7 @@ import { forwardRef } from 'react';
 import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
 
-import { useHideHeaderByScrollDown } from '../../hooks/component';
+import { useHideHeaderByScrollDown } from '../../hooks/useHideHeaderByScrollDown';
 
 import { Content } from './styled';
 import { Nav } from './Nav';

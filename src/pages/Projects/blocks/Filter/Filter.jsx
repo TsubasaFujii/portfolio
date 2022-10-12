@@ -1,11 +1,11 @@
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 
-import { useControlVisibility } from '../../../../hooks/component';
 
 import { FilterButton, FilterInnerWrapper, FilterWrapper } from './styled';
 import Modal from './Modal';
 import { Icon, Overlay } from '../../../../components';
+import useControlVisibility from '../../../../hooks/useControlVisibility';
 
 export default function Filter(props) {
     const { updateFilterBy, projectTotal, isActive, value } = props;
