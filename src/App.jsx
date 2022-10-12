@@ -1,27 +1,29 @@
-import { useRef } from 'react';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Root from './layouts/Root';
+import Home from './pages/Home';
+import PageNotFound from './pages/PageNotFound';
+import Projects from './pages/Projects';
 
-import { ThemeProvider } from './context/ThemeProvider';
-import GlobalStyles from './components/styles/GlobalStyles.styled';
-
-import { useTrackViewport } from './hooks/useTrackViewport';
-import { links } from './data/content';
-
-import Header from './layouts/Header';
-import Main from './layouts/Main';
-import Footer from './layouts/Footer';
-
+const router = createBrowserRouter([
+    {
+        path: '/',
+        element: <Root />,
+        errorElement: <PageNotFound />,
+        children: [
+            {
+                path: '',
+                element: <Home />
+            },
+            {
+                path: 'projects',
+                element: <Projects />
+            },
+        ]
+    }
+])
 function App() {
-    const headerRef = useRef(null);
-    const { currentSection, refs } = useTrackViewport(links);
-    const { contactRef } = refs;
-
     return (
-        <ThemeProvider>
-            <GlobalStyles />
-            <Header ref={headerRef} current={currentSection} links={links} />
-            <Main />
-            <Footer contactRef={contactRef} />
-        </ThemeProvider>
+        <RouterProvider router={router} />
     );
 }
 
