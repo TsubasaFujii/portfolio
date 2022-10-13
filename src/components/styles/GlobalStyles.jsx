@@ -209,6 +209,7 @@ const StyledGlobalStyle = createGlobalStyle`
     ///
 
     body,
+    a,
     a:visited {
         color: ${({ theme }) => theme.fontColor};
     }
