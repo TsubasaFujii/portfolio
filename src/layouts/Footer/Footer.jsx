@@ -1,4 +1,3 @@
-import { useContext } from 'react';
 import PropTypes from 'prop-types';
 
 import ContactForm from './ContactForm';
@@ -6,17 +5,15 @@ import { Icon } from '../../components';
 import { FooterContent, FooterWrapper, SnsIcon, SocialMedia } from './styled';
 
 import { socialMedia } from '../../data/content';
-import { ThemeContext } from '../../context';
 import { openInNewTabTo } from '../../js/window';
 
 import FooterLinks from './FooterLinks/FooterLinks';
 
 export default function Footer(props) {
     const { contactRef } = props;
-    const { currentTheme } = useContext(ThemeContext);
 
     return (
-        <FooterWrapper $currentTheme={currentTheme}>
+        <FooterWrapper>
             <FooterContent>
                 <FooterLinks />
                 <ContactForm contactRef={contactRef} />

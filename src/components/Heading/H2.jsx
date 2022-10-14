@@ -1,8 +1,6 @@
-import { useContext } from 'react';
 import PropTypes from 'prop-types';
 
 import { H2Wrapper } from './styled';
-import { ThemeContext } from '../../context';
 
 const headingMotion = {
     slideIn: { x: '-1rem', opacity: 0 },
@@ -12,11 +10,9 @@ const headingMotion = {
 
 export default function H2(props) {
     const { isVisible, children } = props;
-    const { currentTheme } = useContext(ThemeContext);
 
     return (
         <H2Wrapper
-            $currentTheme={currentTheme}
             animate={isVisible ? 'hidden' : 'slideIn'}
             variants={headingMotion}
             transition={{

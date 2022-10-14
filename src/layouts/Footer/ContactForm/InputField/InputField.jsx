@@ -10,7 +10,7 @@ export default function InputField(props) {
     const { currentTheme } = useContext(ThemeContext);
 
     return (
-        <InputFieldWrapper>
+        <InputFieldWrapper $currentTheme={currentTheme}>
             <motion.label
                 htmlFor={item}
                 initial='init'
@@ -23,14 +23,12 @@ export default function InputField(props) {
                 item === 'message' ?
                     <Textarea
                         id='message'
-                        $currentTheme={currentTheme}
                         value={value}
                         onChange={handleInput}
                         onFocus={handleOnFocus} />
                     :
                     <Input
                         id={item}
-                        $currentTheme={currentTheme}
                         value={value}
                         onChange={handleInput}
                         invalid={isError}
