@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Button } from '../../../../../components';
-
-import InputField from '../InputField/InputField';
+import { InputField } from './InputField';
 import { FormWrapper } from './styled';
 
 export default function Form() {
