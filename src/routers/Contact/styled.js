@@ -5,6 +5,7 @@ import { devices } from '../../static/viewport.js';
 export const Wrapper = styled(Section)`
     min-height: max-content;
     margin-top: 2rem;
+    align-items: center;
 
     @media screen and (${devices.tablet}) {
         min-height: 80vh;

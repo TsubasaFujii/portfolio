@@ -71,8 +71,7 @@ const StyledGlobalStyle = createGlobalStyle`
     footer {
         width: 100vw;
         margin-top: ${({ theme }) => theme.spacing.gap};
-        padding: ${({ theme }) => `${theme.spacing.gap} ${theme.spacing.md} ${theme.spacing.md}`};
-        min-height: 50vh;
+        padding: ${({ theme }) => theme.spacing.md};
 
         z-index: 300;
     }

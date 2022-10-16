@@ -23,7 +23,7 @@ export const FormWrapper = styled.form.attrs(() => ({
 
 export const Notification = styled.div`
     width: 100%;
-    height: 3rem;
+    min-height: 3rem;
     padding: 0.5rem 0;
     
 `;

@@ -9,8 +9,6 @@ export const FormHeading = styled(Heading).attrs(() => ({
 `;
 
 export const Wrapper = styled.div`
-    width: 100%;
-
     display: flex;
     flex-direction: column;
     gap: ${({ theme }) => theme.spacing.sm};

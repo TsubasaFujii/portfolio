@@ -2,27 +2,11 @@ import styled from 'styled-components';
 
 import { FlexRow } from '../../components';
 
-import { devices } from '../../static/viewport.js';
-
 export const FooterWrapper = styled.footer`
     display: flex;
     flex-direction: column;
-    gap: ${({ theme }) => theme.spacing.lg};
+    gap: ${({ theme }) => theme.spacing.sm};
     align-items: center;
-`;
-
-export const FooterContent = styled(FlexRow)`
-    gap: ${({ theme }) => theme.spacing.lg};
-    flex-wrap: wrap-reverse;
-    align-items: flex-start;
-
-    @media screen and (${devices.tablet}) {
-        flex-wrap: nowrap;
-    }
-
-    @media screen and (${devices.desktopL}) {
-        width: ${({theme}) =>theme.max.width}
-    }
 `;
 
 export const SocialMedia = styled(FlexRow)`

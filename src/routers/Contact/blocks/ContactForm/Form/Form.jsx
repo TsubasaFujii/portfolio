@@ -35,7 +35,7 @@ export default function Form() {
         } else if (emailInvalidEl) {
             return 'Please enter a valid email address'
         } else if (isServerError) {
-            return 'Sorry, something wrong with the server. Please try to send again.'
+            return 'Sorry, something went wrong and couldn\'t send the message.\n Please try again.'
         }
         return;
     }, [isValid, isServerError, hasFocused]);
@@ -76,15 +76,16 @@ export default function Form() {
         event.preventDefault();
         const message = new FormData(formRef.current);
         setIsSending(true);
+
         try {
-            await axios.post('http://localhost:4000/send', message);
+            // eslint-disable-next-line
+            await axios.post(process.env.REACT_APP_FORM_API_URL, message);
             if (isServerError) {
                 setIsServerError(false);
             }
             setIsSending(false);
             resetStates();
         } catch {
-            console.log('Server error');
             setIsServerError(true);
         }
     }
