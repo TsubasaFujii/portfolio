@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
-import { Wrapper } from './styled';
 import { H2, NewLine, Content } from '../../../../components/';
 import Introduction from './Introduction';
+import { Wrapper } from './styled';
 
 export default function AboutMe() {
     const [isVisible, setIsVisible] = useState(false);

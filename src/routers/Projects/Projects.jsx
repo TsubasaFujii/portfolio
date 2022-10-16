@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 
+import { projectsData } from '../../static/content.js';
+
 import { GridView } from './blocks/GridView';
 import Filter from './blocks/Filter';
 
-import { projectsData } from '../../data/content';
 
 const TOOLS = projectsData
     .reduce((result, current) => result.concat(current.tools), [])

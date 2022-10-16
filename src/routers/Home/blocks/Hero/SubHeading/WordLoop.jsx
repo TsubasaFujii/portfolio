@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
-import { selfIntroduction } from '../../../../../data/content';
+
+import { selfIntroduction } from '../../../../../static/content.js';
 
 const infoMotion = {
     show: {

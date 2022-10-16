@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import { useInView } from 'react-intersection-observer';
-import { Button, GroupedIcons, P } from '../../../../../components';
 
 import { openInNewTabTo } from '../../../../../js/window';
 
+import { Button, GroupedIcons, P } from '../../../../../components';
 import { CardWrapper, ContentWrapper, Thumbnail } from './styled';
 
 export default function Card(props) {

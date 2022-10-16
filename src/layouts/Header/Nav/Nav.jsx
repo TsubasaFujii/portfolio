@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 
 import { useJumpTo } from '../../../hooks/useJumpTo';
+import { scrollTo } from '../../../js/window';
 
 import { MenuItem, Navigation } from './styled';
-import { scrollTo } from '../../../js/window';
 
 export default function Nav(props) {
     const { current, links } = props;

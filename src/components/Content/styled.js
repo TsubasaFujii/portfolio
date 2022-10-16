@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { FlexColumn } from '../Flex';
 
-import { devices } from '../../data/viewport';
+import { devices } from '../../static/viewport.js';
 
 export const Wrapper = styled(FlexColumn)`
     justify-content: center;

@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
-import { Button, GroupedIcons, H3, Text } from '../../../../../components';
 
 import { openInNewTabTo } from '../../../../../js/window';
 
+import { Button, GroupedIcons, H3, Text } from '../../../../../components';
 import { Details, ProjectWrapper, Thumbnail } from './styled';
 
 export default function Project(props) {

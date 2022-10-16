@@ -6,7 +6,7 @@ import { Input, InputFieldWrapper, Textarea } from './styled';
 import { ThemeContext } from '../../../../../../context';
 
 export default function InputField(props) {
-    const { item, value, handleInput, isError, isFocused, handleOnFocus } = props;
+    const { item, value, handleInput, isError, hasFocused, handleOnFocus } = props;
     const { currentTheme } = useContext(ThemeContext);
 
     return (
@@ -15,7 +15,7 @@ export default function InputField(props) {
                 htmlFor={item}
                 initial='init'
                 animate={{
-                    y: isFocused ? 0 : 'calc(100% + 0.5rem)',
+                    y: hasFocused ? 0 : 'calc(100% + 0.5rem)',
                 }}>
                 {item}*
             </motion.label>
@@ -32,7 +32,7 @@ export default function InputField(props) {
                         value={value}
                         onChange={handleInput}
                         invalid={isError}
-                        onFocus={handleOnFocus} />
+                        onFocus={item === 'email' ? handleOnFocus : null} />
             }
         </InputFieldWrapper >
     )
@@ -42,7 +42,7 @@ InputField.propTypes = {
     item: PropTypes.string,
     value: PropTypes.string,
     isError: PropTypes.bool,
-    isFocused: PropTypes.bool,
+    hasFocused: PropTypes.bool,
     handleOnFocus: PropTypes.func,
     handleInput: PropTypes.func,
 };

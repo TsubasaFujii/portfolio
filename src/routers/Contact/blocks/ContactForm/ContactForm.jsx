@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 import Form from './Form';
-import { FormHeading, Wrapper } from './styled';
+import { FormHeading, Wrapper, Text } from './styled';
 
 export default function ContactForm(props) {
     const { contactRef } = props;
@@ -11,6 +11,7 @@ export default function ContactForm(props) {
             <FormHeading>
                 Contact me
             </FormHeading>
+            <Text>Thank you, I&#39;ll reply you as soon as possible!</Text>
             <Form />
         </Wrapper>
     )

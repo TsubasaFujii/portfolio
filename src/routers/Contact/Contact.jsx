@@ -1,11 +1,13 @@
-import { Section } from '../../components';
 import ContactForm from './blocks/ContactForm';
+import { Wrapper } from './styled';
 
 
 export default function Contact() {
     return (
-        <Section>
-            <ContactForm />
-        </Section>
+        <main>
+            <Wrapper>
+                <ContactForm />
+            </Wrapper>
+        </main>
     )
 }

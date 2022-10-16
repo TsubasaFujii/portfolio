@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { useInView } from 'react-intersection-observer';
+
 import { TextWrapper } from './styled';
 
 export default function Text(props) {

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { devices } from '../../data/viewport';
+import { devices } from '../../static/viewport.js';
 
 export const Content = styled.div`
     width: 100%;

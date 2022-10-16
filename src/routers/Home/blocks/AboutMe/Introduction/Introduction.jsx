@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 
-import profile from '../../../../../assets/images/profile.webp';
+import { projectsData, selfIntroduction } from '../../../../../static/content.js';
 
 import { Image, Heading, Text, GroupedIcons } from '../../../../../components';
 import { ContentWrapper } from './styled';
 
-import { projectsData, selfIntroduction } from '../../../../../data/content';
+import profile from '../../../../../assets/images/profile.webp';
 
 const TOOLS = projectsData
     .reduce((result, current) => result.concat(current.tools), [])

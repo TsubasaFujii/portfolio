@@ -1,12 +1,12 @@
 import { useNavigate } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
 
-import { projectsData } from '../../../../data/content';
+import { projectsData } from '../../../../static/content.js';
 import { scrollToTop } from '../../../../js/window';
 
 import Project from './Project';
-import { List, Wrapper } from './styled';
 import { Button, Content, H2 } from '../../../../components';
+import { List, Wrapper } from './styled';
 
 export default function HighlightedProjects() {
     const { ref, inView } = useInView({

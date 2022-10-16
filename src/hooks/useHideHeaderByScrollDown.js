@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { devices } from '../data/viewport';
+import { devices } from '../static/viewport.js';
 
 export function useHideHeaderByScrollDown() {
     // For smaller screen

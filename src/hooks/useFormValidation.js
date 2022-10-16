@@ -8,9 +8,9 @@ const init = {
 };
 
 export default function useFormValidation() {
-    const [isError, dispatch] = useReducer(validateInput, init);
+    const [isValid, dispatch] = useReducer(validateInput, init);
     return {
-        isError,
+        isValid,
         dispatch
     }
 }

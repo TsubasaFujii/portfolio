@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
-import { devices } from '../../data/viewport';
+import { devices } from '../../static/viewport.js';
 
 import externalIcon from '../../assets/icons/external.svg';
 

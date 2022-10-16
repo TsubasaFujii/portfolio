@@ -1,8 +1,9 @@
+import { createContext } from 'react';
 import PropTypes from 'prop-types';
+import { ThemeProvider as StyledThemeProvider } from 'styled-components';
+
 import { useCurrentTheme } from '../hooks/useCurrentTheme';
 import { getPointingMethod } from '../js/device';
-import { createContext } from 'react';
-import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 
 const spacing = {
     xs: '0.5rem',

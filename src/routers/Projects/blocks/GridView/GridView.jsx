@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 
 import { Card } from './Card';
-import { Grid } from './styled';
 import { Section } from '../../../../components';
+import { Grid } from './styled';
 
 export default function GridView(props) {
     const { projectList } = props;

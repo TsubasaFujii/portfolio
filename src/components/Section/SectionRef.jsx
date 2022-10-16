@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { forwardRef } from 'react';
+
 import { Wrapper } from './styled';
 
 export const SectionRef = forwardRef((props, ref) => {

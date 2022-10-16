@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Heading } from '../../../../components';
+import { Heading, P } from '../../../../components';
 
 export const FormHeading = styled(Heading).attrs(() => ({
     as: 'h3',
@@ -14,4 +14,8 @@ export const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     gap: ${({ theme }) => theme.spacing.sm};
+`;
+
+export const Text = styled(P)`
+    text-align: center;
 `;

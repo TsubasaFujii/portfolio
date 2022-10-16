@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Content } from '../../../../components';
 
-import { devices } from '../../../../data/viewport';
+import { devices } from '../../../../static/viewport.js';
 
 export const Grid = styled(Content)`
     min-height: 50vh;

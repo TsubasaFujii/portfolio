@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { FlexRow } from '../../components';
 
-import { devices } from '../../data/viewport';
+import { devices } from '../../static/viewport.js';
 
 export const FooterWrapper = styled.footer`
     display: flex;

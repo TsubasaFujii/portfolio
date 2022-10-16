@@ -10,7 +10,7 @@ export function validateInput(state, action) {
 
     }
 
-    if (!isValid) {
+    if (isValid) {
         return {
             ...state,
             [type]: true

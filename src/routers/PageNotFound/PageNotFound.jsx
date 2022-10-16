@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { useTheme } from 'styled-components';
+
 import { H3, Large } from '../../components';
 import { Row, Wrapper } from './styled';
 

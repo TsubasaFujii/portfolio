@@ -1,18 +1,20 @@
 import { useContext } from 'react';
 import PropTypes from 'prop-types';
 
-import Label from './Label';
-import ButtonIcon from './ButtonIcon';
-import { ContentWrapper, Wrapper } from './styled';
-import { Icon } from '../Icon';
 import { ThemeContext } from '../../context';
 
+import Label from './Label';
+import ButtonIcon from './ButtonIcon';
+import { Icon } from '../Icon';
+import { ContentWrapper, Wrapper } from './styled';
+
 export default function Button(props) {
-    const { label, disabled, icon, align, onClick, flat, secondary } = props;
+    const { label, disabled, icon, align, onClick, flat, secondary, className } = props;
     const { currentTheme, pointingMethod } = useContext(ThemeContext);
 
     return (
         <Wrapper
+            className={className}
             align={align}
             $currentTheme={currentTheme}
             disabled={disabled}
@@ -36,6 +38,7 @@ Button.propTypes = {
     secondary: PropTypes.bool,
     icon: PropTypes.string,
     align: PropTypes.string,
+    className: PropTypes.string,
     onClick: PropTypes.func,
     flat: PropTypes.bool
 };

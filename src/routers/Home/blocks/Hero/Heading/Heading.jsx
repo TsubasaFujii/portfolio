@@ -1,6 +1,7 @@
+import { headingText } from '../../../../../static/content.js';
+
 import { NewLine } from '../../../../../components';
 import { H1, Letter } from './styled';
-import { headingText } from '../../../../../data/content';
 
 // Motions
 const headingMotion = {

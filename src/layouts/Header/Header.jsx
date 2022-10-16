@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 
 import { useHideHeaderByScrollDown } from '../../hooks/useHideHeaderByScrollDown';
 
-import { Content } from './styled';
 import { Nav } from './Nav';
-import ThemeSwitch from './ThemeSwitch/ThemeSwitch';
+import ThemeSwitch from './ThemeSwitch';
+import { Content } from './styled';
 
 export const Header = forwardRef((props, ref) => {
     const { toggleTheme, current, links } = props;

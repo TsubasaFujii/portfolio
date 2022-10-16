@@ -1,109 +1,114 @@
+import { useMemo, useRef, useState } from 'react';
 import axios from 'axios';
-import { useMemo } from 'react';
-import { useEffect, useState } from 'react';
-import { Button } from '../../../../../components';
+
 import useFormValidation from '../../../../../hooks/useFormValidation';
+
+import { P } from '../../../../../components';
 import { InputField } from './InputField';
-import { FormWrapper } from './styled';
+import { FormWrapper, FormButton, Notification } from './styled';
+
+const FORM_FIELDS = ['name', 'email', 'message'];
 
 export default function Form() {
-    const [buttonLabel, setButtonLabel] = useState('Send Message');
-    const { isError, dispatch: validate } = useFormValidation();
+    const [isSending, setIsSending] = useState(false);
+    const [isServerError, setIsServerError] = useState(false);
+    const { isValid, dispatch: validate } = useFormValidation();
     const [inputValues, setInputValues] = useState({
         name: '',
         email: '',
         message: '',
     });
-    const [isFocused, setIsFocused] = useState({
+    const [hasFocused, setHasFocused] = useState({
         name: false,
         email: false,
         message: false,
     });
-    const [isReady, setIsReady] = useState(false);
-    const hasError = useMemo(() => Object.values(isError).some(value => value), [isError]);
+    const formRef = useRef(null);
+    const hasError = useMemo(() => Object.values(isValid).some(value => !value), [isValid]);
     const hasData = useMemo(() => Object.values(inputValues).every(value => value), [inputValues]);
+    const notificationMessage = useMemo(() => {
+        const emailInvalidEl = document.querySelector('input#email:not(:placeholder-shown):not(:focus):invalid')
+        if (hasFocused.name && !isValid.name) {
+            return 'Please provide your name'
+        } else if (hasFocused.message && !isValid.message) {
+            return 'Please provide message'
+        } else if (emailInvalidEl) {
+            return 'Please enter a valid email address'
+        } else if (isServerError) {
+            return 'Sorry, something wrong with the server. Please try to send again.'
+        }
+        return;
+    }, [isValid, isServerError, hasFocused]);
 
     function handleInput(event) {
         const { target } = event;
+        setInputValues(prev => ({
+            ...prev,
+            [target.id]: target.value
+        }));
         validate({
             type: target.id,
             value: target.value
         });
-        setInputValues(prev => ({
-            ...prev,
-            [event.target.id]: event.target.value
-        }));
     }
 
     function handleOnFocus(event) {
-        setIsFocused(prev => ({
+        setHasFocused(prev => ({
             ...prev,
             [event.target.id]: true,
         }))
     }
 
     function resetStates() {
-        setIsReady(false);
         setInputValues({
             name: '',
             email: '',
             message: '',
         });
-        setIsFocused({
+        setHasFocused({
             name: false,
             email: false,
             message: false,
         });
     }
 
-    async function handleOnClick() {
+    async function handleOnClick(event) {
+        event.preventDefault();
+        const message = new FormData(formRef.current);
+        setIsSending(true);
         try {
-            await axios.post('https://form-api.onrender.com', inputValues);
-
-            setButtonLabel('Thank you');
-            setTimeout(() => setButtonLabel('Send Message'), 1500);
+            await axios.post('http://localhost:4000/send', message);
+            if (isServerError) {
+                setIsServerError(false);
+            }
+            setIsSending(false);
             resetStates();
         } catch {
-            console.log('server error');
+            console.log('Server error');
+            setIsServerError(true);
         }
     }
 
-    useEffect(() => {
-        if (!hasError && hasData) {
-            setIsReady(true);
-        } else {
-            setIsReady(false);
-        }
-    }, [isError, inputValues]);
-
     return (
-        <FormWrapper>
-            <InputField
-                item='name'
-                value={inputValues.name}
-                isFocused={isFocused.name}
-                handleOnFocus={handleOnFocus}
-                handleInput={handleInput}
-                isError={isError.name} />
-            <InputField
-                item='email'
-                value={inputValues.email}
-                isFocused={isFocused.email}
-                handleOnFocus={handleOnFocus}
-                handleInput={handleInput}
-                isError={isError.email} />
-            <InputField
-                item='message'
-                value={inputValues.message}
-                isFocused={isFocused.message}
-                handleOnFocus={handleOnFocus}
-                handleInput={handleInput}
-                isError={isError.message} />
-            <Button
+        <FormWrapper ref={formRef}>
+            {FORM_FIELDS.map(field => (
+                <InputField
+                    key={field}
+                    item={field}
+                    value={inputValues[field]}
+                    hasFocused={hasFocused[field]}
+                    handleOnFocus={handleOnFocus}
+                    handleInput={handleInput}
+                    isValid={!isValid[field]} />
+            ))}
+            <Notification>
+                <P>{notificationMessage}</P>
+            </Notification>
+            <FormButton
                 icon='paperPlane'
-                label={buttonLabel}
+                label={isSending ? 'Sending...' : 'Send Message'}
                 onClick={handleOnClick}
-                disabled={!isReady}
+                disabled={hasError || !hasData}
                 flat />
         </FormWrapper>
     )

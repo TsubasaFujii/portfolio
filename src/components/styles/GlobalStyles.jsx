@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 import { createGlobalStyle } from 'styled-components';
-import { ThemeContext } from '../../context';
 
-import { devices } from '../../data/viewport';
+import { ThemeContext } from '../../context';
+import { devices } from '../../static/viewport.js';
 
 const StyledGlobalStyle = createGlobalStyle`
     *,
