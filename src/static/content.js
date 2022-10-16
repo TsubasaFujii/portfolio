@@ -37,8 +37,8 @@ export const selfIntroduction = {
 export const projectsData = [
     {
         title: 'My portfolio',
-        github: 'https://github.com/TsubasaFujii/',
-        production: 'https://github.com/TsubasaFujii/',
+        github: 'https://github.com/TsubasaFujii/portfolio',
+        production: 'https://tsubasafujii.com',
         thumbnail: portfolioGif,
         description: 'This portfolio. I designed from scratch. I used framer-motion for animation. Further details on GitHub.',
         tools: ['react', 'css', 'javaScript'],
