@@ -6,10 +6,7 @@ export const CardWrapper = styled.article`
     width: 100%;
     height: 100%;
 
-    background: ${({ $currentTheme }) =>
-        $currentTheme === 'dark' ?
-            'rgba(255, 255, 255, 0.1)' :
-            'rgba(255, 255, 255, 0.4)'};
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 1rem;
     overflow: hidden;
 `;
