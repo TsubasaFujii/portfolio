@@ -3,11 +3,9 @@ import PropTypes from 'prop-types';
 import Form from './Form';
 import { FormHeading, Wrapper } from './styled';
 
-export default function ContactForm(props) {
-    const { contactRef } = props;
-
+export default function ContactForm() {
     return (
-        <Wrapper ref={contactRef}>
+        <Wrapper>
             <FormHeading>
                 Contact me
             </FormHeading>

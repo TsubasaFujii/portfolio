@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 import ContactForm from './ContactForm';
 import { Icon } from '../../components';
 import { FooterContent, FooterWrapper, SnsIcon, SocialMedia } from './styled';
@@ -9,14 +7,12 @@ import { openInNewTabTo } from '../../js/window';
 
 import FooterLinks from './FooterLinks/FooterLinks';
 
-export default function Footer(props) {
-    const { contactRef } = props;
-
+export default function Footer() {
     return (
         <FooterWrapper>
             <FooterContent>
                 <FooterLinks />
-                <ContactForm contactRef={contactRef} />
+                <ContactForm />
             </FooterContent>
             <SocialMedia>
                 {
@@ -33,7 +29,3 @@ export default function Footer(props) {
         </FooterWrapper>
     )
 }
-
-Footer.propTypes = {
-    contactRef: PropTypes.func,
-};

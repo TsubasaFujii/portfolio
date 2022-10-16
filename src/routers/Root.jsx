@@ -11,15 +11,14 @@ import Footer from '../layouts/Footer';
 
 export default function Root() {
     const headerRef = useRef(null);
-    const { currentSection, refs } = useTrackViewport(links);
-    const { contactRef } = refs;
+    const { currentSection } = useTrackViewport(links);
     return (
 
         <ThemeProvider>
             <GlobalStyles />
             <Header ref={headerRef} current={currentSection} links={links} />
             <Outlet />
-            <Footer contactRef={contactRef} />
+            <Footer />
         </ThemeProvider>
     )
 }
