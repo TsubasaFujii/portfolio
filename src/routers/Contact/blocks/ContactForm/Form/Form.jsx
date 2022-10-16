@@ -1,17 +1,16 @@
 import { useMemo, useRef, useState } from 'react';
-import axios from 'axios';
 
 import useFormValidation from '../../../../../hooks/useFormValidation';
 
 import { P } from '../../../../../components';
 import { InputField } from './InputField';
 import { FormWrapper, FormButton, Notification } from './styled';
+import useFormApi from '../../../../../hooks/useFormApi';
 
 const FORM_FIELDS = ['name', 'email', 'message'];
 
 export default function Form() {
-    const [isSending, setIsSending] = useState(false);
-    const [isServerError, setIsServerError] = useState(false);
+
     const { isValid, dispatch: validate } = useFormValidation();
     const [inputValues, setInputValues] = useState({
         name: '',
@@ -24,6 +23,7 @@ export default function Form() {
         message: false,
     });
     const formRef = useRef(null);
+    const { isSending, isServerError, sendMessage } = useFormApi(formRef);
     const hasError = useMemo(() => Object.values(isValid).some(value => !value), [isValid]);
     const hasData = useMemo(() => Object.values(inputValues).every(value => value), [inputValues]);
     const notificationMessage = useMemo(() => {
@@ -73,20 +73,9 @@ export default function Form() {
     }
 
     async function handleOnClick(event) {
-        event.preventDefault();
-        const message = new FormData(formRef.current);
-        setIsSending(true);
-
-        try {
-            // eslint-disable-next-line
-            await axios.post(process.env.REACT_APP_FORM_API_URL, message);
-            if (isServerError) {
-                setIsServerError(false);
-            }
-            setIsSending(false);
+        const response = await sendMessage(event);
+        if (response === 200) {
             resetStates();
-        } catch {
-            setIsServerError(true);
         }
     }
 
