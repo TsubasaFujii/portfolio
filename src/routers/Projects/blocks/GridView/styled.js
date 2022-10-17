@@ -15,7 +15,6 @@ export const Grid = styled(Content)`
 
     @media screen and (${devices.tablet}) {
         grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
-        //max-width: 100%;
     }
     @media screen and (${devices.desktop}) {
         gap: ${({ theme }) => `${theme.spacing.gap} ${theme.spacing.lg}`};

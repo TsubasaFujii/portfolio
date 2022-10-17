@@ -27,6 +27,15 @@ export const InputFieldWrapper = styled.div`
         text-transform: capitalize;
     }
 
+    & > ${Input}:not(:placeholder-shown):not(:focus):invalid {
+        background: #f59456;
+    }
+
+    & > ${Input}::placeholder,
+    & > ${Textarea}::placeholder {
+        text-transform: capitalize;
+    }
+
     & > ${Input},
     & > ${Textarea} {
         z-index: 250;
@@ -36,14 +45,5 @@ export const InputFieldWrapper = styled.div`
         $currentTheme === 'dark' ?
             theme.colors.white :
             theme.colors.grey};
-    }
-
-    & > ${Input}::placeholder,
-    & > ${Textarea}::placeholder {
-        text-transform: capitalize;
-    }
-
-    & > ${Input}:not(:placeholder-shown):not(:focus):invalid {
-        background: #f59456;
     }
 `;
