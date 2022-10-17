@@ -214,7 +214,8 @@ const StyledGlobalStyle = createGlobalStyle`
 
     body,
     a,
-    a:visited {
+    a:visited,
+    label {
         color: ${({ theme }) => theme.fontColor};
     }
 
