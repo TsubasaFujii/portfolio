@@ -1,15 +1,17 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import Root from './routers/Root';
+import Layout from './routers/Layout';
 import PageNotFound from './routers/PageNotFound';
 import Home from './routers/Home';
 import Projects from './routers/Projects';
 import Contact from './routers/Contact';
+import { ThemeProvider } from './context';
+import { GlobalStyles } from './components/styles/GlobalStyles';
 
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <Root />,
+        element: <Layout />,
         errorElement: <PageNotFound />,
         children: [
             {
@@ -25,10 +27,14 @@ const router = createBrowserRouter([
             },
         ]
     }
-])
+]);
+
 function App() {
     return (
-        <RouterProvider router={router} />
+        <ThemeProvider>
+            <GlobalStyles />
+            <RouterProvider router={router} />
+        </ThemeProvider>
     );
 }
 
