@@ -28,11 +28,8 @@ const StyledGlobalStyle = createGlobalStyle`
     }
 
     #root {
-        width: 100vw;
+        width: 100%;
         min-height: 100vh;
-
-        display: flex;
-        flex-direction: column;
     }
 
     header {
