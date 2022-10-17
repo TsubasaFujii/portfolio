@@ -29,6 +29,10 @@ const StyledGlobalStyle = createGlobalStyle`
 
     #root {
         width: 100%;
+        min-height: 100vh;
+
+        display: flex;
+        flex-direction: column;
     }
 
     header {
@@ -70,6 +74,7 @@ const StyledGlobalStyle = createGlobalStyle`
 
     footer {
         width: 100vw;
+        flex-grow: 1;
         margin-top: ${({ theme }) => theme.spacing.gap};
         padding: ${({ theme }) => theme.spacing.md};
 
