@@ -98,7 +98,7 @@ export default function Form() {
                 icon='paperPlane'
                 label={isSending ? 'Sending...' : 'Send Message'}
                 onClick={handleOnClick}
-                disabled={hasError || !hasData}
+                disabled={hasError || !hasData || isSending}
                 flat />
         </FormWrapper>
     )
