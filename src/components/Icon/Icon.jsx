@@ -136,6 +136,7 @@ const ICONS = {
 export default function Icon(props) {
     const { name, className } = props;
     const { path, fill, stroke, width } = ICONS[name];
+
     return (
         <Wrapper className={className}>
             <svg
