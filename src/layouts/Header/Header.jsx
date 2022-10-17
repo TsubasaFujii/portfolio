@@ -8,6 +8,15 @@ import { Nav } from './Nav';
 import ThemeSwitch from './ThemeSwitch';
 import { Content } from './styled';
 
+const variants = {
+    hidden: {
+        y: '-100%'
+    },
+    shown: {
+        y: 0,
+    }
+}
+
 export const Header = forwardRef((props, ref) => {
     const { toggleTheme, current, links } = props;
     const { isHidden } = useHideHeaderByScrollDown();
@@ -15,12 +24,8 @@ export const Header = forwardRef((props, ref) => {
     return (
         <motion.header
             ref={ref}
-            animate={{
-                y: isHidden ? '-100%' : 0,
-                transition: {
-                    duration: 0.3
-                }
-            }}>
+            animate={isHidden ? 'hidden' : 'shown'}
+            variants={variants}>
             <Content>
                 <Nav current={current} links={links} />
                 <ThemeSwitch toggleTheme={toggleTheme} />
