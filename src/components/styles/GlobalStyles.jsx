@@ -130,8 +130,11 @@ const StyledGlobalStyle = createGlobalStyle`
     }
 
     h2 {
-        font-size: 4em;
+        font-size: 3.5em;
         @media screen and (${devices.mobileL}) {
+            font-size: 4em;
+        }
+        @media screen and (${devices.tablet}) {
             font-size: 5.6em;
         }
     }
