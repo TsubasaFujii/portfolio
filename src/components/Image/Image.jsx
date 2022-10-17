@@ -21,8 +21,10 @@ export default function Image(props) {
                 animate={{
                     y: inView ? 0 : '-2rem',
                     opacity: inView ? 1 : 0,
-                    transitionDelay: '0.1s',
-                    transitionDuration: '0.3s'
+                    transition: {
+                        delay: 0.1,
+                        duration: 0.3
+                    }
                 }}
                 $clipped={clipped}
                 $landscape={landscape} />
