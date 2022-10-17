@@ -30,6 +30,9 @@ const StyledGlobalStyle = createGlobalStyle`
     #root {
         width: 100%;
         min-height: 100vh;
+
+        display: grid;
+        grid-template-rows: repeat(2, max-content) 1fr;
     }
 
     header {
@@ -70,6 +73,7 @@ const StyledGlobalStyle = createGlobalStyle`
     }
 
     footer {
+        align-self: end;
         width: 100vw;
         flex-grow: 1;
         margin-top: ${({ theme }) => theme.spacing.gap};
