@@ -27,12 +27,11 @@ export default function Form() {
     const hasError = useMemo(() => Object.values(isValid).some(value => !value), [isValid]);
     const hasData = useMemo(() => Object.values(inputValues).every(value => value), [inputValues]);
     const notificationMessage = useMemo(() => {
-        const emailInvalidEl = document.querySelector('input#email:not(:placeholder-shown):not(:focus):invalid')
         if (hasFocused.name && !isValid.name) {
             return 'Please provide your name'
         } else if (hasFocused.message && !isValid.message) {
             return 'Please provide message'
-        } else if (emailInvalidEl) {
+        } else if (hasFocused.email && !isValid.email) {
             return 'Please enter a valid email address'
         } else if (isServerError) {
             return 'Sorry, something went wrong and couldn\'t send the message.\n Please try again.'
@@ -78,6 +77,7 @@ export default function Form() {
             resetStates();
         }
     }
+    console.log(isValid);
 
     return (
         <FormWrapper ref={formRef}>
@@ -89,7 +89,7 @@ export default function Form() {
                     hasFocused={hasFocused[field]}
                     handleOnFocus={handleOnFocus}
                     handleInput={handleInput}
-                    isValid={!isValid[field]} />
+                    isValid={isValid[field]} />
             ))}
             <Notification>
                 <P>{notificationMessage}</P>

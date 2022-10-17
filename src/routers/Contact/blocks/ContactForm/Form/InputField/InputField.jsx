@@ -6,7 +6,7 @@ import { Input, InputFieldWrapper, Textarea } from './styled';
 import { ThemeContext } from '../../../../../../context';
 
 export default function InputField(props) {
-    const { item, value, handleInput, isError, hasFocused, handleOnFocus } = props;
+    const { item, value, handleInput, isValid, hasFocused, handleOnFocus } = props;
     const { currentTheme } = useContext(ThemeContext);
 
     return (
@@ -31,8 +31,8 @@ export default function InputField(props) {
                         id={item}
                         value={value}
                         onChange={handleInput}
-                        invalid={isError}
-                        onFocus={item === 'email' ? handleOnFocus : null} />
+                        invalid={!isValid}
+                        onFocus={handleOnFocus} />
             }
         </InputFieldWrapper >
     )
@@ -41,7 +41,7 @@ export default function InputField(props) {
 InputField.propTypes = {
     item: PropTypes.string,
     value: PropTypes.string,
-    isError: PropTypes.bool,
+    isValid: PropTypes.bool,
     hasFocused: PropTypes.bool,
     handleOnFocus: PropTypes.func,
     handleInput: PropTypes.func,
