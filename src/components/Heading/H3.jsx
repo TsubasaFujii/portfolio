@@ -13,6 +13,7 @@ export default function H3(props) {
     const { children } = props;
     const { ref, inView } = useInView({
         initialInView: false,
+        rootMargin: '0% 0% 5% 0%',
         threshold: 1,
     });
 
