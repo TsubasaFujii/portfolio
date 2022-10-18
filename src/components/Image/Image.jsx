@@ -3,6 +3,19 @@ import { useInView } from 'react-intersection-observer';
 
 import { ImageWrapper, Img } from './styled';
 
+const variants = {
+    shown: {
+        opacity: 1,
+        transition: {
+            delay: 0.1,
+            duration: 0.3
+        }
+    },
+    hidden: {
+        opacity: 0,
+    }
+}
+
 export default function Image(props) {
     const { src, alt, clipped, className, clickable, landscape } = props;
     const { ref, inView } = useInView({
@@ -18,14 +31,8 @@ export default function Image(props) {
             <Img
                 $img={src}
                 alt={alt}
-                animate={{
-                    y: inView ? 0 : '-2rem',
-                    opacity: inView ? 1 : 0,
-                    transition: {
-                        delay: 0.1,
-                        duration: 0.3
-                    }
-                }}
+                animate={inView ? 'shown' : 'hidden'}
+                variants={variants}
                 $clipped={clipped}
                 $landscape={landscape} />
         </ImageWrapper>
