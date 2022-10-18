@@ -1,17 +1,40 @@
-import { Routes, Route } from "react-router-dom";
-import GlobalStyle from "./components/styles/GlobalStyles.styled";
-import Theme from "./components/styles/Theme.styled";
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
+import Layout from './routers/Layout';
+import PageNotFound from './routers/PageNotFound';
+import Home from './routers/Home';
+import Projects from './routers/Projects';
+import Contact from './routers/Contact';
+import { ThemeProvider } from './context';
+import { GlobalStyles } from './components/styles/GlobalStyles';
+
+const router = createBrowserRouter([
+    {
+        path: '/',
+        element: <Layout />,
+        errorElement: <PageNotFound />,
+        children: [
+            {
+                path: '',
+                element: <Home />
+            },
+            {
+                path: 'projects',
+                element: <Projects />
+            }, {
+                path: 'contact',
+                element: <Contact />
+            },
+        ]
+    }
+]);
 
 function App() {
     return (
-        <Theme>
-            <GlobalStyle />
-            <Routes>
-                <Route path='/' element={<Home />} />
-                <Route path='/contact' element={<Contact />} />
-                <Route path='/projects' element={<Projects />} />
-            </Routes>
-        </Theme>
+        <ThemeProvider>
+            <GlobalStyles />
+            <RouterProvider router={router} />
+        </ThemeProvider>
     );
 }
 
