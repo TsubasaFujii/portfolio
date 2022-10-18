@@ -77,7 +77,6 @@ export default function Form() {
             resetStates();
         }
     }
-    console.log(isValid);
 
     return (
         <FormWrapper ref={formRef}>
