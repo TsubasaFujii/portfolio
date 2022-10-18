@@ -1,6 +1,6 @@
 # My Personal Portfolio
 
-This is the source code for my current portfolio. (http://tsubasafujii.com)<br />
+This is the source code for my current portfolio. (https://tsubasafujii.com)<br />
 It's built in **React** and styled by **Styled Components**.
 
 ## Design
