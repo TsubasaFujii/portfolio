@@ -3,7 +3,7 @@ jobs:
   test:
     strategy:
       matrix:
-        platform: [ubuntu-latest, macos-latest, window-lateset]
+        platform: [ubuntu-latest, macos-latest, window-latest]
     runs-on: ${{ matrix.platform }}
     steps:
       - uses: actions/checkout@v3
