@@ -2,6 +2,7 @@ import todoListGif from '../assets/projects/todolist.gif';
 import portfolioGif from '../assets/projects/portfolio.gif';
 import snakeGif from '../assets/projects/snake.gif';
 import todoListVueGif from '../assets/projects/todolist-vue.gif';
+import othelloGif from '../assets/projects/othello.gif';
 
 export const links = [
     {
@@ -45,13 +46,22 @@ export const projectsData = [
         starred: true,
         createdAt: new Date(2022, 9),  // month in index: actual month - 1
     },{
+        title: 'Othello (Reversi)',
+        github: 'https://github.com/TsubasaFujii/othello-server',
+        production: 'https://othello-client.netlify.app/',
+        thumbnail: othelloGif,
+        description: 'The board game "Othello (Reversi)". This project was started to practice Node.js and Socket.IO after I found backend programming was also fun. Communication between the server and the client is handled by socket.io.',
+        tools: ['react', 'css', 'javaScript', 'node'],
+        starred: true,
+        createdAt: new Date(2022, 9),
+    },{
         title: 'To do list (React)',
         github: 'https://github.com/TsubasaFujii/todo-list',
         production: 'https://magical-brioche-a230d9.netlify.app/',
         thumbnail: todoListGif,
         description: 'Classic to-do list that you can add and remove tasks. This is a very first react application that I build. I have vue version in the exact same design.',
         tools: ['react', 'css', 'javaScript'],
-        starred: true,
+        starred: false,
         createdAt: new Date(2022, 1),
     }, {
         title: 'Funky Snake',
