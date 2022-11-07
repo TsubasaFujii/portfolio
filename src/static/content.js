@@ -3,6 +3,7 @@ import portfolioGif from '../assets/projects/portfolio.gif';
 import snakeGif from '../assets/projects/snake.gif';
 import todoListVueGif from '../assets/projects/todolist-vue.gif';
 import othelloGif from '../assets/projects/othello.gif';
+import eCommerceGif from '../assets/projects/e-commerce.gif';
 
 export const links = [
     {
@@ -55,6 +56,15 @@ export const projectsData = [
         starred: true,
         createdAt: new Date(2022, 9),
     },{
+        title: 'Webshop',
+        github: 'https://github.com/TsubasaFujii/e-commerce-client',
+        production: 'https://wondrous-banoffee-0dad94.netlify.app/',
+        thumbnail: eCommerceGif,
+        description: 'A mock e-commerce web site. This was the final assignment for our framework course. Built with help of Fake store API and Chakra for components.',
+        tools: ['react', 'css', 'javaScript'],
+        starred: true,
+        createdAt: new Date(2021, 3),
+    },{
         title: 'To do list (React)',
         github: 'https://github.com/TsubasaFujii/todo-list',
         production: 'https://magical-brioche-a230d9.netlify.app/',
@@ -70,7 +80,7 @@ export const projectsData = [
         thumbnail: snakeGif,
         description: 'Snake game. Built in vanilla JavaScript and html. It allows to play up to 2 players. Snakes are controlled by keyboard.',
         tools: ['html', 'css', 'javaScript'],
-        starred: true,
+        starred: false,
         createdAt: new Date(2021, 10),
     }, {
         title: 'To do list (Vue)',
