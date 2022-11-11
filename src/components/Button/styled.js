@@ -21,9 +21,11 @@ export const Wrapper = styled(motion.button)`
         $secondary ?
             theme.colors.white :
             theme.colors.primary50};
-
-    text-transform: capitalize;
     cursor: pointer;
+
+    color: ${({theme}) => theme.colors.black};
+    text-transform: capitalize;
+    
     transition: all 0.3s;
 
     &:hover {
