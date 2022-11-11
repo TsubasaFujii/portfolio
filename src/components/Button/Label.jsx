@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
+import { LabelWrapper } from './styled';
 
 // calc((1.5rem + 0.6rem) /2) 1.5rem = icon width & gap
 const labelMotion = {
@@ -14,13 +14,13 @@ const labelMotion = {
 export default function Label(props) {
     const { text } = props;
     return (
-        <motion.div
+        <LabelWrapper
             transition={{
                 duration: 0.3,
             }}
             variants={labelMotion}>
             {text}
-        </motion.div>
+        </LabelWrapper>
     );
 }
 

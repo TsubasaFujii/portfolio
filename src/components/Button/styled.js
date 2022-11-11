@@ -62,3 +62,7 @@ export const iconMotion = {
         opacity: 1,
     },
 };
+
+export const LabelWrapper = styled(motion.div)`
+    color: ${({theme}) => theme.colors.black};
+`;
