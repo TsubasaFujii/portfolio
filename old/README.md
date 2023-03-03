@@ -1,7 +1,7 @@
 # My Personal Portfolio
 
 This is the source code for my current portfolio. (https://tsubasafujii.com)<br />
-It's built in **Next.js(Updated on March/2023)** and styled by **Styled Components**.
+It's built in **React** and styled by **Styled Components**.
 
 ## Design
 - I wanted to make something fun and happy but simple
