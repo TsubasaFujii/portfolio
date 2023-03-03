@@ -1,2 +1,2 @@
-import { ThemeContext, ThemeProvider } from './ThemeProvider';
+import { ThemeContext, ThemeProvider } from '../../old/src/context./../../src/context/ThemeProvider';
 export { ThemeContext, ThemeProvider };
