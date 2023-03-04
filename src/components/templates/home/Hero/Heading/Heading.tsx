@@ -1,6 +1,7 @@
-import { headingText } from '../../../../../static/content.js';
 
-import { NewLine } from '../../../../../components';
+import { headingText } from '@/static/content';
+import { NewLine } from '@/components/common';
+
 import { H1, Letter } from './styled';
 
 // Motions

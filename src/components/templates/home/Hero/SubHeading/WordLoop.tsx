@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
-import { selfIntroduction } from '../../../../../static/content.js';
+import { selfIntroduction } from '@/static/content';
 
 const infoMotion = {
     show: {
@@ -18,7 +18,7 @@ const infoMotion = {
     }
 };
 
-export function WordLoop() {
+export default function WordLoop() {
     const [current, setCurrent] = useState(0);
 
     useEffect(() => {

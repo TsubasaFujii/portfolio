@@ -1,6 +1,5 @@
+import { devices } from '@/static/viewport';
 import styled from 'styled-components';
-
-import { devices } from '../../static/viewport.js';
 
 const Flex = styled.div`
     display: flex;

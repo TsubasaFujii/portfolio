@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { WordLoop } from './WordLoop';
+import WordLoop from './WordLoop';
 
 const subMotion = {
     initial: {
