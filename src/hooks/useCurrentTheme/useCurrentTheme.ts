@@ -2,17 +2,20 @@ import { CustomTheme } from '@/types/styled';
 import { useEffect, useState } from 'react';
 import { theme as customTheme } from './theme';
 
-function getUserPref() {
-    return matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-}
-
 export function useCurrentTheme(): {
     theme: CustomTheme;
     currentTheme: string;
     toggleTheme: () => void;
 } {
-    const [theme, setTheme] = useState<CustomTheme>(customTheme[getUserPref()]);
-    const [currentTheme, setCurrentTheme] = useState<'light' | 'dark'>(getUserPref());
+    const [currentTheme, setCurrentTheme] = useState<'light' | 'dark'>('light');
+    const [theme, setTheme] = useState<CustomTheme>(customTheme[currentTheme]);
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            setCurrentTheme(isDarkMode ? 'dark' : 'light')
+        }
+    }, []);
 
     useEffect(() => {
         // dark -> theme.colors.black, light -> theme.colors.white
