@@ -1,4 +1,4 @@
-import { HTMLProps, ReactNode } from 'react';
+import { HTMLProps } from 'react';
 import { useTheme } from 'styled-components';
 
 import Label from './Label';
