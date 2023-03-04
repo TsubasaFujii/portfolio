@@ -1,20 +1,13 @@
-import { useContext } from 'react';
 import { useTheme } from 'styled-components';
-import { ThemeContext } from '../../../context'
 
 import { Label, Marker, Switch, ThemeSwitchWrapper } from './styled';
 
 export default function ThemeSwitch() {
-    const { currentTheme, toggleTheme } = useContext(ThemeContext);
-    const theme = useTheme();
+    const { currentTheme, toggleTheme } = useTheme();
 
     return (
         <ThemeSwitchWrapper onClick={toggleTheme}>
-            <Label
-                animate={{
-                    color: currentTheme === 'light' ?
-                        theme.colors.black : `${theme.colors.white}66`
-                }}>
+            <Label isLight>
                 light
             </Label>
             <Switch $currentTheme={currentTheme}>
@@ -25,11 +18,7 @@ export default function ThemeSwitch() {
                     }}
                     layout />
             </Switch>
-            <Label
-                animate={{
-                    color: currentTheme === 'light' ?
-                        `${theme.colors.black}66` : theme.colors.white
-                }}>
+            <Label>
                 dark
             </Label>
         </ThemeSwitchWrapper >

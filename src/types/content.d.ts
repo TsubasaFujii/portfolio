@@ -21,6 +21,6 @@ interface Project {
 }
 
 interface SocialMedia {
-    name: string;
+    name: IconName;
     url: string;
 }

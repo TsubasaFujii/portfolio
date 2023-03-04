@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-
-import { devices } from '../../../static/viewport.js';
+import { devices } from '@/static/viewport';
 
 export const Navigation = styled.nav`
     width: 100%;
@@ -14,9 +13,7 @@ export const Navigation = styled.nav`
     }
 `;
 
-export const MenuItem = styled.div.attrs(() => ({
-    className: 'navItem',
-}))`
+export const MenuItem = styled.div`
     padding: ${({ theme }) => `${theme.spacing.sm} 0`};
     position: relative;
 

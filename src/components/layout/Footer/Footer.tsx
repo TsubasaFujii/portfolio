@@ -1,7 +1,7 @@
-import { socialMedia } from '../../static/content.js';
-import { openInNewTabTo } from '../../js/window';
 
-import { Icon } from '../../components';
+import { Icon } from '@/components/common';
+import { socialMedia } from '@/static/content';
+import { openInNewTabTo } from '@/utils/window';
 import { FooterWrapper, SnsIcon, SocialMedia } from './styled';
 
 export default function Footer() {
@@ -17,7 +17,7 @@ export default function Footer() {
                 }
             </SocialMedia>
             <div className='copyright'>
-                &copy; 2022 Tsubasa Fujii
+                &copy; 2022-2023 Tsubasa Fujii
             </div>
         </FooterWrapper>
     )

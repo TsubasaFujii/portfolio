@@ -1,7 +1,6 @@
+import { devices } from '@/static/viewport';
+import { useRouter } from 'next/router.js';
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
-
-import { devices } from '../static/viewport.js';
 
 export function useHideHeaderByScrollDown() {
     // For smaller screen
@@ -9,13 +8,13 @@ export function useHideHeaderByScrollDown() {
     // -1: up, 0: page top, 1: down
     const [direction, setDirection] = useState(0);
     const [isHidden, setIsHidden] = useState(false);
-    const location = useLocation();
+    const { pathname } = useRouter();
 
     useEffect(() => {
-        function detectDirection() {
+        function detectDirection(): void {
             const scrolled = window.pageYOffset;
             // Only always-show at the top of the index page
-            if (location.pathname === '/' && scrolled < window.innerHeight) {
+            if (pathname === '/' && scrolled < window.innerHeight) {
                 setDirection(0);
             } else if (scrolled > y) {
                 setDirection(1);
@@ -27,7 +26,7 @@ export function useHideHeaderByScrollDown() {
 
         window.addEventListener('scroll', detectDirection);
         return () => window.removeEventListener('scroll', detectDirection);
-    }, [y]);
+    }, [y, pathname]);
 
     useEffect(() => {
         // Show always for larger screens

@@ -1,15 +1,18 @@
-import PropTypes from 'prop-types';
-
-import { useJumpTo } from '../../../hooks/useJumpTo';
-import { scrollTo } from '../../../js/window';
+import { useJumpTo } from '@/hooks/useJumpTo';
+import { links } from '@/static/content';
+import { scrollTo } from '@/utils/window';
 
 import { MenuItem, Navigation } from './styled';
 
-export default function Nav(props) {
-    const { current, links } = props;
+type CustomProps = {
+    current: number;
+}
+
+export default function Nav(props: CustomProps) {
+    const { current } = props;
     const { jumpTo } = useJumpTo();
 
-    function handleOnClick(route) {
+    function handleOnClick(route: string) {
         if (route.charAt(0) === '#') {
             scrollTo(route);
         } else {
@@ -23,16 +26,12 @@ export default function Nav(props) {
             {links.map((link, index) =>
                 <MenuItem
                     key={index}
-                    className={index === current ? 'current' : null}
+                    className={`navItem${index === current ? ' current' : ''}`}
                     onClick={() => handleOnClick(link.route)}>
                     {link.name}
                 </MenuItem>
-            )}
-        </Navigation>
+            )
+            }
+        </Navigation >
     )
 }
-
-Nav.propTypes = {
-    current: PropTypes.number,
-    links: PropTypes.array,
-};

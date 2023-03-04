@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
-import sun from '../../../assets/icons/sun.svg';
-import moon from '../../../assets/icons/moon.svg';
+import sun from '/public/assets/icons/sun.svg';
+import moon from '/public/assets/icons/moon.svg';
 
 export const ThemeSwitchWrapper = styled.div`
     margin-left: auto;
@@ -16,7 +16,7 @@ export const ThemeSwitchWrapper = styled.div`
 export const Switch = styled(motion.div).attrs(() => ({
     role: 'button',
     ['aria-label']: 'Switch theme'
-}))`
+})) <{ $currentTheme: CurrentTheme }>`
     width: 4.5rem;
     // height / 2 : padding + Marker height / 2
     border-radius: calc(1.5rem + 0.25rem + 0.25rem / 2);
@@ -58,7 +58,22 @@ export const Marker = styled(motion.div)`
     }
 `;
 
-export const Label = styled(motion.div)`
+export const Label = styled(motion.div).attrs<{
+    $currentTheme: CurrentTheme;
+    isLight?: boolean;
+}>(({ isLight, $currentTheme, theme }) => {
+    let color: string;
+    if (isLight) {
+        color = $currentTheme === 'light' ? `${theme.colors.black}66` : theme.colors.white;
+    } else {
+        color = $currentTheme === 'light' ? theme.colors.black : `${theme.colors.white}66`;
+    }
+    return {
+        animate: {
+            color
+        }
+    }
+}) <{ isLight?: boolean }>`
     font-family: 'Josefin Sans', sans-serif;
     font-weight: 400; 
     font-size: 1rem;

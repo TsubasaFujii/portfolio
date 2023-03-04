@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-
-import { FlexRow } from '../../components';
+import { FlexRow } from '@/components/common';
 
 export const FooterWrapper = styled.footer`
     display: flex;
