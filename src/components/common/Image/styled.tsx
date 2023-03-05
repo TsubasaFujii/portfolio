@@ -1,13 +1,11 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
-import { devices } from '../../static/viewport.js';
-
-import externalIcon from '../../assets/icons/external.svg';
+import { devices } from '@/static/viewport';
 
 export const ImageWrapper = styled(motion.div).attrs(() => ({
     role: 'img'
-}))`
+})) <{ $clickable?: boolean; }>`
     height: 70vmin;
     width: 70vmin;
     
@@ -56,7 +54,7 @@ export const ImageWrapper = styled(motion.div).attrs(() => ({
                         right: 0.5rem;
                         bottom: 0.5rem;
 
-                        mask: url(${externalIcon}) no-repeat 50% 50%;
+                        mask: url(/assets/icons/external.svg) no-repeat 50% 50%;
                         mask-size: cover;
                         background-color: ${theme.colors.primary};
                     }
@@ -80,9 +78,17 @@ export const ImageWrapper = styled(motion.div).attrs(() => ({
     }
 `;
 
-export const Img = styled(motion.div).attrs(() => ({
-    className: 'image'
-}))`
+type ImageProps = {
+    $img: string;
+    $clipped?: boolean;
+    $landscape?: boolean;
+    alt: string;
+}
+
+export const Img = styled(motion.div).attrs<{ alt: string }>(({ alt }) => ({
+    className: 'image',
+    alt
+})) <ImageProps>`
     width: 100%;
     height: 100%;
 

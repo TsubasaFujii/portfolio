@@ -4,6 +4,8 @@ import { Text, NewLine, Large, P } from './Text';
 import Content from './Content';
 import { FlexRow, FlexColumn } from './Flex';
 import { Section, SectionRef } from './Section';
+import { Heading, H2, H3 } from './Heading';
+import { Image } from './Image';
 
 export {
     Button,
@@ -18,4 +20,8 @@ export {
     FlexColumn,
     Section,
     SectionRef,
+    Heading,
+    H2,
+    H3,
+    Image,
 }

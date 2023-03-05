@@ -11,7 +11,7 @@ export const Wrapper = styled.div`
     }
 `;
 
-export const GroupedIconWrapper = styled.div<{ $size: string }>`
+export const GroupedIconWrapper = styled.div<{ $size?: string }>`
     display: flex;
     flex-direction: row;
     gap: ${({ theme }) => theme.spacing.xs};

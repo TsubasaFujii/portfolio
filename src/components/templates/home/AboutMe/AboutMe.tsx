@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
-import { H2, NewLine, Content } from '../../../../components/';
+import { Content, H2, NewLine } from '@/components/common';
 import Introduction from './Introduction';
 import { Wrapper } from './styled';
 

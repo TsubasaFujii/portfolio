@@ -1,10 +1,8 @@
+import { devices } from '@/static/viewport';
 import { useContext } from 'react';
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle, useTheme } from 'styled-components';
 
-import { ThemeContext } from '../../context';
-import { devices } from '../../static/viewport.js';
-
-const StyledGlobalStyle = createGlobalStyle`
+const StyledGlobalStyle = createGlobalStyle<{ currentTheme: 'light' | 'dark' }>`
     *,
     *:after,
     *::before {
@@ -224,7 +222,7 @@ const StyledGlobalStyle = createGlobalStyle`
     }
 
     button {
-        color: ${({ theme }) => theme.black};
+        color: ${({ theme }) => theme.colors.black};
     }
 
     footer {
@@ -258,7 +256,7 @@ const StyledGlobalStyle = createGlobalStyle`
 `;
 
 export function GlobalStyles() {
-    const { currentTheme } = useContext(ThemeContext);
+    const { currentTheme } = useTheme();
     return <StyledGlobalStyle currentTheme={currentTheme} />
 }
 

@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { useInView } from 'react-intersection-observer';
 
 import { ImageWrapper, Img } from './styled';
@@ -15,8 +14,17 @@ const variants = {
         opacity: 0,
     }
 }
+type CustomProps = {
+    isVisible?: boolean;
+    clickable?: boolean;
+    landscape?: boolean;
+    className?: string;
+    clipped?: boolean;
+    src: string;
+    alt: string;
+}
 
-export default function Image(props) {
+export default function Image(props: CustomProps) {
     const { src, alt, clipped, className, clickable, landscape } = props;
     const { ref, inView } = useInView({
         initialInView: false,
@@ -38,13 +46,3 @@ export default function Image(props) {
         </ImageWrapper>
     )
 }
-
-Image.propTypes = {
-    isVisible: PropTypes.bool,
-    clickable: PropTypes.bool,
-    landscape: PropTypes.bool,
-    className: PropTypes.string,
-    clipped: PropTypes.bool,
-    src: PropTypes.string,
-    alt: PropTypes.string,
-};

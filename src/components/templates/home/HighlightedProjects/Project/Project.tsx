@@ -1,16 +1,23 @@
-import PropTypes from 'prop-types';
+import { Button, GroupedIcons, H3, Text } from '@/components/common';
+import { openInNewTabTo } from '@/utils/window';
 
-import { openInNewTabTo } from '../../../../../js/window';
-
-import { Button, GroupedIcons, H3, Text } from '../../../../../components';
 import { Details, ProjectWrapper, Thumbnail } from './styled';
 
-export default function Project(props) {
+type CustomProps = {
+    title: string;
+    thumbnail: string;
+    tools: IconName[],
+    description: string;
+    github: string;
+    production: string;
+}
+
+export default function Project(props: CustomProps) {
     const { title, thumbnail, tools, description, github, production } = props;
 
     return (
         <ProjectWrapper>
-            <Thumbnail src={thumbnail} clickable landscape />
+            <Thumbnail src={thumbnail} clickable landscape alt='project' />
             <a href={production}><H3>{title}</H3></a>
             <Details className='details'>
                 <Text>{description}</Text>
@@ -23,12 +30,3 @@ export default function Project(props) {
         </ProjectWrapper>
     );
 }
-
-Project.propTypes = {
-    title: PropTypes.string,
-    thumbnail: PropTypes.string,
-    tools: PropTypes.array,
-    description: PropTypes.string,
-    github: PropTypes.string,
-    production: PropTypes.string,
-};

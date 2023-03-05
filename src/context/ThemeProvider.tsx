@@ -1,8 +1,8 @@
 import { createContext, ReactNode, useEffect, useState } from 'react';
-import { ThemeProvider as StyledThemeProvider } from 'styled-components';
+import { DefaultTheme, ThemeProps, ThemeProvider as StyledThemeProvider } from 'styled-components';
 import useCurrentTheme from '@/hooks/useCurrentTheme';
 
-export const ThemeContext = createContext<null>(null);
+export const ThemeContext = createContext<null | ThemeProps<DefaultTheme>>(null);
 
 type Props = {
     children: ReactNode;

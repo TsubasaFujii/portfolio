@@ -4,5 +4,6 @@ declare module 'styled-components' {
         currentTheme: CurrentTheme;
         toggleTheme: () => void;
         pointingMethod: PointingMethod | null;
+        currentTheme: 'light' | 'dark';
     }
 }

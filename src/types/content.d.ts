@@ -15,7 +15,7 @@ interface Project {
     production: string;
     thumbnail: string,
     description: string;
-    tools: string[];
+    tools: IconName[];
     starred: boolean;
     createdAt: Date;
 }

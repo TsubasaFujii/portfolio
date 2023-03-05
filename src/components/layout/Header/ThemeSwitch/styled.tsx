@@ -60,10 +60,10 @@ export const Marker = styled(motion.div)`
 
 export const Label = styled(motion.div).attrs<{
     $currentTheme: CurrentTheme;
-    isLight?: boolean;
-}>(({ isLight, $currentTheme, theme }) => {
+    $isLight?: boolean;
+}>(({ $isLight, $currentTheme, theme }) => {
     let color: string;
-    if (isLight) {
+    if ($isLight) {
         color = $currentTheme === 'light' ? `${theme.colors.black}66` : theme.colors.white;
     } else {
         color = $currentTheme === 'light' ? theme.colors.black : `${theme.colors.white}66`;
@@ -73,7 +73,7 @@ export const Label = styled(motion.div).attrs<{
             color
         }
     }
-}) <{ isLight?: boolean }>`
+}) <{ $isLight?: boolean }>`
     font-family: 'Josefin Sans', sans-serif;
     font-weight: 400; 
     font-size: 1rem;

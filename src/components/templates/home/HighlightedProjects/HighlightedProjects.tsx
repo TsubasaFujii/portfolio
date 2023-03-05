@@ -1,18 +1,18 @@
-import { useNavigate } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
+import { useRouter } from 'next/router';
 
-import { projectsData } from '../../../../static/content.js';
-import { scrollToTop } from '../../../../js/window';
+import { scrollToTop } from '@/utils/window';
+import { projectsData } from '@/static/content';
 
+import { Button, Content, H2 } from '@/components/common';
 import Project from './Project';
-import { Button, Content, H2 } from '../../../../components';
 import { List, Wrapper } from './styled';
 
 export default function HighlightedProjects() {
     const { ref, inView } = useInView({
         initialInView: false,
     });
-    const navigate = useNavigate();
+    const router = useRouter();
 
     return (
         <Wrapper ref={ref}>
@@ -26,7 +26,7 @@ export default function HighlightedProjects() {
                         label='check more projects'
                         icon='chevronRight'
                         onClick={() => {
-                            navigate('/projects');
+                            router.push('/projects');
                             scrollToTop();
                         }}
                         secondary />

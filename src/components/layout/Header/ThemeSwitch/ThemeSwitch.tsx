@@ -7,7 +7,7 @@ export default function ThemeSwitch() {
 
     return (
         <ThemeSwitchWrapper onClick={toggleTheme}>
-            <Label isLight>
+            <Label $isLight={true}>
                 light
             </Label>
             <Switch $currentTheme={currentTheme}>

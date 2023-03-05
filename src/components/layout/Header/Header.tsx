@@ -1,4 +1,4 @@
-import { ComponentPropsWithRef, forwardRef, Ref } from 'react';
+import { forwardRef, Ref } from 'react';
 import { motion } from 'framer-motion';
 
 import { useHideHeaderByScrollDown } from '@/hooks/useHideHeaderByScrollDown';
@@ -6,6 +6,7 @@ import { useHideHeaderByScrollDown } from '@/hooks/useHideHeaderByScrollDown';
 import Nav from './Nav';
 import ThemeSwitch from './ThemeSwitch';
 import { Content } from './styled';
+import { useTrackViewport } from '@/hooks/useTrackViewport';
 
 const variants = {
     hidden: {
@@ -16,13 +17,9 @@ const variants = {
     }
 }
 
-interface CustomProps {
-    current: number;
-}
-
-export const Header = forwardRef((props: CustomProps & ComponentPropsWithRef<'section'>, ref?: Ref<HTMLElement>) => {
-    const { current } = props;
+export const Header = forwardRef((_, ref?: Ref<HTMLElement>) => {
     const { isHidden } = useHideHeaderByScrollDown();
+    const { currentSection } = useTrackViewport();
 
     return (
         <motion.header
@@ -30,7 +27,7 @@ export const Header = forwardRef((props: CustomProps & ComponentPropsWithRef<'se
             animate={isHidden ? 'hidden' : 'shown'}
             variants={variants}>
             <Content>
-                <Nav current={current} />
+                <Nav current={currentSection} />
                 <ThemeSwitch />
             </Content>
         </motion.header>
