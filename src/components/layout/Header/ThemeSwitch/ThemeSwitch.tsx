@@ -7,18 +7,13 @@ export default function ThemeSwitch() {
 
     return (
         <ThemeSwitchWrapper onClick={toggleTheme}>
-            <Label $isLight={true}>
+            <Label $isLight={true} $currentTheme={currentTheme}>
                 light
             </Label>
             <Switch $currentTheme={currentTheme}>
-                <Marker
-                    transition={{
-                        stiffness: 200,
-                        damping: 100
-                    }}
-                    layout />
+                <Marker />
             </Switch>
-            <Label>
+            <Label $currentTheme={currentTheme}>
                 dark
             </Label>
         </ThemeSwitchWrapper >
