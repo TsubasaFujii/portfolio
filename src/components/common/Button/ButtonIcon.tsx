@@ -1,27 +1,15 @@
-import { IconWrapper } from './styled';
-import PropTypes from 'prop-types';
 import { Icon } from '../Icon';
+import { IconWrapper } from './styled';
 
-const iconMotion = {
-    hidden: {
-        opacity: 0,
-    },
-    hover: {
-        opacity: 1,
-    },
-};
+type Props = {
+    name: IconName;
+}
 
-export default function ButtonIcon(props) {
+export default function ButtonIcon(props: Props) {
     const { name } = props;
     return (
-        <IconWrapper
-            variants={iconMotion}
-            layout>
+        <IconWrapper>
             {<Icon name={name} />}
         </IconWrapper>
     );
 }
-
-ButtonIcon.propTypes = {
-    name: PropTypes.string,
-};

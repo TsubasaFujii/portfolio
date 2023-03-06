@@ -1,5 +1,5 @@
-import { HTMLMotionProps, motion } from 'framer-motion';
-import { HTMLProps, ReactNode } from 'react';
+import { motion } from 'framer-motion';
+import { ReactNode } from 'react';
 import styled from 'styled-components';
 
 type ButtonProps = {
@@ -11,7 +11,7 @@ type ButtonProps = {
     disabled?: boolean;
 }
 
-export const Wrapper = styled(motion.button).attrs((disabled) => ({
+export const Wrapper = styled(motion.button).attrs(({ disabled }) => ({
     initial: 'hidden',
     whileHover: !disabled && 'hover',
     whileTap: !disabled && { scale: 0.9 },
@@ -66,11 +66,7 @@ export const ContentWrapper = styled(motion.div)`
     gap: 0.6rem;
 `;
 
-export const IconWrapper = styled(motion.div)`
-    min-width:0;
-`;
-
-export const iconMotion = {
+const iconMotion = {
     hidden: {
         opacity: 0,
     },
@@ -79,6 +75,28 @@ export const iconMotion = {
     },
 };
 
-export const LabelWrapper = styled(motion.div)`
+export const IconWrapper = styled(motion.div).attrs(() => ({
+    variants: iconMotion,
+    layout: true,
+}))`
+    min-width:0;
+`;
+
+// calc((1.5rem + 0.6rem) /2) 1.5rem = icon width & gap
+const labelMotion = {
+    hidden: {
+        x: 'calc((1.5rem + 0.6rem) /2)',
+    },
+    hover: {
+        x: 0,
+    },
+};
+
+export const LabelWrapper = styled(motion.div).attrs(() => ({
+    transition: {
+        duration: 0.3,
+    },
+    variants: labelMotion
+}))`
     color: ${({ theme }) => theme.colors.black};
 `;

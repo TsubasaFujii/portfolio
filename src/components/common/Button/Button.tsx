@@ -5,7 +5,6 @@ import Label from './Label';
 import ButtonIcon from './ButtonIcon';
 import { Icon } from '../Icon';
 import { ContentWrapper, Wrapper } from './styled';
-import { IconName } from '../Icon/path';
 
 type Props = {
     icon?: IconName;
@@ -30,7 +29,7 @@ export default function Button(props: Props) {
             $secondary={secondary}>
             <ContentWrapper>
                 {pointingMethod === 'touch' ? label : <Label text={label} />}
-                {pointingMethod === 'touch' && icon ? <Icon name={icon} /> : <ButtonIcon name={icon} />}
+                {icon && (pointingMethod === 'touch' ? <Icon name={icon} /> : <ButtonIcon name={icon} />)}
             </ContentWrapper>
         </Wrapper>
     )
