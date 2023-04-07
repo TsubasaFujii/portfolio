@@ -36,4 +36,4 @@ interface CustomTheme {
 
 type CurrentTheme = 'dark' | 'light';
 
-type PointingMethod = 'touch' | 'mouse';
+type isMouse = 'touch' | 'mouse';

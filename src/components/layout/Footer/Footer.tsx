@@ -17,7 +17,7 @@ export default function Footer() {
                 }
             </SocialMedia>
             <div className='copyright'>
-                &copy; 2022-2023 Tsubasa Fujii
+                &copy; 2023 Tsubasa Fujii
             </div>
         </FooterWrapper>
     )

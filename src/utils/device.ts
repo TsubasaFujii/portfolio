@@ -1,9 +1,7 @@
-export function getPointingMethod(): { pointingMethod: 'mouse' | 'touch' } | undefined {
+export function isMouseAvailable(): boolean | undefined {
     if (typeof window !== undefined) {
-        return {
-            pointingMethod: window.matchMedia('(any-pointer : fine)').matches ?
-                'mouse' :
-                'touch'
-        }
+        // True: mouse
+        // False: touch
+        return window.matchMedia('(any-pointer : fine)').matches;
     }
 }

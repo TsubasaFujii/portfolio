@@ -1,5 +1,5 @@
+import { Button } from '@/components/common';
 import styled from 'styled-components';
-import { Button } from '../../components';
 
 export const Wrapper = styled.main`
     display: grid;
@@ -17,5 +17,5 @@ export const Row = styled.div`
 `;
 
 export const StyledButton = styled(Button)`
-    margin-top: ${({theme}) => theme.spacing.md};
+    margin-top: ${({ theme }) => theme.spacing.md};
 `;

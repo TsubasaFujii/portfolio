@@ -1,6 +1,7 @@
 import { createContext, ReactNode, useEffect, useState } from 'react';
 import { DefaultTheme, ThemeProps, ThemeProvider as StyledThemeProvider } from 'styled-components';
 import useCurrentTheme from '@/hooks/useCurrentTheme';
+import { isMouseAvailable } from '@/utils/device';
 
 export const ThemeContext = createContext<null | ThemeProps<DefaultTheme>>(null);
 
@@ -15,7 +16,7 @@ export function ThemeProvider(props: Props) {
 
     useEffect(() => {
         if (typeof window !== undefined) {
-            setPointingMethod(window.matchMedia('(any-pointer : fine)').matches ? 'mouse' : 'touch');
+            setPointingMethod(isMouseAvailable() ? 'mouse' : 'touch');
         }
     }, []);
 

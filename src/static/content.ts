@@ -1,13 +1,13 @@
 export const links: Link[] = [
     {
         name: 'Home',
-        route: '',
+        route: '/',
     }, {
         name: 'Projects',
-        route: 'projects',
+        route: '/projects',
     }, {
         name: 'Contact',
-        route: 'contact',
+        route: '/contact',
     }
 ];
 

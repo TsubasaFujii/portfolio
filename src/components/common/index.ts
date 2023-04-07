@@ -6,6 +6,7 @@ import { FlexRow, FlexColumn } from './Flex';
 import { Section, SectionRef } from './Section';
 import { Heading, H2, H3 } from './Heading';
 import { Image } from './Image';
+import Overlay from './Overlay';
 
 export {
     Button,
@@ -24,4 +25,5 @@ export {
     H2,
     H3,
     Image,
+    Overlay,
 }

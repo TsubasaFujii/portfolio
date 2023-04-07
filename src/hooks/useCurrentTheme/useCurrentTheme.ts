@@ -1,4 +1,3 @@
-import { CurrentTheme, CustomTheme } from '@/types/styled';
 import { useEffect, useState } from 'react';
 import { theme as customTheme } from './theme';
 

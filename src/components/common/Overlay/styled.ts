@@ -8,8 +8,8 @@ export const OverlayWrapper = styled.div`
     left: 0;
     right: 0;
     bottom: 0;
-    background: ${({ theme, $currentTheme }) =>
-        $currentTheme === 'dark' ? `${theme.colors.white}CC` : theme.colors.black40};
+    background: ${({ theme }) =>
+        theme.currentTheme === 'dark' ? `${theme.colors.white}CC` : theme.colors.black40};
 
     &:after {
         content: '.';

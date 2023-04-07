@@ -4,13 +4,8 @@ import { scrollTo } from '@/utils/window';
 
 import { MenuItem, Navigation } from './styled';
 
-type CustomProps = {
-    current: number;
-}
-
-export default function Nav(props: CustomProps) {
-    const { current } = props;
-    const { jumpTo } = useJumpTo();
+export default function Nav() {
+    const { jumpTo, currentPath } = useJumpTo();
 
     function handleOnClick(route: string) {
         if (route.charAt(0) === '#') {
@@ -26,7 +21,7 @@ export default function Nav(props: CustomProps) {
             {links.map((link, index) =>
                 <MenuItem
                     key={index}
-                    className={`navItem${index === current ? ' current' : ''}`}
+                    className={`navItem${currentPath === link.route ? ' current' : ''}`}
                     onClick={() => handleOnClick(link.route)}>
                     {link.name}
                 </MenuItem>

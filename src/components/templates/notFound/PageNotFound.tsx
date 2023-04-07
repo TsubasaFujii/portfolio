@@ -1,9 +1,8 @@
+import { H3, Large } from '@/components/common';
 import { motion } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/router';
 import { useTheme } from 'styled-components';
-
-import { H3, Large } from '../../components';
-import { Row, Wrapper, StyledButton } from './styled';
+import { Row, StyledButton, Wrapper } from './styled';
 
 const variants = {
     initial: {
@@ -26,10 +25,10 @@ const variants = {
 
 export default function PageNotFound() {
     const theme = useTheme();
-    const navigate = useNavigate();
+    const router = useRouter();
 
     function goToTop() {
-        navigate('/');
+        router.push('/');
     }
 
     return (

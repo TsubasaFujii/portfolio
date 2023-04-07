@@ -19,7 +19,7 @@ const bounce = keyframes`
     }
 `;
 
-export const Circle =styled.circle`
+export const Circle = styled.circle`
     animation: ${bounce} 2s ease-in infinite;
     transform-origin: center;
 `;

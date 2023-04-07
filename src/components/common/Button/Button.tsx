@@ -16,17 +16,17 @@ type Props = {
 
 export default function Button(props: Props) {
     const { label, disabled, icon, align, onClick, flat, secondary, className } = props;
-    const { currentTheme, pointingMethod } = useTheme();
+    const { pointingMethod } = useTheme();
 
     return (
         <Wrapper
             className={className}
-            align={align}
-            $currentTheme={currentTheme}
-            disabled={disabled}
-            onClick={onClick}
+            $secondary={secondary}
             $flat={flat}
-            $secondary={secondary}>
+            disabled={disabled}
+            align={align}
+            onClick={onClick}
+        >
             <ContentWrapper>
                 {pointingMethod === 'touch' ? label : <Label text={label} />}
                 {icon && (pointingMethod === 'touch' ? <Icon name={icon} /> : <ButtonIcon name={icon} />)}

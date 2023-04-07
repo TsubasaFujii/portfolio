@@ -7,7 +7,6 @@ type ButtonProps = {
     icon?: ReactNode;
     $flat?: boolean;
     $secondary?: boolean;
-    $currentTheme?: string;
     disabled?: boolean;
 }
 
@@ -35,7 +34,6 @@ export const Wrapper = styled(motion.button).attrs(({ disabled }) => ({
         $secondary ?
             theme.colors.white :
             theme.colors.primary50};
-    cursor: pointer;
 
     color: ${({ theme }) => theme.colors.black};
     text-transform: capitalize;
@@ -46,6 +44,7 @@ export const Wrapper = styled(motion.button).attrs(({ disabled }) => ({
         background: ${({ theme, $secondary }) =>
         $secondary ? theme.colors.primary20 : theme.colors.primary70};
         border-color: transparent;
+        cursor: pointer;
     }
 
     &:disabled {
