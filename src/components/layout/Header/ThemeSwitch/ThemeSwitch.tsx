@@ -3,17 +3,17 @@ import { useTheme } from 'styled-components';
 import { Label, Marker, Switch, ThemeSwitchWrapper } from './styled';
 
 export default function ThemeSwitch() {
-    const { currentTheme, toggleTheme } = useTheme();
+    const { toggleTheme } = useTheme();
 
     return (
         <ThemeSwitchWrapper onClick={toggleTheme}>
-            <Label $isLight={true} $currentTheme={currentTheme}>
+            <Label className='lato' $isLight>
                 light
             </Label>
-            <Switch $currentTheme={currentTheme}>
+            <Switch>
                 <Marker />
             </Switch>
-            <Label $currentTheme={currentTheme}>
+            <Label className='lato'>
                 dark
             </Label>
         </ThemeSwitchWrapper >

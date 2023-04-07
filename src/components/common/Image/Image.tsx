@@ -2,6 +2,16 @@ import { useInView } from 'react-intersection-observer';
 
 import { ImageWrapper, Img } from './styled';
 
+type CustomProps = {
+    isVisible?: boolean;
+    clickable?: boolean;
+    landscape?: boolean;
+    className?: string;
+    clipped?: boolean;
+    src: string;
+    alt: string;
+}
+
 const variants = {
     shown: {
         opacity: 1,
@@ -13,15 +23,6 @@ const variants = {
     hidden: {
         opacity: 0,
     }
-}
-type CustomProps = {
-    isVisible?: boolean;
-    clickable?: boolean;
-    landscape?: boolean;
-    className?: string;
-    clipped?: boolean;
-    src: string;
-    alt: string;
 }
 
 export default function Image(props: CustomProps) {

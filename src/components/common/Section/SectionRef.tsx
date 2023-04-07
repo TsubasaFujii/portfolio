@@ -1,8 +1,8 @@
-import { ComponentPropsWithRef, forwardRef, Ref } from 'react';
+import { ComponentPropsWithRef, forwardRef, HTMLProps, Ref } from 'react';
 
 import { Wrapper } from './styled';
 
-export const SectionRef = forwardRef((props: Props & ComponentPropsWithRef<'section'>, ref?: Ref<HTMLElement>) => {
+export const SectionRef = forwardRef((props: HTMLProps<HTMLDivElement> & ComponentPropsWithRef<'section'>, ref?: Ref<HTMLElement>) => {
     const { children, className, id } = props;
     return (
         <Wrapper

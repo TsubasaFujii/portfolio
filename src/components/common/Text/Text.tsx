@@ -1,8 +1,9 @@
 import { useInView } from 'react-intersection-observer';
 
 import { TextWrapper } from './styled';
+import { HTMLProps } from 'react';
 
-export default function Text(props: Props) {
+export default function Text(props: HTMLProps<HTMLParagraphElement>) {
     const { children } = props;
     const { ref, inView } = useInView({
         initialInView: false,

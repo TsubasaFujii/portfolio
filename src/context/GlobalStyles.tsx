@@ -1,8 +1,8 @@
 import { devices } from '@/static/viewport';
-import { useContext } from 'react';
-import { createGlobalStyle, useTheme } from 'styled-components';
+import { Hex } from '@/types/hex';
+import { createGlobalStyle } from 'styled-components';
 
-const StyledGlobalStyle = createGlobalStyle<{ currentTheme: 'light' | 'dark' }>`
+const StyledGlobalStyle = createGlobalStyle`
     *,
     *:after,
     *::before {
@@ -101,24 +101,9 @@ const StyledGlobalStyle = createGlobalStyle<{ currentTheme: 'light' | 'dark' }>`
     }
 
     h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6,
-    button,
-    div.intro,
-    div.navItem,
-    aside.filters,
-    footer li,
-    span.large {
-        font-family: 'Josefin Sans', sans-serif;
-        font-weight: 700;
-    }
-
-    h1,
     span.large {
         font-size: 4em;
+        font-weight: 700;
 
         @media screen and (${devices.mobileL}) {
             font-size: 5.6em;
@@ -135,6 +120,8 @@ const StyledGlobalStyle = createGlobalStyle<{ currentTheme: 'light' | 'dark' }>`
 
     h2 {
         font-size: 3.5em;
+        font-weight: 700;
+
         @media screen and (${devices.mobileL}) {
             font-size: 4em;
         }
@@ -145,6 +132,8 @@ const StyledGlobalStyle = createGlobalStyle<{ currentTheme: 'light' | 'dark' }>`
 
     h3 {
         font-size: 2em;
+        font-weight: 700;
+
         @media screen and (${devices.mobileL}) {
             font-size: 2.8em;
         }
@@ -186,16 +175,6 @@ const StyledGlobalStyle = createGlobalStyle<{ currentTheme: 'light' | 'dark' }>`
         }
     }
 
-    p,
-    label,
-    input,
-    textarea,
-    div.copyright,
-    aside.filters {
-        font-family: 'Lato', sans-serif;
-        font-weight: 400;
-    }
-
     label,
     input,
     textarea {
@@ -226,37 +205,35 @@ const StyledGlobalStyle = createGlobalStyle<{ currentTheme: 'light' | 'dark' }>`
     }
 
     footer {
-        color: ${({ theme, currentTheme }) => currentTheme === 'dark' ? theme.colors.black : theme.colors.white};
-        background: ${({ theme, currentTheme }) => currentTheme === 'dark' ? theme.colors.white : theme.colors.black};
+        color: ${({ theme }) => theme.currentTheme === 'dark' ? theme.colors.black : theme.colors.white};
+        background: ${({ theme }) => theme.currentTheme === 'dark' ? theme.colors.white : theme.colors.black};
     }
 
     footer a,
     footer a:visited {
-        color: ${({ theme, currentTheme }) => currentTheme === 'dark' ? theme.colors.black : theme.colors.white};
-        background: ${({ theme, currentTheme }) => currentTheme === 'dark' ? theme.colors.white : theme.colors.black};
+        color: ${({ theme }) => theme.currentTheme === 'dark' ? theme.colors.black : theme.colors.white};
+        background: ${({ theme }) => theme.currentTheme === 'dark' ? theme.colors.white : theme.colors.black};
     }
 
     header,
     div.modal {
-        // CC in HEX is 80% opacity
-        background: ${({ theme, currentTheme }) =>
-        currentTheme === 'dark' ?
-            `${theme.colors.black}CC` :
-            `${theme.colors.white}CC`};
+        background: ${({ theme }) =>
+        theme.currentTheme === 'dark' ?
+            `${theme.colors.black}${Hex.opacity80}` :
+            `${theme.colors.white}${Hex.opacity80}`};
         backdrop-filter: blur(1rem);
     }
 
     body.lock header,
     body.lock div.modal {
-        background: ${({ theme, currentTheme }) =>
-        currentTheme === 'dark' ?
+        background: ${({ theme }) =>
+        theme.currentTheme === 'dark' ?
             theme.colors.black :
             theme.colors.white};
     }
 `;
 
 export function GlobalStyles() {
-    const { currentTheme } = useTheme();
-    return <StyledGlobalStyle currentTheme={currentTheme} />
+    return <StyledGlobalStyle />
 }
 

@@ -1,6 +1,9 @@
-import PropTypes from 'prop-types';
-
+import { HTMLProps } from 'react';
 import { H2Wrapper } from './styled';
+
+type Props = {
+    isVisible: boolean;
+} & HTMLProps<HTMLHeadingElement>;
 
 const headingMotion = {
     slideIn: { x: '-1rem', opacity: 0 },
@@ -8,7 +11,7 @@ const headingMotion = {
     visible: { x: 0, opacity: 1 },
 }
 
-export default function H2(props) {
+export default function H2(props: Props) {
     const { isVisible, children } = props;
 
     return (
@@ -24,11 +27,3 @@ export default function H2(props) {
         </H2Wrapper>
     )
 }
-
-H2.propTypes = {
-    isVisible: PropTypes.bool,
-    children: PropTypes.oneOfType([
-        PropTypes.array,
-        PropTypes.string,
-    ]),
-};

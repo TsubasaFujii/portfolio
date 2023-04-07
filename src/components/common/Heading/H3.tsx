@@ -1,7 +1,12 @@
 import { useInView } from 'react-intersection-observer';
-import PropTypes from 'prop-types';
 
 import { AnimatedUnderline, H3Wrapper } from './styled';
+import { HTMLProps } from 'react';
+
+type Props = {
+    isVisible?: boolean;
+} & HTMLProps<HTMLSpanElement>;
+
 
 const headingMotion = {
     slideIn: { x: '-1rem', opacity: 0 },
@@ -9,7 +14,7 @@ const headingMotion = {
     visible: { x: 0, opacity: 1 },
 }
 
-export default function H3(props) {
+export default function H3(props: Props) {
     const { children } = props;
     const { ref, inView } = useInView({
         initialInView: false,
@@ -22,17 +27,9 @@ export default function H3(props) {
             animate={inView ? 'hidden' : 'fallIn'}
             variants={headingMotion}
             ref={ref}>
-            <AnimatedUnderline className={inView ? 'shown' : null}>
+            <AnimatedUnderline className={inView ? 'shown' : undefined}>
                 {children}
             </AnimatedUnderline>
         </H3Wrapper>
     )
 }
-
-H3.propTypes = {
-    isVisible: PropTypes.bool,
-    children: PropTypes.oneOfType([
-        PropTypes.array,
-        PropTypes.string,
-    ]),
-};

@@ -1,29 +1,26 @@
 import { useJumpTo } from '@/hooks/useJumpTo';
 import { links } from '@/static/content';
-import { scrollTo } from '@/utils/window';
+import { scrollTo, scrollToTop } from '@/utils/window';
 
 import { MenuItem, Navigation } from './styled';
+import { useRouter } from 'next/router';
 
 export default function Nav() {
-    const { jumpTo, currentPath } = useJumpTo();
+    const router = useRouter();
 
     function handleOnClick(route: string) {
-        if (route.charAt(0) === '#') {
-            scrollTo(route);
-        } else {
-            jumpTo(route);
-        }
-        return;
+        scrollToTop();
+        router.push(route);
     }
 
     return (
         <Navigation>
-            {links.map((link, index) =>
+            {links.map(({ name, route }, index) =>
                 <MenuItem
                     key={index}
-                    className={`navItem${currentPath === link.route ? ' current' : ''}`}
-                    onClick={() => handleOnClick(link.route)}>
-                    {link.name}
+                    className={`navItem${router.pathname === route ? ' current' : ''}`}
+                    onClick={() => handleOnClick(route)}>
+                    {name}
                 </MenuItem>
             )
             }

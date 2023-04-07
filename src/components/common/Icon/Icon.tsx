@@ -1,4 +1,4 @@
-import { IconName, PATH } from './path';
+import { PATH } from './path';
 import { Wrapper } from './styled';
 
 type Props = {

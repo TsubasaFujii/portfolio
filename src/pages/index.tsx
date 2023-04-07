@@ -1,16 +1,5 @@
-import { Inter } from 'next/font/google'
-import Hero from '@/components/templates/home/Hero';
-import AboutMe from '@/components/templates/home/AboutMe';
-import HighlightedProjects from '@/components/templates/home/HighlightedProjects';
+import Home from '@/components/templates/home/Home';
 
-const inter = Inter({ subsets: ['latin'] })
-
-export default function Home() {
-    return (
-        <main>
-            <Hero />
-            <AboutMe />
-            <HighlightedProjects />
-        </main>
-    )
+export default function HomePage() {
+    return <Home />
 }

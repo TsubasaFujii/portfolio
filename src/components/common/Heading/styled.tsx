@@ -1,11 +1,12 @@
 import { motion } from 'framer-motion';
+import { CSSProperties } from 'react';
 import styled, { keyframes } from 'styled-components';
 
-export const Wrapper = styled.h1.attrs(({ size }) => (
-    size ?
-        { as: `h${size}` } :
+export const Wrapper = styled.h1.attrs<{ $size?: number; }>(({ $size }) => (
+    $size ?
+        { as: `h${$size}` } :
         null
-))`
+)) <{ $size?: number; }>`
     text-transform: capitalize;
 `;
 

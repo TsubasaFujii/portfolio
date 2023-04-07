@@ -1,25 +1,18 @@
-import PropTypes from 'prop-types';
 import { Wrapper } from './styled';
+import { HTMLProps } from 'react';
 
-export default function Heading(props) {
-    const { size, children, transform, className } = props;
+type Props = {
+    size?: number;
+} & HTMLProps<HTMLHeadingElement>;
+
+export default function Heading(props: Props) {
+    const { size, children, className } = props;
 
     return (
         <Wrapper
-            size={size}
-            className={className}
-            $transform={transform}>
+            $size={size}
+            className={className}>
             {children}
         </Wrapper>
     )
 }
-
-Heading.propTypes = {
-    size: PropTypes.number,
-    children: PropTypes.oneOfType([
-        PropTypes.array,
-        PropTypes.string,
-    ]),
-    transform: PropTypes.string,
-    className: PropTypes.string,
-};

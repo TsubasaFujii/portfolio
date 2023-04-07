@@ -1,7 +1,7 @@
 import { Content, SectionRef } from '@/components/common';
 import styled from 'styled-components';
 
-export const Wrapper = styled(SectionRef) <{ $headerHeight: number; }>`
+export const Wrapper = styled(SectionRef) <{ $headerHeight: number | null; }>`
     min-height: ${({ $headerHeight }) => `calc(100vh - ${$headerHeight}px)`};
     box-sizing: content-box;
     padding-top:    ${({ $headerHeight }) => `${$headerHeight}px`};
