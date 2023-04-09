@@ -15,14 +15,15 @@ export default function Nav() {
 
     return (
         <Navigation>
-            {links.map(({ name, route }, index) =>
-                <MenuItem
-                    key={index}
-                    className={`navItem${router.pathname === route ? ' current' : ''}`}
-                    onClick={() => handleOnClick(route)}>
-                    {name}
-                </MenuItem>
-            )
+            {
+                links.map(({ name, route }, index) =>
+                    <MenuItem
+                        key={index}
+                        className={`navItem${router.pathname === route ? ' current' : ''}`}
+                        onClick={() => handleOnClick(route)}>
+                        {name}
+                    </MenuItem>
+                )
             }
         </Navigation >
     )

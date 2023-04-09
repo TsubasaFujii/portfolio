@@ -2,43 +2,34 @@ import { devices } from '@/static/viewport';
 import { useRouter } from 'next/router.js';
 import { useEffect, useState } from 'react';
 
-export function useHideHeaderByScrollDown() {
+export default function useShowOnScrollDown() {
     // For smaller screen
-    const [y, setY] = useState(0);
+    const [previousPositionY, setPreviousPositionY] = useState(0);
     // -1: up, 0: page top, 1: down
     const [direction, setDirection] = useState(0);
-    const [isHidden, setIsHidden] = useState(false);
+    const [isShown, setIsShown] = useState(true);
     const { pathname } = useRouter();
 
     useEffect(() => {
+        // Ignore if larger screen
+        if (matchMedia(devices.mobileL).matches) return;
+
         function detectDirection(): void {
             const scrolled = window.pageYOffset;
-            // Only always-show at the top of the index page
+            // Always show if it's in hero on the index page
             if (pathname === '/' && scrolled < window.innerHeight) {
                 setDirection(0);
-            } else if (scrolled > y) {
+            } else if (scrolled > previousPositionY) {
                 setDirection(1);
-            } else if (scrolled < y) {
+            } else if (scrolled < previousPositionY) {
                 setDirection(-1);
             }
-            setY(scrolled);
+            setPreviousPositionY(scrolled);
         }
 
         window.addEventListener('scroll', detectDirection);
         return () => window.removeEventListener('scroll', detectDirection);
-    }, [y, pathname]);
-
-    useEffect(() => {
-        // Show always for larger screens
-        function handleResize() {
-            if (matchMedia(devices.mobileL).matches) {
-                setIsHidden(false);
-            }
-        }
-
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
+    }, [previousPositionY, pathname]);
 
     useEffect(() => {
         // Ignore if larger screen
@@ -46,13 +37,13 @@ export function useHideHeaderByScrollDown() {
 
         // Show always at the top
         if (direction < 0) {
-            setIsHidden(false);
+            setIsShown(true);
         } else if (direction > 0) {
-            setIsHidden(true);
+            setIsShown(false);
         }
     }, [direction]);
 
     return {
-        isHidden
+        isShown
     }
 }

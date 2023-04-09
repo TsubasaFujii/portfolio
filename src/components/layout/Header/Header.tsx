@@ -1,7 +1,6 @@
-import { forwardRef, Ref } from 'react';
 import { motion } from 'framer-motion';
 
-import { useHideHeaderByScrollDown } from '@/hooks/useHideHeaderByScrollDown';
+import useShowOnScrollDown from '@/hooks/useShowOnScrollDown';
 
 import Nav from './Nav';
 import ThemeSwitch from './ThemeSwitch';
@@ -16,13 +15,12 @@ const variants = {
     }
 }
 
-export const Header = forwardRef((_, ref?: Ref<HTMLElement>) => {
-    const { isHidden } = useHideHeaderByScrollDown();
+export function Header() {
+    const { isShown } = useShowOnScrollDown();
 
     return (
         <motion.header
-            ref={ref}
-            animate={isHidden ? 'hidden' : 'shown'}
+            animate={isShown ? 'shown' : 'hidden'}
             variants={variants}>
             <Content>
                 <Nav />
@@ -30,6 +28,4 @@ export const Header = forwardRef((_, ref?: Ref<HTMLElement>) => {
             </Content>
         </motion.header>
     )
-});
-
-Header.displayName = 'Header';
+}

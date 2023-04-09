@@ -25,6 +25,7 @@ export default function App({ Component, pageProps }: AppProps) {
         .josefin {
           font-family: ${josefin.style.fontFamily};
         }
+
         p,
         label,
         input,
