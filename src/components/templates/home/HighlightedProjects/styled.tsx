@@ -1,14 +1,11 @@
 import styled from 'styled-components';
 import { devices } from '@/static/viewport';
-import { FlexColumn, SectionRef } from '@/components/common';
 
-export const Wrapper = styled(SectionRef).attrs(() => ({
-    id: 'projects'
-}))`
-    scroll-margin: 10vh;
-`;
-
-export const List = styled(FlexColumn)`
+export const List = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     gap: ${({ theme }) => theme.spacing.gap};
 
     @media screen and (${devices.tablet}) {

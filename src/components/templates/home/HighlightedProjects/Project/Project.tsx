@@ -19,7 +19,7 @@ export default function Project(props: CustomProps) {
         <ProjectWrapper>
             <Thumbnail src={thumbnail} clickable landscape alt='project' />
             <a href={production}><H3>{title}</H3></a>
-            <Details className='details'>
+            <Details>
                 <Text>{description}</Text>
                 <GroupedIcons names={tools} />
                 <Button

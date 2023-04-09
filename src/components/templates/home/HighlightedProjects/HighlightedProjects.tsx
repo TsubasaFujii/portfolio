@@ -1,23 +1,24 @@
 import { useInView } from 'react-intersection-observer';
-import { useRouter } from 'next/router';
 
-import { scrollToTop } from '@/utils/window';
 import { projectsData } from '@/static/content';
+import { useLinkTo } from '@/hooks/useLinkTo';
 
-import { Button, Content, H2 } from '@/components/common';
+import { Button, Content, H2, SectionRef } from '@/components/common';
 import Project from './Project';
-import { List, Wrapper } from './styled';
+import { List } from './styled';
 
 export default function HighlightedProjects() {
     const { ref, inView } = useInView({
         initialInView: false,
     });
-    const router = useRouter();
+    const { linkTo } = useLinkTo();
 
     return (
-        <Wrapper ref={ref}>
+        <SectionRef ref={ref}>
             <Content>
-                <H2 isVisible={inView}>projects</H2>
+                <H2 isVisible={inView}>
+                    projects
+                </H2>
                 <List>
                     {projectsData
                         .filter(p => p.starred)
@@ -25,13 +26,10 @@ export default function HighlightedProjects() {
                     <Button
                         label='check more projects'
                         icon='chevronRight'
-                        onClick={() => {
-                            router.push('/projects');
-                            scrollToTop();
-                        }}
+                        onClick={() => linkTo('/projects')}
                         secondary />
                 </List>
             </Content>
-        </Wrapper>
+        </SectionRef>
     )
 }

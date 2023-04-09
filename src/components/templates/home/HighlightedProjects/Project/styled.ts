@@ -16,6 +16,11 @@ export const Thumbnail = styled(Image)`
 export const ProjectTitle = styled(H3)`
 `;
 
+export const Details = styled(FlexColumn)`
+    flex-wrap: wrap;
+    align-items: flex-start;
+`;
+
 export const ProjectWrapper = styled.div`
     width: 100%;
 
@@ -34,7 +39,7 @@ export const ProjectWrapper = styled.div`
             grid-row: 1 / span 1;
         }
 
-        & .details {
+        & ${Details} {
             grid-row: 2 / span 2;
         }
 
@@ -48,7 +53,7 @@ export const ProjectWrapper = styled.div`
                 grid-column: 2 / span 1;
             }
 
-            & .details {
+            & ${Details} {
                 grid-column: 2 / span 1;
             }
 
@@ -62,7 +67,7 @@ export const ProjectWrapper = styled.div`
                 grid-column: 1 / span 1;
             }
 
-            & .details {
+            & ${Details} {
                 grid-column: 1 / span 1;
             }
 
@@ -71,9 +76,4 @@ export const ProjectWrapper = styled.div`
             }
         }
     }
-`;
-
-export const Details = styled(FlexColumn)`
-    flex-wrap: wrap;
-    align-items: flex-start;
 `;
