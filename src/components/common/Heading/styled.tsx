@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import { CSSProperties } from 'react';
 import styled, { keyframes } from 'styled-components';
 
 export const Wrapper = styled.h1.attrs<{ $size?: number; }>(({ $size }) => (
