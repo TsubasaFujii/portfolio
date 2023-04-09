@@ -21,15 +21,13 @@ export default function Hero() {
     }
 
     useEffect(() => {
-        const header = document.querySelector('header');
-
         function handleResize() {
+            const header = document.querySelector('header');
             if (!header) return;
             setHeaderHeight(header.clientHeight);
         }
 
         handleResize();
-
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     }, []);
