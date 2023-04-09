@@ -1,6 +1,6 @@
 import { useInView } from 'react-intersection-observer';
 
-import { ImageWrapper, Img } from './styled';
+import { Wrapper, Img } from './styled';
 
 type CustomProps = {
     isVisible?: boolean;
@@ -33,17 +33,17 @@ export default function Image(props: CustomProps) {
     });
 
     return (
-        <ImageWrapper
+        <Wrapper
             className={`${className ? className : ''} ${inView ? 'shown' : ''}`}
             $clickable={clickable}
             ref={ref}>
             <Img
-                $img={src}
+                $imgSrc={src}
                 alt={alt}
                 animate={inView ? 'shown' : 'hidden'}
                 variants={variants}
                 $clipped={clipped}
                 $landscape={landscape} />
-        </ImageWrapper>
+        </Wrapper>
     )
 }

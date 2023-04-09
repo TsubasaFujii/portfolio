@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-
 import { devices } from '@/static/viewport';
 
-export const ImageWrapper = styled(motion.div).attrs(() => ({
+export const Wrapper = styled(motion.div).attrs(() => ({
     role: 'img'
 })) <{ $clickable?: boolean; }>`
     height: 70vmin;
@@ -19,12 +18,9 @@ export const ImageWrapper = styled(motion.div).attrs(() => ({
         height: 10%;
         z-index: 50;
         position: absolute;
-        // (100% - width(%)) / 2
-        top: 45%;
-        // (100% - height(%)) / 2
-        left: 45%;
+        top: 45%; // (100% - width(%)) / 2
+        left: 45%; // (100% - height(%)) / 2
         border-radius: 50%;
-        opacity: 0;
         background-color: ${({ theme }) => theme.colors.primary};
         transition: all 0.25s cubic-bezier(0.55, 0.06, 0.68, 0.19);
     }
@@ -32,12 +28,9 @@ export const ImageWrapper = styled(motion.div).attrs(() => ({
     &.shown:after {
         width: 90%;
         height: 90%;
-        opacity: 1;
         position: absolute;
-        // 100% - width(%)
-        top: 10%;
-        // (100% - height(%)) / 2
-        left: 5%;
+        top: 5%; // (100% - height) /2
+        left: 5%; // (100% - width) /2
     }
 
     // Icon
@@ -79,7 +72,7 @@ export const ImageWrapper = styled(motion.div).attrs(() => ({
 `;
 
 type ImageProps = {
-    $img: string;
+    $imgSrc: string;
     $clipped?: boolean;
     $landscape?: boolean;
     alt: string;
@@ -95,7 +88,7 @@ export const Img = styled(motion.div).attrs<{ alt: string }>(({ alt }) => ({
     position: absolute;
     z-index: 100;
 
-    background-image: ${({ $img }) => `url(${$img})`};
+    background-image: ${({ $imgSrc }) => `url(${$imgSrc})`};
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
