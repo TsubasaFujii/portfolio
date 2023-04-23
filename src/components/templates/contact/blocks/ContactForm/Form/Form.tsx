@@ -62,6 +62,7 @@ export default function Form() {
             <FormButton
                 icon='paperPlane'
                 label={isSending ? 'Sending...' : 'Send Message'}
+                alignSelf='center'
                 onClick={sendMessage}
                 disabled={
                     isError ||

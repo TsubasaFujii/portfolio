@@ -32,6 +32,7 @@ export default function Card(props: Props) {
                 <Button
                     label='GitHub'
                     icon='code'
+                    alignSelf='center'
                     onClick={() => openInNewTabTo(github)} />
             </ContentWrapper>
         </CardWrapper>

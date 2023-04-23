@@ -39,7 +39,6 @@ export default function Hero() {
                 <SubHeading />
                 <Button
                     label='Check my projects'
-                    align='left'
                     icon='chevronDown'
                     onClick={handleOnClick} />
             </ContentWrapper>

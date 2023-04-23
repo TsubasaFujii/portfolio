@@ -26,6 +26,7 @@ export default function HighlightedProjects() {
                     <Button
                         label='check more projects'
                         icon='chevronRight'
+                        alignSelf='center'
                         onClick={() => linkTo('/projects')}
                         secondary />
                 </List>

@@ -25,6 +25,7 @@ export default function Project(props: CustomProps) {
                 <Button
                     label='GitHub'
                     icon='code'
+                    alignSelf='center'
                     onClick={() => openInNewTabTo(github)} />
             </Details>
         </ProjectWrapper>
