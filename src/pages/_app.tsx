@@ -3,6 +3,7 @@ import { GlobalStyles, ThemeProvider } from '@/context';
 import { devices } from '@/static/viewport';
 import type { AppProps } from 'next/app';
 import { Josefin_Sans, Lato } from 'next/font/google';
+import Head from 'next/head';
 
 const josefin = Josefin_Sans({ subsets: ['latin'] });
 const lato = Lato({ subsets: ['latin'], weight: ['400'] });
@@ -10,6 +11,9 @@ const lato = Lato({ subsets: ['latin'], weight: ['400'] });
 export default function App({ Component, pageProps }: AppProps) {
     return (
         <>
+            <Head>
+                <title>Tsubasa Fujii | Portfolio</title>
+            </Head>
             <style jsx global>{`
                 body, main {
                     font-size: 1rem;
