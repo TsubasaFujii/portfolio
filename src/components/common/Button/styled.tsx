@@ -1,9 +1,9 @@
 import { motion } from 'framer-motion';
-import { ReactNode } from 'react';
+import { CSSProperties, ReactNode } from 'react';
 import styled from 'styled-components';
 
 type ButtonProps = {
-    align?: 'left';
+    $alignSelf?: CSSProperties["alignSelf"];
     icon?: ReactNode;
     $flat?: boolean;
     $secondary?: boolean;
@@ -15,7 +15,7 @@ export const Wrapper = styled(motion.button).attrs(({ disabled }) => ({
     whileHover: !disabled && 'hover',
     whileTap: !disabled && { scale: 0.9 },
 })) <ButtonProps>`
-    ${({ align }) => align === 'left' && 'align-self: flex-start'};
+    align-self: ${({ $alignSelf }) => $alignSelf ? $alignSelf : 'flex-start'};
 
     // 0.6 : 1
     padding: ${({ theme }) => `1.25rem ${theme.spacing.md}`};

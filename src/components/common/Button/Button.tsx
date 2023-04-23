@@ -2,11 +2,13 @@ import { HTMLProps } from 'react';
 import { useTheme } from 'styled-components';
 
 import { Icon } from '../Icon';
-import { ContentWrapper, Wrapper, IconWrapper, LabelWrapper } from './styled';
+import { Wrapper, ContentWrapper, IconWrapper, LabelWrapper } from './styled';
+import { CSSProperties } from 'react';
 
 type Props = {
     icon?: IconName;
     align?: 'left';
+    alignSelf?: CSSProperties["alignSelf"];
     flat?: boolean;
     secondary?: boolean;
     label: string;
@@ -31,7 +33,7 @@ function Label(props: { text: string; }) {
 }
 
 export default function Button(props: Props) {
-    const { label, disabled, icon, align, flat, secondary, className, onClick } = props;
+    const { label, disabled, icon, align, flat, secondary, className, alignSelf, onClick } = props;
     const { pointingMethod } = useTheme();
 
     return (
@@ -40,6 +42,7 @@ export default function Button(props: Props) {
             $secondary={secondary}
             $flat={flat}
             $align={align}
+            $alignSelf={alignSelf}
             disabled={disabled}
             onClick={onClick}
         >
