@@ -11,7 +11,7 @@ export default function Icon(props: Props) {
     const { path, fill, stroke, width } = PATH[name];
 
     return (
-        <Wrapper className={className}>
+        <Wrapper className={className} title={name.charAt(0).toUpperCase() + name.slice(1)}>
             <svg
                 xmlns='http://www.w3.org/2000/svg'
                 viewBox='0 0 24 24'>
