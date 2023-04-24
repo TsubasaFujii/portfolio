@@ -1,10 +1,5 @@
-import { RefObject } from 'react';
 import Form from './Form';
 import { FormHeading, Wrapper, Text } from './styled';
-
-type Props = {
-    contactRef: RefObject<HTMLDivElement>;
-}
 
 export default function ContactForm() {
 

@@ -12,6 +12,106 @@ const StyledGlobalStyle = createGlobalStyle`
     }
 
     ///
+    // Typography (font-family is located in _app.tsx)
+    ///
+    
+    body,
+    main {
+                    font-size: 1rem;
+    }
+
+    // Josefin
+    h1,
+    span.large {
+        font-size: 4em;
+        font-weight: 700;
+
+        @media screen and (${devices.mobileL}) {
+            font-size: 5.6em;
+        }
+
+        @media screen and (${devices.tablet}) {
+            font-size: 7em;
+        }
+
+        @media screen and (${devices.desktop}) {
+            font-size: 8em;
+        }
+    }
+
+    h2 {
+        font-size: 3.5em;
+        font-weight: 700;
+
+        @media screen and (${devices.mobileL}) {
+            font-size: 4em;
+        }
+        @media screen and (${devices.tablet}) {
+            font-size: 5.6em;
+        }
+    }
+
+    h3 {
+        font-size: 2em;
+        font-weight: 700;
+
+        @media screen and (${devices.mobileL}) {
+            font-size: 2.8em;
+        }
+    }
+
+    h4 {
+        font-weight: 600;
+        font-size: 1.6em;
+        @media screen and (${devices.mobileL}) {
+            font-size: 2em;
+        }
+    }
+
+    h5,
+    button,
+    div.navItem,
+    div.intro > div,
+    footer li {
+        font-weight: 600;
+        font-size: 1.3em;
+        @media screen and (${devices.mobileL}) {
+            font-size: 1.4em;
+        }
+    }
+
+    h6 {
+        font-weight: 400;
+        font-size: 1em;
+        @media screen and (${devices.mobileL}) {
+            font-size: 1.2em;
+        }
+    }
+
+    // Lato
+    div.intro > span {
+        font-weight: 400;
+        font-size: 1em;
+        @media screen and (${devices.mobileL}) {
+            font-size: 1.2em;
+        }
+    }
+
+    label,
+    input,
+    textarea {
+        font-size: 1em;
+    }
+
+    p {
+        font-size: 1.2em;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    ///
     // Position, width, height, padding, margin, z-index, overflow
     ///
     body {

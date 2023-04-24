@@ -36,7 +36,7 @@ export const projectsData: Project[] = [
         production: 'https://tsubasafujii.com',
         thumbnail: '/assets/projects/portfolio.webp',
         description: 'This portfolio. I designed from scratch. I used framer-motion for animation. Further details on GitHub.',
-        tools: ['react', 'css', 'javaScript'],
+        tools: ['react', 'javaScript', 'css'],
         starred: true,
         createdAt: new Date(2022, 9),  // month in index: actual month - 1
     }, {

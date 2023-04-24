@@ -1,10 +1,10 @@
 import { ChangeEvent, RefObject, useMemo } from 'react';
 
-import { InputField } from './InputField';
-import { FormWrapper, FormButton, Notification } from './styled';
 import useForm, { FormField, FormFields } from '@/hooks/useForm';
 
 import { P } from '@/components/common';
+import { InputField } from './InputField';
+import { FormWrapper, FormButton, Notification } from './styled';
 
 export default function Form() {
     const {
@@ -28,7 +28,7 @@ export default function Form() {
         } else if (isError) {
             return 'Sorry, something went wrong and couldn\'t send the message.\n Please try again.'
         }
-        return;
+        return '';
     }, [userInput, isFocused, isError]);
 
     function handleOnChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {

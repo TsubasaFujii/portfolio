@@ -1,6 +1,6 @@
+import { ChangeEvent } from 'react';
 import { motion } from 'framer-motion';
 import { Input, Wrapper, Textarea } from './styled';
-import { ChangeEvent } from 'react';
 
 type Props = {
     item: string;
