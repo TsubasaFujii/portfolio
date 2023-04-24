@@ -1,6 +1,5 @@
 import Layout from '@/components/layout';
 import { GlobalStyles, ThemeProvider } from '@/context';
-import { devices } from '@/static/viewport';
 import type { AppProps } from 'next/app';
 import { Josefin_Sans, Lato } from 'next/font/google';
 import Head from 'next/head';
