@@ -1,9 +1,7 @@
 import { scrollToTop } from '@/utils/window';
 import { useRouter } from 'next/router';
 
-export function useLinkTo(): {
-    linkTo: (route: string) => void;
-} {
+export function useLinkTo() {
     const router = useRouter();
 
     function linkTo(route: string) {
