@@ -1,11 +1,11 @@
+import { ChangeEvent, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 import useControlVisibility from '@/hooks/useControlVisibility';
-import Modal from './Modal';
 import { Icon, Overlay } from '@/components/common';
-import { FilterButton, FilterInnerWrapper, FilterWrapper } from './styled';
-import { ChangeEvent } from 'react';
 import { FilterBy } from '../../Projects';
+import Modal from './Modal';
+import { FilterButton, FilterInnerWrapper, FilterWrapper } from './styled';
 
 type Props = {
     projectTotal: number;
@@ -16,32 +16,39 @@ type Props = {
 
 export default function Filter(props: Props) {
     const { updateFilterBy, projectTotal, isActive, value } = props;
+    const [isMounted, setIsMounted] = useState(false);
     const { ref, isVisible: isOpen, updateVisibility } = useControlVisibility();
 
-    const headerEl = document.querySelector('header')!;
-    return createPortal(
-        <FilterWrapper>
-            <FilterInnerWrapper>
-                <div>{projectTotal}&nbsp;project(s)</div>
-                <FilterButton
-                    $isActive={isActive}
-                    $isOpen={isOpen}
-                    onClick={() => {
-                        if (isOpen) return;
-                        updateVisibility(true);
-                    }}>
-                    Filter by
-                    <Icon name='funnel' />
-                </FilterButton>
-                <Modal
-                    value={value}
-                    isOpen={isOpen}
-                    updateFilterBy={updateFilterBy}
-                    updateModalState={updateVisibility} />
-                {isOpen && <Overlay ref={ref} />}
-            </FilterInnerWrapper>
-        </FilterWrapper>
-        , headerEl
-    )
+    useEffect(() => {
+        setIsMounted(true)
+        return () => setIsMounted(false)
+    }, [])
+
+    return isMounted ?
+        createPortal(
+            <FilterWrapper>
+                <FilterInnerWrapper>
+                    <div>{projectTotal}&nbsp;project(s)</div>
+                    <FilterButton
+                        $isActive={isActive}
+                        $isOpen={isOpen}
+                        onClick={() => {
+                            if (isOpen) return;
+                            updateVisibility(true);
+                        }}>
+                        Filter by
+                        <Icon name='funnel' />
+                    </FilterButton>
+                    <Modal
+                        value={value}
+                        isOpen={isOpen}
+                        updateFilterBy={updateFilterBy}
+                        updateModalState={updateVisibility} />
+                    {isOpen && <Overlay ref={ref} />}
+                </FilterInnerWrapper>
+            </FilterWrapper>
+            , document.querySelector('header')!
+        ) :
+        null
 }
 
