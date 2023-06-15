@@ -1,11 +1,7 @@
 import { useEffect, useState } from 'react';
 import { theme as customTheme } from './theme';
 
-export function useCurrentTheme(): {
-    theme: CustomTheme;
-    currentTheme: CurrentTheme;
-    toggleTheme: () => void;
-} {
+export function useCurrentTheme() {
     const [currentTheme, setCurrentTheme] = useState<CurrentTheme>('light');
     const [theme, setTheme] = useState<CustomTheme>(customTheme[currentTheme]);
 
