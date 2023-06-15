@@ -3,7 +3,7 @@ import { CSSProperties, ReactNode } from 'react';
 import styled from 'styled-components';
 
 type ButtonProps = {
-    $alignSelf?: CSSProperties["alignSelf"];
+    $alignSelf?: CSSProperties['alignSelf'];
     icon?: ReactNode;
     $flat?: boolean;
     $secondary?: boolean;

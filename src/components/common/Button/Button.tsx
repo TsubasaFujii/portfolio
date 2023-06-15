@@ -8,7 +8,7 @@ import { CSSProperties } from 'react';
 type Props = {
     icon?: IconName;
     align?: 'left';
-    alignSelf?: CSSProperties["alignSelf"];
+    alignSelf?: CSSProperties['alignSelf'];
     flat?: boolean;
     secondary?: boolean;
     label: string;
