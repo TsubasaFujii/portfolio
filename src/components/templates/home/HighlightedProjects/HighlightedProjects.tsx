@@ -14,7 +14,7 @@ export default function HighlightedProjects() {
     const { linkTo } = useLinkTo();
 
     return (
-        <SectionRef ref={ref}>
+        <SectionRef ref={ref} id='projects'>
             <Content>
                 <H2 isVisible={inView}>
                     projects
