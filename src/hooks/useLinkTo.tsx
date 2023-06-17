@@ -4,9 +4,9 @@ import { useRouter } from 'next/router';
 export function useLinkTo() {
     const router = useRouter();
 
-    function linkTo(route: string) {
+    async function linkTo(route: string) {
+        await router.push(route);
         scrollToTop();
-        router.push(route);
     }
 
     return { linkTo }
