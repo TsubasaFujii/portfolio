@@ -20,6 +20,10 @@ export const MenuItem = styled.div`
     flex: 1;
     text-align: center;
 
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+     user-select: none; /* Standard syntax */
+
     &:after {
         content: '';
         width: 0%;
