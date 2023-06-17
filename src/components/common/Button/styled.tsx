@@ -28,8 +28,8 @@ export const Wrapper = styled(motion.button).attrs(({ disabled }) => ({
         $secondary ?
             `0.1rem solid ${theme.colors.primary70}` :
             'none'};
-    // (vertical paddings * 2 + font-size) /2
-    border-radius: calc((1.25rem + 1.25rem + 1.3em) / 2);
+    // This is big enough value so it will be rounded even when it contains multiple lines
+    border-radius: 300px;
     background: ${({ theme, $secondary }) =>
         $secondary ?
             theme.colors.white :
