@@ -2,11 +2,11 @@ import { links } from '@/static/content';
 
 import { MenuItem, Navigation } from './styled';
 import { useRouter } from 'next/router';
-import { useLinkTo } from '@/hooks/useLinkTo';
+
+import Link from 'next/link';
 
 export default function Nav() {
     const { pathname } = useRouter();
-    const { linkTo } = useLinkTo();
 
     return (
         <Navigation>
@@ -15,8 +15,8 @@ export default function Nav() {
                     <MenuItem
                         key={index}
                         className={`navItem${pathname === route ? ' current' : ''}`}
-                        onClick={() => linkTo(route)}>
-                        {name}
+                    >
+                        <Link href={route}>{name}</Link>
                     </MenuItem>
                 )
             }
